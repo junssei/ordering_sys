@@ -1,0 +1,171 @@
+.container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container > .subcontainer{
+    gap: 42px;
+    display: flex;
+    padding: 64px;
+    border-radius: 16px;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid var(--gray3);
+    user-select: none;
+}
+
+/* Form Header */
+.subcontainer > .subcontainer_header{
+    gap: 14px;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+}
+
+.subcontainer_header > p {
+    font-size: 14px;
+    color: #00000080;
+}
+
+/* Style of the form inside of the container */
+.subcontainer > .form{
+    gap: 24px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.form .input{
+    display: flex;
+    padding: 0 10px;
+    border-radius: 4px;
+    align-items: center;
+    border-bottom: 2px solid var(--blue2);
+}
+
+.input{
+    min-width: 350px;
+    height: 40px;
+    position: relative;
+}
+
+.input:focus-within{
+    border-bottom: 2px solid var(--black3);
+}
+
+.two_input{
+    gap: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.input .inp{
+    gap: 16px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding: 0 6px;
+    position: relative;
+    align-items: center;
+}
+
+.input .inp input{
+    width: 100%;
+    height: 100%;
+    font-size: var(--size1);
+}
+
+
+.input .inp input::placeholder{
+    color: #2184d550;
+    font-weight: 300;
+}
+
+.input .inp input:focus::placeholder{
+    color: transparent;
+}
+
+.input_wmsg{
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input_wmsg > .message{
+    font-size: 14px;
+    text-align: right;
+}
+
+/* Styles for Input Actions */
+.form .input_actions{
+    gap: 32px;
+    width: 100%;
+    display: flex;
+    align-items: end;
+    position: relative;
+    height: fit-content;
+    flex-direction: column;
+}
+
+.input_actions span a{
+    font-size: 14px;
+    font-weight: 300;
+}
+
+/* Form Footer */
+.subcontainer_footer{
+    width: 100%;
+    text-align: center;
+}
+
+.subcontainer_footer span{
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.subcontainer_footer span a{
+    font-weight: 500;
+    color: var(--blue);
+    text-decoration-thickness: 2px;
+}
+
+/* Register */
+#message {
+    display:none;
+    color: #000;
+    text-align: right;
+    position: relative;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+#message span {
+    font-size: 12px;
+}
+
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+    color: green;
+}
+
+.valid:before {
+    position: relative;
+    /* left: -10px; */
+    content: "✔";
+}
+
+/* Add a red text color and an "x" icon when the requirements are wrong */
+.invalid {
+    color: var(--red);
+}
+
+.invalid:before {
+    position: relative;
+    /* left: -10px; */
+    content: "✖";
+}

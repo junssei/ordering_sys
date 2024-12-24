@@ -1,0 +1,192 @@
+@import url(style.css);
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    width: 100%;
+    height: 100%;
+    font-weight: 400;
+    position: relative;
+    font-style: normal;
+    font-family: "Poppins", serif;
+    background-color: var(--white);
+}
+
+/* Default for Links */
+a{  
+    color: black;
+    text-decoration: none;
+}
+
+.link{ 
+    color: var(--black);
+    text-decoration: underline transparent;
+    transition: text-decoration 300ms ease;
+}
+
+.link:hover{
+    color: var(--blue);
+    text-decoration: 2px underline;
+}
+
+/* Dialog */
+dialog{
+    z-index: 1;
+    padding: 32px;
+    border-radius: 8px;
+    border: 1px solid var(--gray5);
+}
+
+/* Input Style */
+input{
+    border: none;
+}
+
+input:focus, select:focus{
+    outline: none;
+}
+
+
+input[type="text"], input[type="password"], input[type="email"], input[type="file"]{
+    font-weight: 400;
+    font-style: normal;
+    font-family: "Poppins", serif;
+}
+
+/* Button */
+.defaultbtn{
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px 25px;
+    font-style: normal;
+    border-radius: 4px;
+    color: var(--white);
+    font-family: "Poppins", serif;
+    background-color: var(--gray4);
+}
+
+.defaultbtn:hover{
+    cursor: pointer;
+    background-color: var(--gray5);
+}
+
+/* Error or Red Colors */
+.error{
+    color: var(--red);
+}
+
+.deletebtn:hover{
+    filter: var(--filterRed2);
+}
+
+.cancelbtn{
+    background-color: var();
+}
+
+/* Success or Green Colors */
+.success{
+    color: var(--green3);
+}
+
+/* Blue Colors */
+.enabledbtn{
+    background-color: var(--blue);
+}
+
+.enabledbtn:hover{
+    background-color: var(--blue2);
+}
+
+.editbtn:hover{
+    filter: var(--filterBlue2);
+}
+
+.editbtnlink:hover{
+    cursor: pointer;
+}
+
+/* Disabled or Gray Color */
+.disabled{
+    
+}
+
+/* Icon */
+.icon_fn{ /* icon that has functions */
+    cursor: pointer;
+}
+
+.iconSmall{
+    width: 18px;
+    height: 18px;
+}
+
+.iconNormal{
+    width: 24px;
+    height: 24px;
+}
+
+.iconMedium{
+    width: 32px;
+    height: 32px;
+}
+
+/* Product Image */
+.imageSmall{
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+}
+
+.imageMedium{
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+}
+
+/* Image Logo */
+.logoSmall{
+    width: 200px;
+    height: 200px;
+}
+
+.logoMedium{
+    width: 400px;
+    height: 400px;
+}
+
+.wordLogoSmall{
+    width: 137px;
+    height: 42px;
+}
+
+.wordLogoMedium{
+    width: 220px;
+    height: 66px;
+}
+
+/* Card Img Size */
+.card_image_small{
+
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* border-radius: 20px; */
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--blue);
+    /* border-radius: 30px; */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--blue2);
+}
