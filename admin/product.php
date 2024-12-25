@@ -19,13 +19,13 @@ include 'includes/header.php';
                 <div id="content_header">
                     <p id="breadcrumbs"> <?php echo "Inventory/" . $currentPage; ?> </p>
                     <div id="contentheader_actions">
-                        <button class="defaultbtn" onclick="addModal()"> Add </button>
+                        <button class="defaultbtn" onclick="addModal('product')"> Add </button>
                     </div>
                 </div>
                 <?php 
                 // include 'includes/add_dialog.php';
                 ?>
-                <dialog id="edit_dialog" class="dialog"></dialog>
+                <dialog id="dialog" class="dialog"></dialog>
                 <div id="content_body">
                     <div class="tablecontainer">
                         <table class="table">
@@ -63,12 +63,8 @@ include 'includes/header.php';
                                         echo "<td>" . $rowProducts['ctg_id'] . "</td>";
                                         echo "<td>" . $rowProducts['prd_price'] . "</td>";
                                         echo "<td>" . $rowProducts['prd_size'] . "</td>";
-                                        // echo '<td class="action_col"> 
-                                        // <a href="?editprd=' . $rowProducts['prd_id'] . '" class="editbtnlink"><img src="../source/images/icon/svg/edit.svg" alt="edit" class="editbtn"></a>
-    
-                                        // <a href="process/delete.php?productID='. $rowProducts['prd_id'] . '" class="deletebtnlink"><img src="../source/images/icon/svg/delete.svg" alt="delete" class="deletebtn"></a>';
                                         echo '<td class="action_col"> 
-                                        <a onclick="editModal(' . $rowProducts['prd_id'] . ')" class="editbtnlink"><img src="../source/images/icon/svg/edit.svg" alt="edit" class="editbtn"></a>
+                                        <a onclick="editModal(' . "'product'," . $rowProducts['prd_id'] . ')" class="editbtnlink"><img src="../source/images/icon/svg/edit.svg" alt="edit" class="editbtn"></a>
     
                                         <a href="process/delete.php?productID='. $rowProducts['prd_id'] . '" class="deletebtnlink"><img src="../source/images/icon/svg/delete.svg" alt="delete" class="deletebtn"></a>';
                                         echo '</tr>';

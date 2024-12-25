@@ -1,69 +1,65 @@
-// Show Add Dialog
-function showModal(){
-    document.getElementById("dialog").showModal();
-}
-
-// Close Dialog
-var closedialog = document.getElementsByClassName("close_dialog");
-for(var j = 0; j < closedialog.length; j++){
-    closedialog[j].addEventListener('click', function(){
-        document.getElementById("dialog").close();
-        window.location.href = "product.php";
-        // location.reload();
-    });
-}
-
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
     var dialogs = document.getElementsByClassName("dialog");
     for(let i = 0; i < dialogs.length; i++){
         if (event.target == dialogs[i]) {
             dialogs[i].close();
-            window.location.href = "product.php";
         }
     }
 }
 
-// Edit Product
-function addModal(){
+function displayImageModal(){ // *Upload Image -> Display Image
+    let imagedisp_modal = document.getElementsByClassName("imagedisp"); //img
+    let imageUpload_modal = document.getElementsByClassName("imageupld"); //button
+
+    for(let i = 0; i < imageUpload_modal.length; i++){
+        imageUpload_modal[i].onchange = function(){
+            if(imageUpload_modal[i].files && imageUpload_modal[i].files[0]){
+                imagedisp_modal[i].src = URL.createObjectURL(imageUpload_modal[i].files[0]);
+            } else {
+                imagedisp_modal[i].src = "../source/images/upload/products/default.png";
+            }
+        }
+    }
+}
+
+function closeModal(){
+    const closeBtn = dialog.querySelector(".close_dialog");
+    if (closeBtn) {
+        closeBtn.addEventListener("click", () => {
+            dialog.close();
+        });
+    }
+}
+
+// Add Product
+function addModal(page){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            const dialog = document.querySelector("#edit_dialog");
+            const dialog = document.querySelector("#dialog");
             dialog.innerHTML = this.responseText;
-            // console.log("ID: " + id);
+            displayImageModal();
             dialog.showModal();
-
-            const closeBtn = dialog.querySelector(".close_editprd_dialog");
-            if (closeBtn) {
-                closeBtn.addEventListener("click", () => {
-                    dialog.close();
-                });
-            }
+            closeModal();
         }
     };
-    xhttp.open("GET", "includes/add_dialog.php", true);
+    xhttp.open("GET", "includes/add_dialog.php?page=" + page, true); //get depends category or product
     xhttp.send();
 }
 
 // Edit Product
-function editModal(id){
+function editModal(page, id){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            const dialog = document.querySelector("#edit_dialog");
+            const dialog = document.querySelector("#dialog");
             dialog.innerHTML = this.responseText;
-            // console.log("ID: " + id);
+            displayImageModal();
             dialog.showModal();
-
-            const closeBtn = dialog.querySelector(".close_editprd_dialog");
-            if (closeBtn) {
-                closeBtn.addEventListener("click", () => {
-                    dialog.close();
-                });
-            }
+            closeModal();
         }
     };
-    xhttp.open("GET", "includes/edit_dialog.php?prdID="+id, true);
+    xhttp.open("GET", "includes/edit_dialog.php?page=" + page + "&" + "id=" +id, true);
     xhttp.send();
 }

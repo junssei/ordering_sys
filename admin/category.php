@@ -17,10 +17,10 @@ include 'includes/header.php';
                 <div id="content_header">
                     <p id="breadcrumbs"> <?php echo "Inventory/" . $currentPage; ?> </p>
                     <div id="contentheader_actions">
-                        <button class="defaultbtn" onclick="showModal()"> Add </button>
+                        <button class="defaultbtn" onclick="addModal('category')"> Add </button>
                     </div>
                 </div>
-                <?php include 'includes/add_dialog.php'; ?>
+                <dialog id="dialog" class="dialog"></dialog>
                 <div id="content_body">
                     <div class="tablecontainer">
                         <table class="table">

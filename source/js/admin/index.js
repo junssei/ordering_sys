@@ -32,13 +32,3 @@ for (var i = 0; i < activeTabs.length; i++) {
         parentElement.style.display = "block";
     }
 }
-
-// *Upload Image -> Display Image
-let imagedisp_modal = document.getElementsByClassName("imagedisp"); //img
-let imageUpload_modal = document.getElementsByClassName("imageupld"); //button
-
-for(let i = 0; i < imageUpload_modal.length; i++){
-    imageUpload_modal[i].onchange = function(){
-        imagedisp_modal[i].src = URL.createObjectURL(imageUpload_modal[i].files[0]);
-    }
-}

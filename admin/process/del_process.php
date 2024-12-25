@@ -14,7 +14,9 @@ if ($_GET['productID']) {
         echo "Delete Failed";
         header('Location: ../product.php');
     }
-} else if ($_GET['categoryID']){
+}
+
+if ($_GET['categoryID']){
     $cID = $_GET['categoryID'];
     $sql = "DELETE FROM category WHERE ctg_id = '$cID'";
     $deleteResult = mysqli_query($conn, $sql);
