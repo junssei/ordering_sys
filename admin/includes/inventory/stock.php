@@ -4,7 +4,7 @@
     ?>
     <div id="content">
         <div id="content_header">
-            <p id="breadcrumbs"> <?php echo "Inventory/Product List"?> </p>
+            <p id="breadcrumbs"> <?php echo "Inventory/Stock"?> </p>
             <!-- <div class="contentheader_actions">
                 <button class="defaultbtn" onclick="addModal('product')"> + Product </button>
             </div> -->
@@ -16,9 +16,9 @@
         <div id="content_body">
             <div class="tablecontainer">
                 <div class="tablecontainer_header">
-                    <h2> Product </h2>
+                    <h2> Stock </h2>
                     <div class="tablecontainerheader_actions">
-                        <button class="defaultbtn" onclick="addModal('product')"> + Product </button>
+                        <button class="defaultbtn" onclick="addModal('product')"> + Stock </button>
                     </div>
                 </div>
                 <table class="table">
@@ -26,24 +26,11 @@
                         <th> Image </th>
                         <th> Product Name </th>
                         <th> Product Brand </th>
-                        <th> Category </th>
-                        <th> Price </th>
                         <th> Size </th>
+                        <th> Stock </th>
                         <th></th>
                     </tr>
-                    <!-- <tr class="table_rows">
-                        <td> Example </td>
-                        <td> Example </td>
-                        <td> Example </td>
-                        <td> Example </td>
-                        <td> Example </td>
-                        <td> Example </td>
-                        <td class="action_col">
-                            <a href=""><img src="../source/images/icon/svg/edit.svg" alt="edit" class="editbtn"></a>
-                            <a onclick="showDelModal()"><img src="../source/images/icon/svg/delete.svg" alt="delete" class="deletebtn"></a>
-                        </td>
-                    </tr> -->
-                    <?php //Display all products
+                    <?php
                         $fetchProducts = "SELECT * FROM product";
                         $exec_prd = mysqli_query($conn, $fetchProducts);
 

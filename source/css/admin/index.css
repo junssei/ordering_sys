@@ -178,12 +178,12 @@
     /* background-color: yellow; */
 }
 
-#content_header > #contentheader_actions > button{
+.contentheader_actions > button{
     border: none;
     background-color: var(--blue);
 }
 
-#content_header > #contentheader_actions > button:hover{
+.contentheader_actions > button:hover{
     background-color: var(--blue2);
 }
 
@@ -270,6 +270,35 @@
     width: 100%;
 }
 
+.input_textarea{
+    width: 100%;
+    display: flex;
+    min-width: 350px;
+    min-height: 80px;
+    border-radius: 4px;
+    position: relative;
+    align-items: center;
+    border: 2px solid var(--blue2);
+    background-color: var(--white);
+}
+
+.input_inptextarea{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: relative;
+    overflow: auto;
+}
+
+.input_inptextarea textarea{
+    width: 100%;
+    /* height: 100%; */
+    resize: none;
+    border: none;
+    position: relative;
+    padding: 8px 16px;
+}
+
 .inputfile{
     gap: 18px;
     display: flex;
@@ -294,7 +323,7 @@
     padding: 12px 16px;
     font-size: 16px;
     border: none;
-    border-radius: 2px;
+    border-radius: 4px;
     cursor: pointer;
     width: 100%;
 }
@@ -332,14 +361,50 @@
     overflow-y: hidden;
     position: relative;
     background-color: var(--white);
+    
 }
 
-/* All Table Styles */
+/* Options for Content Body */
+.content_body_row{
+    gap: 16px;
+    display: flex;
+    flex-direction: row;
+}
+
+.content_body_col{
+    gap: 16px;
+    display: flex;
+    overflow-y: auto;
+    flex-direction: column;
+}
+
+/* Style for Tables */
 .tablecontainer{
+    gap: 16px;
+    zoom: 90%;
+    width: 100%;
     height: 100%;
+    display: flex;
     overflow-y: auto;
     position: relative;
+    flex-direction: column;
     /* background-color: aqua; */
+}
+
+.tablecontainer > .tablecontainer_header{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.tablecontainer_header > .tablecontainerheader_actions > button{
+    border: none;
+    background-color: var(--blue);
+}
+
+.tablecontainer_header > .tablecontainerheader_actions > button:hover{
+    background-color: var(--blue2);
 }
 
 .tablecontainer .table{

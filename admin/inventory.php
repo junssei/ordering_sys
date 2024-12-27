@@ -18,6 +18,11 @@ include 'includes/header.php';
         if ($_GET['page'] == "category") { 
             include 'includes/inventory/category.php';
         }
+
+        // User: Customer Interface 
+        if ($_GET['page'] == "stock") { 
+            include 'includes/inventory/stock.php';
+        }
         ?>
     </div>
 </div>

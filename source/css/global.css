@@ -45,12 +45,12 @@ input{
     border: none;
 }
 
-input:focus, select:focus{
+input:focus, select:focus, textarea:focus{
     outline: none;
 }
 
 
-input[type="text"], input[type="password"], input[type="email"], input[type="file"]{
+input[type="text"], input[type="password"], input[type="email"], input[type="file"]::file-selector-button, textarea{
     font-weight: 400;
     font-style: normal;
     font-family: "Poppins", serif;

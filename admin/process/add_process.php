@@ -25,7 +25,7 @@
             echo "<script> console.log('Failed to upload image!') </script>";
         }
 
-        $insertProduct = "INSERT INTO product VALUES ('', '$product_category', '$product_name', '$product_brand', '$product_price', '$product_size', '',CURRENT_DATE(), '$filename')";
+        $insertProduct = "INSERT INTO product VALUES ('', '$product_name', '$product_brand', '$product_price', '$product_size', '',CURRENT_DATE(), '$filename', '$product_category')";
 
         $query = mysqli_query($conn, $insertProduct);
 
@@ -35,6 +35,19 @@
     }
 
     if(isset($_POST['submit_category'])){
+        $category_name = $_POST['categoryname'];
+
+        $insertCategory = "INSERT INTO category VALUES ('', '$category_name', CURRENT_DATE())";
+
+        $query = mysqli_query($conn, $insertCategory);
+
+        if ($query) {
+            header('Location: ../inventory.php?page=category');
+        }
+    }
+    
+    if(isset($_POST['submit_category'])){
+        $category_name = $_POST['categoryname'];
         $category_name = $_POST['categoryname'];
 
         $insertCategory = "INSERT INTO category VALUES ('', '$category_name', CURRENT_DATE())";

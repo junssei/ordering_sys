@@ -17,6 +17,9 @@
                     <a href="inventory.php?page=category" class="menu <?php if($defaultpage === "inventory.php?page=category") echo "active"; ?>">
                         <span>Categories</span>
                     </a>
+                    <a href="inventory.php?page=stock" class="menu <?php if($defaultpage === "inventory.php?page=stock") echo "active"; ?>">
+                        <span>Stock</span>
+                    </a>
                 </div>
             <a href="" class="menu <?php if($currentPage === "") echo "active"; ?>"><img src="../source/images/icon/svg/dashboard.svg" class="iconNormal" alt="dashboard"><p> Orders </p></a>
             <div class="menu dropdown"><img src="../source/images/icon/svg/people.svg" class="iconNormal" alt="users"><p>Users</p><img src="../source/images/icon/svg/dropdown.svg"></div>

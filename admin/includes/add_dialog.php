@@ -31,13 +31,18 @@ if($_GET['page'] == "product") {
                 <select name="productcategory" required>
                     <option value="none"> None </option>
                     <?php
-                    $fetchCategory = "SELECT * FROM category";
+                    $fetchCategory = "SELECT * FROM subcategory";
                     $exec = mysqli_query($conn, $fetchCategory);
                     while ($rowCategory = mysqli_fetch_array($exec)) {
                             echo "<option value='" . $rowCategory['ctg_id'] . "'>" . $rowCategory['ctg_name'] . "</option>";
                     }
                     ?>
                 </select>
+            </div>
+            <div class="input_textarea">
+                <div class="input_inptextarea">
+                    <textarea name="productdescription" placeholder="Description..."></textarea>
+                </div>
             </div>
             <div class="input">
                 <div class="inp">
@@ -62,13 +67,72 @@ if($_GET['page'] == "product") {
             <img class="close_dialog cancelbtnimg" src="../source/images/icon/svg/close.svg" alt="closebtn">
         </div>
         <form id="addcategory" class="dialog_form" action="process/add_process.php" method="post">
-            <div class="input">
-                <div class="inp">
-                    <input id="product_name" type="text" name="categoryname" placeholder="Product Name" required>
+            <div class="dialog_imginp">
+                <div class="inputfile" style="border: none"; >
+                    <img src="../source/images/upload/products/gallery.png" class="imagedisp imageLarge">
+                    <div class="inp inpfile">
+                        <input class="imageupld choosefilebtn" type="file" name="uploadimg" accept=".png, .jpg, .jpeg, .webp">
+                    </div>
                 </div>
             </div>
-            <div class="input_actions">
-                <input class="enabledbtn defaultbtn" type="submit" value="Add Category" name="submit_category">
+            <div class="dialog_allinp">
+                <div class="input">
+                    <div class="inp">
+                        <input id="category_name" type="text" name="categoryname" placeholder="Category Name" required>
+                    </div>
+                </div>
+                <div class="input_textarea">
+                    <div class="input_inptextarea">
+                        <textarea name="categorydescription" placeholder="Description..."></textarea>
+                    </div>
+                </div>
+                <div class="input_actions">
+                    <input class="enabledbtn defaultbtn" type="submit" value="Add Category" name="submit_category">
+                </div>
+            </div>
+        </form>
+    </div>
+<?php } else if($_GET['page'] == "subcategory") { ?>
+    <div class="dialog_container">
+        <div id="dialog_header">
+            <h1> Add Subcategory </h1>
+            <img class="close_dialog cancelbtnimg" src="../source/images/icon/svg/close.svg" alt="closebtn">
+        </div>
+        <form id="addcategory" class="dialog_form" action="process/add_process.php" method="post">
+            <div class="dialog_imginp">
+                <div class="inputfile" style="border: none"; >
+                    <img src="../source/images/upload/products/gallery.png" class="imagedisp imageLarge">
+                    <div class="inp inpfile">
+                        <input class="imageupld choosefilebtn" type="file" name="uploadimg" accept=".png, .jpg, .jpeg, .webp">
+                    </div>
+                </div>
+            </div>
+            <div class="dialog_allinp">
+                <div class="input">
+                    <div class="inp">
+                        <input id="subcategory_name" type="text" name="subcategoryname" placeholder="Subcategory Name" required>
+                    </div>
+                </div>
+                <div class="input_select">
+                    <select name="productcategory" required>
+                        <option value="none"> None </option>
+                        <?php
+                        $fetchCategory = "SELECT * FROM category";
+                        $exec = mysqli_query($conn, $fetchCategory);
+                        while ($rowCategory = mysqli_fetch_array($exec)) {
+                                echo "<option value='" . $rowCategory['ctg_id'] . "'>" . $rowCategory['ctg_name'] . "</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="input_textarea">
+                    <div class="input_inptextarea">
+                        <textarea name="subcategorydescription" placeholder="Description..."></textarea>
+                    </div>
+                </div>
+                <div class="input_actions">
+                    <input class="enabledbtn defaultbtn" type="submit" value="Add Category" name="submit_subcategory">
+                </div>
             </div>
         </form>
     </div>

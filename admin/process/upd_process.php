@@ -48,4 +48,17 @@ if(isset($_POST['update_category'])){
     }
 }
 
+if(isset($_POST['update_subcategory'])){
+    $id = $_POST['category_id'];
+    $category_name = $_POST['categoryname'];
+    
+    $update = "UPDATE product SET ctg_name = '$category_name' WHERE ctg_id = '$id'";
+    
+    $query = mysqli_query($conn, $update);
+    
+    if ($query) {
+        header('Location: ../inventory.php?page=category');
+    }
+}
+
 mysqli_close($conn);

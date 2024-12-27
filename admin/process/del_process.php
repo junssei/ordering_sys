@@ -13,8 +13,18 @@ if ($_GET['productID']) {
 }
 
 if ($_GET['categoryID']){
-    $cID = $_GET['categoryID'];
-    $sql = "DELETE FROM category WHERE ctg_id = '$cID'";
+    $id = $_GET['categoryID'];
+    $sql = "DELETE FROM category WHERE ctg_id = '$id'";
+    $query = mysqli_query($conn, $sql);
+
+    if ($query) {
+        header('Location: ../inventory.php?page=category');
+    }
+}
+
+if ($_GET['subcategoryID']){
+    $id = $_GET['subcategoryID'];
+    $sql = "DELETE FROM subcategory WHERE subctg_id = '$id'";
     $query = mysqli_query($conn, $sql);
 
     if ($query) {
