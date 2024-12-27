@@ -12,7 +12,7 @@ if($_GET['page'] == "product" && $_GET['id']){
         <div class="dialog_container">
             <div id="dialog_header">
                 <h1>Edit Product</h1>
-                <img class="close_dialog" src="../source/images/icon/svg/close.svg" alt="closebtn">
+                <img class="close_dialog cancelbtnimg" src="../source/images/icon/svg/close.svg" alt="closebtn">
             </div>
             <form id="editproduct" class="dialog_form" action="process/upd_process.php" method="post" enctype="multipart/form-data" autocomplete="off">
                 <div class="dialog_imginp">
@@ -20,7 +20,7 @@ if($_GET['page'] == "product" && $_GET['id']){
                     <div class="inputfile" style="border: none;">
                         <img src="../source/images/upload/products/<?= htmlspecialchars($rowPrd['prd_filename']) ?>" class="imagedisp imageLarge">
                         <div class="inp inpfile">
-                            <input class="imageupld choosefilebtn" type="file" name="uploadimg1" accept=".png, .jpg, .jpeg">
+                            <input class="imageupld choosefilebtn" type="file" name="uploadimg" accept=".png, .jpg, .jpeg">
                         </div>
                     </div>
                 </div>
@@ -37,7 +37,7 @@ if($_GET['page'] == "product" && $_GET['id']){
                     </div>
                     <div class="input_select">
                         <select name="productcategory" required>
-                            <option>Select category:</option>
+                            <option value="N/A"> None </option>
                             <?php
                             $fetchCategory = "SELECT * FROM category";
                             $exec = mysqli_query($conn, $fetchCategory);
@@ -82,16 +82,17 @@ if($_GET['page'] == "category" && $_GET['id']){
     <div class="dialog_container">
         <div id="dialog_header">
             <h1> Add Category </h1>
-            <img class="close_dialog" src="../source/images/icon/svg/close.svg" alt="closebtn">
+            <img class="close_dialog cancelbtnimg" src="../source/images/icon/svg/close.svg" alt="closebtn">
         </div>
-        <form id="addcategory" class="dialog_form" action="process/add_process.php" method="post">
+        <form id="editcategory" class="dialog_form" action="process/upd_process.php" method="post">
             <div class="input">
                 <div class="inp">
+                    <input type="hidden" name="category_id" value="<?= $rowCat['ctg_id'] ?>">
                     <input id="product_name" type="text" name="categoryname" placeholder="Product Name" required value="<?= htmlspecialchars($rowCat['ctg_name']) ?>">
                 </div>
             </div>
             <div class="input_actions">
-                <input class="enabledbtn defaultbtn" type="submit" value="Add Category" name="submit_category">
+                <input class="enabledbtn defaultbtn" type="submit" value="Add Category" name="update_category">
             </div>
         </form>
     </div>

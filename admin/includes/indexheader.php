@@ -1,4 +1,9 @@
 <?php
+if(!isset($_SESSION['loggedin'])){
+    header('Location: login.php');
+    exit();
+}
+
 $id = $_SESSION['admidID'];
 $sql = "SELECT * FROM admin WHERE admin_id = '$id'";
 $result = mysqli_query($conn, $sql);

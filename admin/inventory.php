@@ -1,6 +1,6 @@
 <?php
 session_start();
-$title = "Users";
+$title = "Inventory";
 
 include 'includes/header.php';
 ?>
@@ -10,13 +10,13 @@ include 'includes/header.php';
         include 'includes/sidebar.php';
 
         // User: Admin Interface
-        if($_GET['page'] == "admin") {
-            include 'includes/users/user_admin.php';
+        if($_GET['page'] == "product") {
+            include 'includes/inventory/product.php';
         }
     
         // User: Customer Interface 
-        if ($_GET['page'] == "customer") { 
-            include 'includes/users/user_customer.php';
+        if ($_GET['page'] == "category") { 
+            include 'includes/inventory/category.php';
         }
         ?>
     </div>

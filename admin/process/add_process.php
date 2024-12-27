@@ -9,14 +9,14 @@
         $product_size = $_POST['productsize'];
         $product_category = $_POST['productcategory'];
         
+        if($_FILES["uploadimg"]["size"] > 500000){
+
+        };
+
         // For Image
         $filename = $_FILES["uploadimg"]["name"];
         $tempname = $_FILES["uploadimg"]["tmp_name"];
         $folder = "../../source/images/upload/products/" . $filename;
-
-        $insertProduct = "INSERT INTO product VALUES ('', '$product_category', '$product_name', '$product_brand', '$product_price', '$product_size', CURRENT_DATE(), '$filename')";
-
-        $query = mysqli_query($conn, $insertProduct);
 
         // Now let's move the uploaded image into the folder: image
         if (move_uploaded_file($tempname, $folder)) {
@@ -25,8 +25,12 @@
             echo "<script> console.log('Failed to upload image!') </script>";
         }
 
+        $insertProduct = "INSERT INTO product VALUES ('', '$product_category', '$product_name', '$product_brand', '$product_price', '$product_size', '',CURRENT_DATE(), '$filename')";
+
+        $query = mysqli_query($conn, $insertProduct);
+
         if ($query) {
-            header('Location: ../product.php');
+            header('Location: ../inventory.php?page=product');
         }
     }
 
@@ -38,7 +42,7 @@
         $query = mysqli_query($conn, $insertCategory);
 
         if ($query) {
-            header('Location: ../category.php');
+            header('Location: ../inventory.php?page=category');
         }
     }
 ?>

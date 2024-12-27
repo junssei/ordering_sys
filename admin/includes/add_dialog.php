@@ -5,14 +5,14 @@ if($_GET['page'] == "product") {
 <div class="dialog_container">
     <div id="dialog_header">
         <h1> Add Product </h1>
-        <img class="close_dialog" src="../source/images/icon/svg/close.svg" alt="closebtn">
+        <img class="close_dialog cancelbtnimg" src="../source/images/icon/svg/close.svg" alt="closebtn">
     </div>
     <form id="addproduct" class="dialog_form" action="process/add_process.php" method="post" enctype="multipart/form-data" autocomplete="off">
         <div class="dialog_imginp">
             <div class="inputfile" style="border: none"; >
-                <img src="../source/images/upload/products/default.png" class="imagedisp imageLarge">
+                <img src="../source/images/upload/products/gallery.png" class="imagedisp imageLarge">
                 <div class="inp inpfile">
-                    <input class="imageupld choosefilebtn" type="file" name="uploadimg" accept=".png, .jpg, .jpeg">
+                    <input class="imageupld choosefilebtn" type="file" name="uploadimg" accept=".png, .jpg, .jpeg, .webp">
                 </div>
             </div>
         </div>
@@ -29,7 +29,7 @@ if($_GET['page'] == "product") {
             </div>
             <div class="input_select">
                 <select name="productcategory" required>
-                    <option>None</option>
+                    <option value="none"> None </option>
                     <?php
                     $fetchCategory = "SELECT * FROM category";
                     $exec = mysqli_query($conn, $fetchCategory);
@@ -59,7 +59,7 @@ if($_GET['page'] == "product") {
     <div class="dialog_container">
         <div id="dialog_header">
             <h1> Add Category </h1>
-            <img class="close_dialog" src="../source/images/icon/svg/close.svg" alt="closebtn">
+            <img class="close_dialog cancelbtnimg" src="../source/images/icon/svg/close.svg" alt="closebtn">
         </div>
         <form id="addcategory" class="dialog_form" action="process/add_process.php" method="post">
             <div class="input">

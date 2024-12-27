@@ -4,26 +4,27 @@
     </a>
     <div id="navigation">
         <?php 
+        $defaultpage = basename($_SERVER['REQUEST_URI']);
         $currentPage = basename($_SERVER['REQUEST_URI'], ".php");
         ?>
         <div id="navmenus">
             <a href="index.php" class="menu <?php if($currentPage === "index") echo "active"; ?>"><img src="../source/images/icon/svg/dashboard.svg" class="iconNormal" alt="dashboard"><p>Dashboard</p></a>
             <div class="menu dropdown"><img src="../source/images/icon/svg/boxes.svg" class="iconNormal" alt="inventory"><p>Inventory</p><img src="../source/images/icon/svg/dropdown.svg"></div>
                 <div class="dropdown_menus">
-                    <a href="product.php" class="menu <?php if($currentPage === "product") echo "active"; ?>">
-                        <span>Product</span>
+                    <a href="inventory.php?page=product" class="menu <?php if($defaultpage === "inventory.php?page=product") echo "active"; ?>">
+                        <span>Product List</span>
                     </a>
-                    <a href="category.php" class="menu <?php if($currentPage === "category") echo "active"; ?>">
+                    <a href="inventory.php?page=category" class="menu <?php if($defaultpage === "inventory.php?page=category") echo "active"; ?>">
                         <span>Categories</span>
                     </a>
                 </div>
             <a href="" class="menu <?php if($currentPage === "") echo "active"; ?>"><img src="../source/images/icon/svg/dashboard.svg" class="iconNormal" alt="dashboard"><p> Orders </p></a>
             <div class="menu dropdown"><img src="../source/images/icon/svg/people.svg" class="iconNormal" alt="users"><p>Users</p><img src="../source/images/icon/svg/dropdown.svg"></div>
                 <div class="dropdown_menus">
-                    <a href="user_customer.php" class="menu <?php if($currentPage === "user_customer") echo "active"; ?>">
+                    <a href="users.php?page=customer" class="menu <?php if($defaultpage === "users.php?page=customer") echo "active"; ?>">
                         <span>Customer</span>
                     </a>
-                    <a href="user_admin.php" class="menu <?php if($currentPage === "user_admin") echo "active"; ?>">
+                    <a href="users.php?page=admin" class="menu <?php if($defaultpage === "users.php?page=admin") echo "active"; ?>">
                         <span>Admin</span>
                     </a>
                 </div>

@@ -11,22 +11,41 @@ if(isset($_POST['update_product'])){
     $product_category = $_POST['productcategory'];
     
     // For Image
-    $filename = $_FILES["uploadimg"]["name"];
-    $tempname = $_FILES["uploadimg"]["tmp_name"];
-    $folder = "../../source/images/upload/products/" . $filename;
+    if(!empty($_FILES["uploadimg"]["name"])){
+        $filename = $_FILES["uploadimg"]["name"];
+        $tempname = $_FILES["uploadimg"]["tmp_name"];
+        $folder = "../../source/images/upload/products/" . $filename;
 
-    $update = "UPDATE product SET prd_name = '$product_name', prd_brand = '$product_brand', prd_price = '$product_size'";
-
-    $query = mysqli_query($conn, $update);
-
-    // Now let's move the uploaded image into the folder: image
-    if (move_uploaded_file($tempname, $folder)) {
-        echo "<script> console.log('Image uploaded successfully!') </script>";
+        // Now let's move the uploaded image into the folder: image
+        if (move_uploaded_file($tempname, $folder)) {
+            echo "<script> console.log('Image uploaded successfully!') </script>";
+        } else {
+            echo "<script> console.log('Failed to upload image!') </script>";
+        }
+        
+        $update = "UPDATE product SET prd_name = '$product_name', ctg_id = '$product_category', prd_brand = '$product_brand', prd_price = '$product_price', prd_size = '$product_size', prd_filename = '$filename' WHERE prd_id = '$id'";
     } else {
-        echo "<script> console.log('Failed to upload image!') </script>";
+        $update = "UPDATE product SET prd_name = '$product_name', ctg_id = '$product_category', prd_brand = '$product_brand', prd_price = '$product_price', prd_size = '$product_size' WHERE prd_id = '$id'";
     }
-
+    
+    $query = mysqli_query($conn, $update);
+    
     if ($query) {
-        header('Location: ../product.php');
+        header('Location: ../inventory.php?page=product');
     }
 }
+
+if(isset($_POST['update_category'])){
+    $id = $_POST['category_id'];
+    $category_name = $_POST['categoryname'];
+    
+    $update = "UPDATE product SET ctg_name = '$category_name' WHERE ctg_id = '$id'";
+    
+    $query = mysqli_query($conn, $update);
+    
+    if ($query) {
+        header('Location: ../inventory.php?page=category');
+    }
+}
+
+mysqli_close($conn);

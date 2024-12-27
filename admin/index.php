@@ -1,10 +1,6 @@
 <?php
 session_start();
 $title = "Dashboard";
-if(!isset($_SESSION['loggedin'])){
-    header('Location: login.php');
-    exit();
-}
 
 include 'includes/header.php';
 ?>
@@ -18,7 +14,7 @@ include 'includes/header.php';
                     <p id="breadcrumbs"> <?php echo "Dashboard" ?> </p>
                 </div>
                 <div id="content_body">
-
+                    
                 </div>
             </div>
         </div>

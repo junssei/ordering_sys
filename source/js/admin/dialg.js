@@ -17,7 +17,7 @@ function displayImageModal(){ // *Upload Image -> Display Image
             if(imageUpload_modal[i].files && imageUpload_modal[i].files[0]){
                 imagedisp_modal[i].src = URL.createObjectURL(imageUpload_modal[i].files[0]);
             } else {
-                imagedisp_modal[i].src = "../source/images/upload/products/default.png";
+                imagedisp_modal[i].src = "../source/images/upload/products/gallery.png";
             }
         }
     }
@@ -32,7 +32,7 @@ function closeModal(){
     }
 }
 
-// Add Product
+// Add
 function addModal(page){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -48,7 +48,7 @@ function addModal(page){
     xhttp.send();
 }
 
-// Edit Product
+// Edit
 function editModal(page, id){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -61,5 +61,21 @@ function editModal(page, id){
         }
     };
     xhttp.open("GET", "includes/edit_dialog.php?page=" + page + "&" + "id=" +id, true);
+    xhttp.send();
+}
+
+// Delete
+function deltModal(page, id){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            const dialog = document.querySelector("#dialog");
+            dialog.innerHTML = this.responseText;
+            displayImageModal();
+            dialog.showModal();
+            closeModal();
+        }
+    };
+    xhttp.open("GET", "includes/delt_dialog.php?page=" + page + "&" + "id=" +id, true);
     xhttp.send();
 }
