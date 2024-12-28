@@ -149,20 +149,20 @@ input[type="text"], input[type="password"], input[type="email"], input[type="fil
 
 /* Product Image */
 .imageSmall{
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+}
+
+.imageMedium{
     width: 64px;
     height: 64px;
     object-fit: cover;
 }
 
-.imageMedium{
+.imageLarge{
     width: 120px;
     height: 120px;
-    object-fit: cover;
-}
-
-.imageLarge{
-    width: 200px;
-    height: 200px;
     object-fit: cover;
 }
 

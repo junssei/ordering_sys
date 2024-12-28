@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 27, 2024 at 03:19 PM
+-- Generation Time: Dec 28, 2024 at 04:58 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -56,7 +56,7 @@ CREATE TABLE `category` (
   `ctg_id` int(11) NOT NULL,
   `ctg_name` varchar(255) NOT NULL,
   `ctg_desc` varchar(255) DEFAULT NULL,
-  `ctg_img` varchar(255) NOT NULL,
+  `ctg_img` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -73,6 +73,19 @@ INSERT INTO `category` (`ctg_id`, `ctg_name`, `ctg_desc`, `ctg_img`, `created_at
 (5, 'Miscellaneous', NULL, '', '2024-12-25 16:00:00', '2024-12-27 07:41:37'),
 (6, 'Baby Products', NULL, '', '2024-12-25 16:00:00', '2024-12-27 07:41:37'),
 (7, 'Snacks', NULL, '', '2024-12-25 16:00:00', '2024-12-27 07:41:37');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inventory`
+--
+
+CREATE TABLE `inventory` (
+  `inventory_id` int(11) NOT NULL,
+  `stock` int(99) NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `variation_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -95,32 +108,31 @@ CREATE TABLE `product` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `product_variation`
+--
+
+CREATE TABLE `product_variation` (
+  `variation_id` int(11) NOT NULL,
+  `variation_name` varchar(255) NOT NULL,
+  `price` double(12,2) NOT NULL,
+  `sku` varchar(155) DEFAULT NULL,
+  `prd_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `subcategory`
 --
 
 CREATE TABLE `subcategory` (
   `subctg_id` int(11) NOT NULL,
   `subctg_name` varchar(255) NOT NULL,
-  `subctg_desc` varchar(255) NOT NULL,
-  `subctg_img` varchar(255) NOT NULL,
-  `created_at` date DEFAULT NULL,
+  `subctg_desc` varchar(255) DEFAULT NULL,
+  `subctg_img` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `ctg_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `variation`
---
-
-CREATE TABLE `variation` (
-  `variation_id` int(11) NOT NULL,
-  `variation_name` varchar(255) NOT NULL,
-  `price` double(12,2) NOT NULL,
-  `stock_quantity` int(11) NOT NULL,
-  `sku` varchar(155) NOT NULL,
-  `prd_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -140,6 +152,13 @@ ALTER TABLE `category`
   ADD PRIMARY KEY (`ctg_id`);
 
 --
+-- Indexes for table `inventory`
+--
+ALTER TABLE `inventory`
+  ADD PRIMARY KEY (`inventory_id`),
+  ADD KEY `variation_id` (`variation_id`);
+
+--
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
@@ -147,17 +166,18 @@ ALTER TABLE `product`
   ADD KEY `product_ibfk_1` (`subctg_id`);
 
 --
+-- Indexes for table `product_variation`
+--
+ALTER TABLE `product_variation`
+  ADD PRIMARY KEY (`variation_id`),
+  ADD KEY `prd_id` (`prd_id`);
+
+--
 -- Indexes for table `subcategory`
 --
 ALTER TABLE `subcategory`
   ADD PRIMARY KEY (`subctg_id`),
   ADD KEY `ctg_id` (`ctg_id`);
-
---
--- Indexes for table `variation`
---
-ALTER TABLE `variation`
-  ADD PRIMARY KEY (`variation_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -176,10 +196,22 @@ ALTER TABLE `category`
   MODIFY `ctg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT for table `inventory`
+--
+ALTER TABLE `inventory`
+  MODIFY `inventory_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
   MODIFY `prd_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `product_variation`
+--
+ALTER TABLE `product_variation`
+  MODIFY `variation_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `subcategory`
@@ -188,14 +220,20 @@ ALTER TABLE `subcategory`
   MODIFY `subctg_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `variation`
---
-ALTER TABLE `variation`
-  MODIFY `variation_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `inventory`
+--
+ALTER TABLE `inventory`
+  ADD CONSTRAINT `inventory_ibfk_1` FOREIGN KEY (`variation_id`) REFERENCES `product_variation` (`variation_id`);
+
+--
+-- Constraints for table `product_variation`
+--
+ALTER TABLE `product_variation`
+  ADD CONSTRAINT `product_variation_ibfk_1` FOREIGN KEY (`prd_id`) REFERENCES `product` (`prd_id`);
 
 --
 -- Constraints for table `subcategory`

@@ -2,6 +2,7 @@
     session_start();
     require '../../source/db/connect.php';
 
+    // Product
     if(isset($_POST['submit_product'])){
         $product_name = $_POST['productname'];
         $product_brand = $_POST['productbrand'];
@@ -9,13 +10,9 @@
         $product_size = $_POST['productsize'];
         $product_category = $_POST['productcategory'];
         
-        if($_FILES["uploadimg"]["size"] > 500000){
-
-        };
-
         // For Image
-        $filename = $_FILES["uploadimg"]["name"];
-        $tempname = $_FILES["uploadimg"]["tmp_name"];
+        $filename = $_FILES["uploadimgproduct"]["name"];
+        $tempname = $_FILES["uploadimgproduct"]["tmp_name"];
         $folder = "../../source/images/upload/products/" . $filename;
 
         // Now let's move the uploaded image into the folder: image
@@ -34,10 +31,24 @@
         }
     }
 
+    // Categories
     if(isset($_POST['submit_category'])){
         $category_name = $_POST['categoryname'];
+        $category_desc = $_POST['categorydescription'];
 
-        $insertCategory = "INSERT INTO category VALUES ('', '$category_name', CURRENT_DATE())";
+        // For Image
+        $filename = $_FILES["uploadimgcategory"]["name"];
+        $tempname = $_FILES["uploadimgcategory"]["tmp_name"];
+        $folder = "../../source/images/upload/categories/" . $filename;
+
+        // Now let's move the uploaded image into the folder: image
+        if (move_uploaded_file($tempname, $folder)) {
+            echo "<script> console.log('Image uploaded successfully!') </script>";
+        } else {
+            echo "<script> console.log('Failed to upload image!') </script>";
+        }
+
+        $insertCategory = "INSERT INTO category VALUES ('', '$category_name', '$category_desc', '$filename', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP())";
 
         $query = mysqli_query($conn, $insertCategory);
 
@@ -46,11 +57,25 @@
         }
     }
     
-    if(isset($_POST['submit_category'])){
-        $category_name = $_POST['categoryname'];
-        $category_name = $_POST['categoryname'];
+    // Subcategory
+    if(isset($_POST['submit_subcategory'])){
+        $subcategory_category = $_POST['category'];
+        $subcategory_name = $_POST['subcategoryname'];
+        $subcategory_desc = $_POST['subcategorydescription'];
 
-        $insertCategory = "INSERT INTO category VALUES ('', '$category_name', CURRENT_DATE())";
+        // For Image
+        $filename = $_FILES["uploadimgsubcategory"]["name"];
+        $tempname = $_FILES["uploadimgsubcategory"]["tmp_name"];
+        $folder = "../../source/images/upload/categories/" . $filename;
+
+        // Now let's move the uploaded image into the folder: image
+        if (move_uploaded_file($tempname, $folder)) {
+            echo "<script> console.log('Image uploaded successfully!') </script>";
+        } else {
+            echo "<script> console.log('Failed to upload image!') </script>";
+        }
+
+        $insertCategory = "INSERT INTO subcategory VALUES ('','$subcategory_name','$subcategory_desc','$filename',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(), '$subcategory_category')";
 
         $query = mysqli_query($conn, $insertCategory);
 

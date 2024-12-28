@@ -25,7 +25,7 @@ if($_GET['page'] == "product" && $_GET['id']){
         <?php
 }
 
-//Category
+// Category
 if($_GET['page'] == "category" && $_GET['id']){
     $id = intval($_GET['id']);
     $sql = "SELECT * FROM category WHERE ctg_id = '$id'";
@@ -49,6 +49,7 @@ if($_GET['page'] == "category" && $_GET['id']){
     <?php
 }
 
+// Subcategory
 if($_GET['page'] == "subcategory" && $_GET['id']){
     $id = intval($_GET['id']);
     $sql = "SELECT * FROM subcategory WHERE subctg_id = '$id'";
