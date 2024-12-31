@@ -18,7 +18,11 @@
                 <div class="tablecontainer_header">
                     <h2> Product </h2>
                     <div class="tablecontainerheader_actions">
-                        <button class="defaultbtn" onclick="addModal('product')"> + Product </button>
+                        <div class="searchcontainer">
+                            <img src="../source/images/icon/svg/search.svg" alt="search_icon">
+                            <input type="text" placeholder="Search">
+                        </div>
+                        <button class="smallbtn" onclick="addModal('product')"> + Product </button>
                     </div>
                 </div>
                 <div class="tablecontainer">

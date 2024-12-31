@@ -23,6 +23,7 @@ function displayImageModal(){ // *Upload Image -> Display Image
     }
 }
 
+// Modal Close button
 function closeModal(){
     const closeBtn = dialog.querySelector(".close_dialog");
     if (closeBtn) {
@@ -32,7 +33,7 @@ function closeModal(){
     }
 }
 
-// Add
+// Add(1)
 function addModal(page){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -48,7 +49,23 @@ function addModal(page){
     xhttp.send();
 }
 
-// Edit
+// Add(2)
+function addModal2(page, id){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            const dialog = document.querySelector("#dialog");
+            dialog.innerHTML = this.responseText;
+            displayImageModal();
+            dialog.showModal();
+            closeModal();
+        }
+    };
+    xhttp.open("GET", "includes/add_dialog.php?page=" + page + "&" + "id=" + id, true);
+    xhttp.send();
+}
+
+// Edit(2)
 function editModal(page, id){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -64,7 +81,7 @@ function editModal(page, id){
     xhttp.send();
 }
 
-// Delete
+// Delete(2)
 function deltModal(page, id){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -76,6 +93,6 @@ function deltModal(page, id){
             closeModal();
         }
     };
-    xhttp.open("GET", "includes/delt_dialog.php?page=" + page + "&" + "id=" +id, true);
+    xhttp.open("GET", "includes/delt_dialog.php?page=" + page + "&" + "id=" + id, true);
     xhttp.send();
 }

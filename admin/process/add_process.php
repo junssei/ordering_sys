@@ -27,6 +27,8 @@
         $query = mysqli_query($conn, $insertProduct);
 
         if ($query) {
+            $para1 = "Insert";
+            $_SESSION['notification'] = $para1 . " succesfully!";
             header('Location: ../inventory.php?page=product');
         }
     }
@@ -53,6 +55,8 @@
         $query = mysqli_query($conn, $insertCategory);
 
         if ($query) {
+            $para1 = "Insert";
+            $_SESSION['notification'] = $para1 . " succesfully!";
             header('Location: ../inventory.php?page=category');
         }
     }
@@ -64,7 +68,7 @@
         $subcategory_desc = $_POST['subcategorydescription'];
 
         // For Image
-        $filename = $_FILES["uploadimgsubcategory"]["name"];
+        $filename = $_FILES["uploadimgsubcategory"]["name"] . $subcategory_name . $id;
         $tempname = $_FILES["uploadimgsubcategory"]["tmp_name"];
         $folder = "../../source/images/upload/categories/" . $filename;
 
@@ -80,7 +84,71 @@
         $query = mysqli_query($conn, $insertCategory);
 
         if ($query) {
+            $para1 = "Insert";
+            $_SESSION['notification'] = $para1 . " succesfully!";
             header('Location: ../inventory.php?page=category');
+        }
+    }
+
+    // Variation
+    if(isset($_POST['submit_variation'])){
+        $variation_name = $_POST['variationname'];
+
+        $insertCategory = "INSERT INTO variation VALUES ('','$variation_name',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP())";
+
+        $query = mysqli_query($conn, $insertCategory);
+
+        if ($query) {
+            $para1 = "Insert";
+            $_SESSION['notification'] = $para1 . " succesfully!";
+            header('Location: ../inventory.php?page=variation');
+        }
+    }
+
+    // Variation Option
+    if(isset($_POST['submit_option_variation'])){
+        
+        $option_value = $_POST['option_variation_name'];
+        $variationID = $_POST['option_variation_vrtid'];
+        
+        foreach($option_value as $option => $value){
+            $trimvalue = trim($value);
+
+            if(!empty($trimvalue)){
+            $insertOptionToVariation = "INSERT INTO variation_option VALUES ('','$trimvalue',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(), '$variationID')";
+            
+            $query1 = mysqli_query($conn, $insertOptionToVariation);
+            }
+        }
+
+        // This will update the current option
+        if(isset($_POST['current_option_id'])){
+            $currentid = $_POST['current_option_id'];
+            $currentvalue = $_POST['current_option_name'];
+            
+            foreach($currentid as $index => $id){
+                $optvalue = $currentvalue[$index];
+                $updateOptionToVariation = "UPDATE variation_option SET option_value = '$optvalue', updated_at = CURRENT_TIMESTAMP() WHERE vrtopt_id = '$id'";
+                
+                $query2 = mysqli_query($conn, $updateOptionToVariation);
+            }
+
+            if ($query1 && $query2) {
+                $para1 = "Insert";
+                $para2 = "Update Option";
+                $_SESSION['notification'] = $para1 . " and " . $para2 . " succesfully!";
+                header('Location: ../inventory.php?page=variation');
+            } else if ($query2){
+                $para2 = "Update Option";
+                $_SESSION['notification'] = $para2 . " succesfully!";
+                header('Location: ../inventory.php?page=variation');
+            }
+        }
+
+        if ($query1) {
+            $para1 = "Insert";
+            $_SESSION['notification'] = $para1 . " succesfully!";
+            header('Location: ../inventory.php?page=variation');
         }
     }
 ?>

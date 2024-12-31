@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 28, 2024 at 04:58 AM
+-- Generation Time: Dec 29, 2024 at 01:07 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -66,13 +66,14 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`ctg_id`, `ctg_name`, `ctg_desc`, `ctg_img`, `created_at`, `updated_at`) VALUES
-(1, 'Canned Goods', NULL, '', '2024-12-25 16:00:00', '2024-12-27 07:41:37'),
-(2, 'Beverages', NULL, '', '2024-12-25 16:00:00', '2024-12-27 07:41:37'),
-(3, 'Household', NULL, '', '2024-12-25 16:00:00', '2024-12-27 07:41:37'),
-(4, 'Condiments', NULL, '', '2024-12-25 16:00:00', '2024-12-27 07:41:37'),
-(5, 'Miscellaneous', NULL, '', '2024-12-25 16:00:00', '2024-12-27 07:41:37'),
-(6, 'Baby Products', NULL, '', '2024-12-25 16:00:00', '2024-12-27 07:41:37'),
-(7, 'Snacks', NULL, '', '2024-12-25 16:00:00', '2024-12-27 07:41:37');
+(1, 'Canned Goods', 'Sardines, Meat Loaf, Corned Beef.', 'Property 1=canned.svg', '2024-12-25 16:00:00', '2024-12-28 19:25:33'),
+(2, 'Beverages', 'Soft drinks, Bottled water, Juices, Coffee & Tea, Alcohol drinks', 'Property 1=beverage.svg', '2024-12-25 16:00:00', '2024-12-28 19:29:02'),
+(3, 'Household', 'Cleaning Materials, Toiletries, Paper Products ', 'Property 1=cleaning.svg', '2024-12-25 16:00:00', '2024-12-28 17:56:19'),
+(4, 'Condiments', 'Soy sauce, Vinegar, Cooking Oil', 'Property 1=condiments.svg', '2024-12-25 16:00:00', '2024-12-28 19:21:01'),
+(5, 'Miscellaneous', 'Batteries, Light Bulbs, Umbrellas', 'Property 1=misc.svg', '2024-12-25 16:00:00', '2024-12-28 17:58:12'),
+(6, 'Baby Products', 'Baby Food, Diapers, Baby Wipes\r\n', 'Property 1=baby.svg', '2024-12-25 16:00:00', '2024-12-28 17:59:10'),
+(7, 'Snacks', 'Chips, Biscuits, Chocolates', 'Property 1=snack.svg', '2024-12-25 16:00:00', '2024-12-28 17:59:36'),
+(8, 'School Supplies', '  ', 'Property 1=school.svg', '2024-12-28 18:00:14', '2024-12-28 18:00:24');
 
 -- --------------------------------------------------------
 
@@ -136,6 +137,18 @@ CREATE TABLE `subcategory` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Dumping data for table `subcategory`
+--
+
+INSERT INTO `subcategory` (`subctg_id`, `subctg_name`, `subctg_desc`, `subctg_img`, `created_at`, `updated_at`, `ctg_id`) VALUES
+(2, 'Sardines', 'All Sardines Canned Goods.', 'Phosphor icons.svg', '2024-12-28 04:24:35', '2024-12-28 19:18:58', 1),
+(3, 'Meat Loaf', 'All Meat Loaf Canned Goods. ', 'meatcanned.svg', '2024-12-28 08:21:19', '2024-12-28 17:24:20', 1),
+(7, 'Tuna', '', 'Property 1=image 15.svg', '2024-12-28 18:05:35', '2024-12-28 18:05:35', 1),
+(8, 'Corned Beef', '  ', 'Property 1=image 16.svg', '2024-12-28 18:05:53', '2024-12-28 18:06:12', 1),
+(9, 'Bottled Water', '', 'waterbottled.svg', '2024-12-28 19:28:31', '2024-12-28 19:28:31', 2),
+(10, 'Soft drinks', '', 'softdrinks.svg', '2024-12-28 19:30:31', '2024-12-28 19:30:31', 2);
+
+--
 -- Indexes for dumped tables
 --
 
@@ -193,7 +206,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `ctg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ctg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `inventory`
@@ -217,7 +230,7 @@ ALTER TABLE `product_variation`
 -- AUTO_INCREMENT for table `subcategory`
 --
 ALTER TABLE `subcategory`
-  MODIFY `subctg_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `subctg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables

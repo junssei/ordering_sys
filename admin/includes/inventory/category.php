@@ -13,7 +13,11 @@
                 <div class="tablecontainer_header">
                     <h2> Category </h2>
                     <div class="tablecontainerheader_actions">
-                        <button class="defaultbtn" onclick="addModal('category')"> + Category </button>
+                        <div class="searchcontainer">
+                            <img src="../source/images/icon/svg/search.svg" alt="search_icon">
+                            <input type="text" placeholder="Search">
+                        </div>
+                        <button class="smallbtn" onclick="addModal('category')"> + Category </button>
                     </div>
                 </div>
                 <div class="tablecontainer">
@@ -51,7 +55,11 @@
                 <div class="tablecontainer_header">
                     <h2> Subcategory </h2>
                     <div class="tablecontainerheader_actions">
-                        <button class="defaultbtn" onclick="addModal('subcategory')"> + Subcategory </button>
+                        <div class="searchcontainer">
+                            <img src="../source/images/icon/svg/search.svg" alt="search_icon">
+                            <input type="text" placeholder="Search">
+                        </div>
+                        <button class="smallbtn" onclick="addModal('subcategory')"> + Subcategory </button>
                     </div>
                 </div>
                 <div class="tablecontainer">

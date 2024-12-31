@@ -32,6 +32,8 @@ if(isset($_POST['update_product'])){
     $query = mysqli_query($conn, $update);
     
     if ($query) {
+        $para1 = "Update";
+        $_SESSION['notification'] = $para1 . " succesfully!";
         header('Location: ../inventory.php?page=product');
     }
 }
@@ -62,6 +64,8 @@ if(isset($_POST['update_category'])){
     $query = mysqli_query($conn, $update);
     
     if ($query) {
+        $para1 = "Update";
+        $_SESSION['notification'] = $para1 . " succesfully!";
         header('Location: ../inventory.php?page=category');
     }
 }
@@ -93,7 +97,25 @@ if(isset($_POST['update_subcategory'])){
     $query = mysqli_query($conn, $update);
     
     if ($query) {
+        $para1 = "Update";
+        $_SESSION['notification'] = $para1 . " succesfully!";
         header('Location: ../inventory.php?page=category');
+    }
+}
+
+// Variation
+if(isset($_POST['update_variation'])){
+    $id = $_POST['variation_id'];
+    $name = $_POST['variationname'];
+    
+    $update = "UPDATE variation SET vrt_name = '$name', updated_at = CURRENT_TIMESTAMP() WHERE vrt_id = '$id'";
+
+    $query = mysqli_query($conn, $update);
+    
+    if ($query) {
+        $para1 = "Update";
+        $_SESSION['notification'] = $para1 . " succesfully!";
+        header('Location: ../inventory.php?page=variation');
     }
 }
 

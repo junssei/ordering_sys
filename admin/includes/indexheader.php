@@ -11,9 +11,12 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 ?>
 <div id="header">
     <div id="header_left">
-        <img src="../source/images/icon/svg/menu.svg" alt="hamburger_icon">
+        <img id="togglehamburger" src="../source/images/icon/svg/menu.svg" alt="hamburger_icon">
     </div>
     <div id="header_right">
+        <div id="addbutton">
+            <img src="../source/images/icon/svg/addbutton.svg" alt="addbutton">
+        </div>
         <div id="notification">
             <img src="../source/images/icon/svg/notification.svg" alt="notification">
         </div>

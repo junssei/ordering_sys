@@ -20,6 +20,11 @@ include 'includes/header.php';
         }
 
         // User: Customer Interface 
+        if ($_GET['page'] == "variation") { 
+            include 'includes/inventory/variation.php';
+        }
+
+        // User: Customer Interface 
         if ($_GET['page'] == "stock") { 
             include 'includes/inventory/stock.php';
         }

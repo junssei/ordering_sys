@@ -13,3 +13,9 @@ require '../source/db/connect.php';
     ?>
 </head>
 <body>
+<?php
+if (isset($_SESSION['notification'])){
+    echo "<div class='popupnotification'><p>" . $_SESSION['notification'] . "</p></div>";
+    unset($_SESSION['notification']);
+}
+?>

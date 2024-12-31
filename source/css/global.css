@@ -56,7 +56,25 @@ input[type="text"], input[type="password"], input[type="email"], input[type="fil
     font-family: "Poppins", serif;
 }
 
+/* Direction */
+.flex-rowdirection{
+    gap: 16px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.flex-coldirection{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
 /* Button */
+.btn{
+    cursor: pointer;
+}
+
 .defaultbtn{
     width: 100%;
     font-size: 16px;
@@ -70,7 +88,20 @@ input[type="text"], input[type="password"], input[type="email"], input[type="fil
     background-color: var(--gray4);
 }
 
-.defaultbtn:hover{
+.smallbtn{
+    font-size: 16px;
+    font-weight: 500;
+    text-wrap: nowrap;
+    text-align: center;
+    padding: 6px 12px;
+    font-style: normal;
+    border-radius: 72px;
+    color: var(--white);
+    font-family: "Poppins", serif;
+    background-color: var(--gray4);
+}
+
+.defaultbtn:hover, .smallbtn:hover{
     cursor: pointer;
     background-color: var(--gray5);
 }
@@ -154,6 +185,13 @@ input[type="text"], input[type="password"], input[type="email"], input[type="fil
     object-fit: cover;
 }
 
+/* Product Image */
+.imageMediumSmall{
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+}
+
 .imageMedium{
     width: 64px;
     height: 64px;
@@ -168,8 +206,9 @@ input[type="text"], input[type="password"], input[type="email"], input[type="fil
 
 /* Image Logo */
 .logoSmall{
-    width: 200px;
-    height: 200px;
+    width: 64px;
+    height: 42px;
+    object-fit: cover;
 }
 
 .logoMedium{
@@ -208,4 +247,39 @@ input[type="text"], input[type="password"], input[type="email"], input[type="fil
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--blue2);
+}
+
+/* Animation Notification */
+.popupnotification{
+    top: 0%;
+    left: 50%;
+    z-index: 1;
+    padding: 32px;
+    display: block;
+    text-align: center;
+    visibility: hidden;
+    position: absolute;
+    border-radius: 14px;
+    background-color: var(--gray3);
+    transform: translate(-50%, -50%);
+    animation-name: popuphide;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-in-out;
+}
+
+/* Notification & Animation */
+@keyframes popuphide{
+    0% 	{ opacity: 0; visibility: visible;}
+	10% { opacity: 1; }
+	90% { opacity: 1;
+        top: 8%;
+        left: 50%;
+        /* transform: translate(-50%, -50%); */
+    }
+	99% { opacity: 0; 
+        top: 13%;
+        left: 50%;
+        /* transform: translate(-50%, -50%); */
+        }
+	100% { opacity: 0; visibility: hidden;}
 }

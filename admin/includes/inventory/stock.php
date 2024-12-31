@@ -5,9 +5,6 @@
     <div id="content">
         <div id="content_header">
             <p id="breadcrumbs"> <?php echo "Inventory/Stock"?> </p>
-            <!-- <div class="contentheader_actions">
-                <button class="defaultbtn" onclick="addModal('product')"> + Product </button>
-            </div> -->
         </div>
         <?php 
         // include 'includes/add_dialog.php';
@@ -18,7 +15,11 @@
                 <div class="tablecontainer_header">
                     <h2> Stock </h2>
                     <div class="tablecontainerheader_actions">
-                        <button class="defaultbtn" onclick="addModal('product')"> + Stock </button>
+                        <div class="searchcontainer">
+                            <img src="../source/images/icon/svg/search.svg" alt="search_icon">
+                            <input type="text" placeholder="Search">
+                        </div>
+                        <button class="smallbtn" onclick="addModal('product')"> + Stock </button>
                     </div>
                 </div>
                 <div class="tablecontainer">

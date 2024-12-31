@@ -51,6 +51,7 @@ if($_GET['page'] == "category" && $_GET['id']){
 
 // Subcategory
 if($_GET['page'] == "subcategory" && $_GET['id']){
+    $page = $_GET['page'];
     $id = intval($_GET['id']);
     $sql = "SELECT * FROM subcategory WHERE subctg_id = '$id'";
     $result = mysqli_query($conn, $sql);
@@ -58,7 +59,7 @@ if($_GET['page'] == "subcategory" && $_GET['id']){
     ?>
     <div class="dialog_container">
         <div id="dialog_header">
-            <h1> Delete Category </h1>
+            <h1>Delete <?=ucwords($page)?></h1>
         </div>
         <div id="dialog_body">
             <div class="dialog_message">
@@ -66,6 +67,31 @@ if($_GET['page'] == "subcategory" && $_GET['id']){
             </div>
             <div class="dialog_action">
                 <a href="process/del_process.php?subcategoryID=<?= $rowSubctg['subctg_id']?>" class="defaultbtn enabledbtn"> CONFIRM </a>
+                <a class="close_dialog defaultbtn cancelbtn"> CANCEL </a>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+
+// Variation
+if($_GET['page'] == "variation" && $_GET['id']){
+    $page = $_GET['page'];
+    $id = intval($_GET['id']);
+    $sql = "SELECT * FROM variation WHERE vrt_id = '$id'";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_array($result);
+    ?>
+    <div class="dialog_container">
+        <div id="dialog_header">
+            <h1>Delete <?=ucwords($page)?></h1>
+        </div>
+        <div id="dialog_body">
+            <div class="dialog_message">
+                <p> Are you sure you want to delete <span style="color: red"><?= $row['vrt_name'] ?></span></p>
+            </div>
+            <div class="dialog_action">
+                <a href="process/del_process.php?variationID=<?= $row['vrt_id']?>" class="defaultbtn enabledbtn"> CONFIRM </a>
                 <a class="close_dialog defaultbtn cancelbtn"> CANCEL </a>
             </div>
         </div>
