@@ -38,6 +38,15 @@
         $category_name = $_POST['categoryname'];
         $category_desc = $_POST['categorydescription'];
 
+        $checking = mysqli_query($conn, "SELECT * FROM category WHERE ctg_name = '$category_name' LIMIT 1");
+        $checkifexist = mysqli_num_rows($checking);
+        
+        if($checkifexist){ //If email is already exist
+            $_SESSION['notification'] = "Category is already exist.";
+            header('Location: ../inventory.php?page=category');
+            exit();
+        }
+
         // For Image
         $filename = $_FILES["uploadimgcategory"]["name"];
         $tempname = $_FILES["uploadimgcategory"]["tmp_name"];
@@ -67,16 +76,27 @@
         $subcategory_name = $_POST['subcategoryname'];
         $subcategory_desc = $_POST['subcategorydescription'];
 
-        // For Image
-        $filename = $_FILES["uploadimgsubcategory"]["name"] . $subcategory_name . $id;
-        $tempname = $_FILES["uploadimgsubcategory"]["tmp_name"];
-        $folder = "../../source/images/upload/categories/" . $filename;
+        $checking = mysqli_query($conn, "SELECT * FROM subcategory WHERE subctg_name = '$subcategory_name' AND ctg_id = '$subcategory_category' LIMIT 1");
+        $checkifexist = mysqli_num_rows($checking);
+        
+        if($checkifexist){ //If email is already exist
+            $_SESSION['notification'] = "Subcategory is already exist.";
+            header('Location: ../inventory.php?page=category');
+            exit();
+        }
+        
+        if(!empty($_FILES["uploadimgsubcategory"]["name"])){
+            // For Image
+            $filename = $_FILES["uploadimgsubcategory"]["name"];
+            $tempname = $_FILES["uploadimgsubcategory"]["tmp_name"];
+            $folder = "../../source/images/upload/categories/" . $filename;
 
-        // Now let's move the uploaded image into the folder: image
-        if (move_uploaded_file($tempname, $folder)) {
-            echo "<script> console.log('Image uploaded successfully!') </script>";
-        } else {
-            echo "<script> console.log('Failed to upload image!') </script>";
+            // Now let's move the uploaded image into the folder: image
+            if (move_uploaded_file($tempname, $folder)) {
+                echo "<script> console.log('Image uploaded successfully!') </script>";
+            } else {
+                echo "<script> console.log('Failed to upload image!') </script>";
+            }
         }
 
         $insertCategory = "INSERT INTO subcategory VALUES ('','$subcategory_name','$subcategory_desc','$filename',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(), '$subcategory_category')";
@@ -93,6 +113,15 @@
     // Variation
     if(isset($_POST['submit_variation'])){
         $variation_name = $_POST['variationname'];
+
+        $checking = mysqli_query($conn, "SELECT * FROM variation WHERE vrt_name = '$variation_name' AND ctg_id = 'subcategory_category' LIMIT 1");
+        $checkifexist = mysqli_num_rows($checking);
+        
+        if($checkifexist){ //If email is already exist
+            $_SESSION['notification'] = "Variation is already exist.";
+            header('Location: ../inventory.php?page=category');
+            exit();
+        }
 
         $insertCategory = "INSERT INTO variation VALUES ('','$variation_name',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP())";
 
@@ -111,6 +140,7 @@
         $option_value = $_POST['option_variation_name'];
         $variationID = $_POST['option_variation_vrtid'];
         
+        // Insert new input field
         foreach($option_value as $option => $value){
             $trimvalue = trim($value);
 

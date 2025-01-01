@@ -20,7 +20,7 @@
                     <div class="tablecontainerheader_actions">
                         <div class="searchcontainer">
                             <img src="../source/images/icon/svg/search.svg" alt="search_icon">
-                            <input type="text" placeholder="Search">
+                            <input type="text" placeholder="Search" class="search_field" onkeyup="searchFilter('variation')">
                         </div>
                         <button class="smallbtn" onclick="addModal('product')"> + Product </button>
                     </div>
@@ -32,9 +32,9 @@
                             <th> Product Name </th>
                             <th> Product Brand </th>
                             <th> Subcategory </th>
+                            <th> Variation </th>
                             <th> Description </th>
                             <th> Base Price </th>
-                            <th> Size </th>
                             <th></th>
                         </tr>
                         <?php //Display all products
@@ -49,7 +49,6 @@
                                     echo "<td>" . $rowProducts['prd_brand'] . "</td>";
                                     echo "<td>" . $rowProducts['ctg_id'] . "</td>";
                                     echo "<td>" . $rowProducts['prd_price'] . "</td>";
-                                    echo "<td>" . $rowProducts['prd_size'] . "</td>";
                                     echo '<td class="action_col"> 
                                     <a onclick="editModal(' . "'product'," . $rowProducts['prd_id'] . ')" class="editbtnlink"><img src="../source/images/icon/svg/edit.svg" alt="edit" class="editbtn"></a>
     

@@ -2,6 +2,7 @@
 session_start();
 require '../../source/db/connect.php';
 
+// Product
 if (isset($_GET['productID'])) {
     $pID = $_GET['productID'];
     $sql= "DELETE FROM product WHERE prd_id = '$pID'";
@@ -20,6 +21,7 @@ if (isset($_GET['productID'])) {
     }
 }
 
+// Category
 if (isset($_GET['categoryID'])){
     $id = $_GET['categoryID'];
     $sql = "DELETE FROM category WHERE ctg_id = '$id'";
@@ -38,6 +40,7 @@ if (isset($_GET['categoryID'])){
     }
 }
 
+// Subcategory
 if (isset($_GET['subcategoryID'])){
     $id = $_GET['subcategoryID'];
     $sql = "DELETE FROM subcategory WHERE subctg_id = '$id'";
@@ -48,11 +51,12 @@ if (isset($_GET['subcategoryID'])){
     $query = mysqli_query($conn, $sql);
     if (!unlink($path)) {
         // session
-        $_SESSION['error_notif'] = "Image not exist";
+        $_SESSION['notification'] = "Image not exist";
         header('Location: ../inventory.php?page=category');
     } else {
+        $para = "Delete";
+        $_SESSION['notification'] = $para1 . " succesfully!";
         header('Location: ../inventory.php?page=category');
-        // session
     }
 }
 
@@ -64,19 +68,21 @@ if (isset($_GET['variationID'])){
     $query = mysqli_query($conn, $sql);
 
     if ($query) {
-        // session
+        $para = "Delete";
+        $_SESSION['notification'] = $para1 . " succesfully!";
         header('Location: ../inventory.php?page=variation');
     }
 }
 
 // Variation Option
-if (isset($_GET['variation_option'])){
-    $id = $_GET['id'];
+if (isset($_GET['vrtoptionID'])){
+    $id = $_GET['vrtoptionID'];
     $sql = "DELETE FROM variation_option WHERE vrtopt_id = '$id'";
     $query = mysqli_query($conn, $sql);
-    
+
     if ($query) {
-        // session
+        $para = "Delete";
+        $_SESSION['notification'] = $para1 . " succesfully!";
         header('Location: ../inventory.php?page=variation');
     }
 }

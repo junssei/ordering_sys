@@ -6,13 +6,13 @@
         </div>
         <dialog id="dialog" class="dialog"></dialog>
         <div id="content_body" class="content_body_row">
-            <div class="maincontainer">
+            <div id="variation" class="maincontainer">
                 <div class="tablecontainer_header">
                     <h2> Variation </h2>
                     <div class="tablecontainerheader_actions">
                         <div class="searchcontainer">
                             <img src="../source/images/icon/svg/search.svg" alt="search_icon">
-                            <input type="text" placeholder="Search">
+                            <input type="text" placeholder="Search" class="search_field" onkeyup="searchFilter('variation')">
                         </div>
                         <button class="smallbtn" onclick="addModal('variation')"> + Variation </button>
                     </div>

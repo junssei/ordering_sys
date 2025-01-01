@@ -76,3 +76,60 @@ function addInputField(){
 function delInputField(delbtn){
     delbtn.closest('.flex-rowdirection').remove();
 }
+
+// Filter
+function filterTable(page){
+    var container = document.getElementById(page);
+
+    if(container.querySelector(".sort_category")){
+        var value = container.querySelector(".sort_category").value;
+    }
+
+    if(container.querySelector(".sort_chronological")){
+        var sort = container.querySelector(".sort_chronological").value;
+    }
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById(page + "table").innerHTML = this.responseText;
+        }
+    };
+
+    xhttp.open("GET", "includes/display_filter.php?value=" + value + "&sort=" + sort + "&page=" + page, true);
+    xhttp.send();
+}
+
+function searchFilter(page){
+    var container = document.getElementById(page);
+
+    var table = container.querySelector('.table'),
+    input = container.querySelector('.search_field'),
+    filter = input.value.toUpperCase(),
+    tr = table.getElementsByTagName("tr"),
+    td, i, txtValue;
+
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+        } else {
+            tr[i].style.display = "none";
+        }
+        }
+    }
+}
+
+// For all input fields that has a text or input, it will set the width to max/limit 200px
+var search_fields = document.getElementsByClassName("search_field");
+for (let i = 0; i < search_fields.length; i++) {
+    search_fields[i].addEventListener("input", function () {
+        if (this.value.trim() !== "") {
+            this.parentElement.style.width = "200px";
+        } else {
+            this.parentElement.style.width = "";
+        }
+    });
+}

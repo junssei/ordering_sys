@@ -132,7 +132,6 @@ if($_GET['page'] == "product") { $page = $_GET['page']; ?>
                 </div>
                 <div class="input_select">
                     <select name="category" required>
-                        <option value="0"> None </option>
                         <?php
                         $fetchCategory = "SELECT * FROM category";
                         $exec = mysqli_query($conn, $fetchCategory);
@@ -212,7 +211,7 @@ if($_GET['page'] == "product") { $page = $_GET['page']; ?>
                                                 <input id="' . $page . '_name" type="text" name="current_option_name[]" placeholder="Option name" required value="' . $rowCurrentOpt['option_value'] . '">
                                             </div>
                                         </div>
-                                        <a onclick="deltModal(' . "'variation_option'," . $rowCurrentOpt['vrtopt_id'] . ')" class="deletebtnlink"><img src="../source/images/icon/svg/delete.svg" alt="delete" class="deletebtn"></a>';
+                                        <a href="process/del_process.php?vrtoptionID=' . $rowCurrentOpt['vrtopt_id'] . '" class="deletebtnlink"><img src="../source/images/icon/svg/delete.svg" alt="delete" class="deletebtn"></a>';
                                     echo '</div>';
                                 }
                             }

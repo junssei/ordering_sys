@@ -34,6 +34,7 @@ a{
 
 /* Dialog */
 dialog{
+    zoom: 85%;
     z-index: 1;
     padding: 32px;
     border-radius: 8px;
@@ -50,7 +51,7 @@ input:focus, select:focus, textarea:focus{
 }
 
 
-input[type="text"], input[type="password"], input[type="email"], input[type="file"]::file-selector-button, textarea{
+input[type="text"], input[type="password"], input[type="email"], input[type="file"]::file-selector-button, textarea, select{
     font-weight: 400;
     font-style: normal;
     font-family: "Poppins", serif;
