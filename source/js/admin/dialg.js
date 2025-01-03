@@ -1,3 +1,5 @@
+window.onload = function() { displayImageModal() };
+
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
     var dialogs = document.getElementsByClassName("dialog");
@@ -9,15 +11,16 @@ window.onclick = function(event) {
 }
 
 function displayImageModal(){ // *Upload Image -> Display Image
-    let imagedisp_modal = document.getElementsByClassName("imagedisp"); //img
-    let imageUpload_modal = document.getElementsByClassName("imageupld"); //button
+    let imageUpload_btn = document.getElementsByClassName("imageupld"); //button
+    let imagedisp = document.getElementsByClassName("imagedisp"); //img
 
-    for(let i = 0; i < imageUpload_modal.length; i++){
-        imageUpload_modal[i].onchange = function(){
-            if(imageUpload_modal[i].files && imageUpload_modal[i].files[0]){
-                imagedisp_modal[i].src = URL.createObjectURL(imageUpload_modal[i].files[0]);
+    for(let i = 0; i < imageUpload_btn.length; i++){
+        imageUpload_btn[i].onchange = function(){
+            if(imageUpload_btn[i].files && imageUpload_btn[i].files[0]){
+                imagedisp[i].src = URL.createObjectURL(imageUpload_btn[i].files[0]);
+                console.log(imageUpload_btn[i].files[0]);
             } else {
-                imagedisp_modal[i].src = "../source/images/upload/products/gallery.png";
+                imagedisp[i].src = "../source/images/upload/products/gallery.png";
             }
         }
     }

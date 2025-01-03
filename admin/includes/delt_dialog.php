@@ -1,10 +1,11 @@
 <?php
+session_start();
 require '../../source/db/connect.php';
 
 // Product
 if($_GET['page'] == "product" && $_GET['id']){
     $id = intval($_GET['id']);
-    $sql = "SELECT * FROM product WHERE prd_id = '$id'";
+    $sql = "SELECT * FROM product WHERE product_id = '$id'";
     $result = mysqli_query($conn, $sql);
     $rowPrd = mysqli_fetch_array($result);
         ?>
@@ -14,10 +15,10 @@ if($_GET['page'] == "product" && $_GET['id']){
             </div>
             <div id="dialog_body">
                 <div class="dialog_message">
-                    <p> Are you sure you want to delete <span style="color: red"><?= $rowPrd['prd_name'] ?></span></p>
+                    <p> Are you sure you want to delete <span style="color: red"><?= $rowPrd['product_name'] ?></span></p>
                 </div>
                 <div class="dialog_action">
-                    <a href="process/del_process.php?productID=<?= $rowPrd['prd_id']?>" class="defaultbtn enabledbtn"> CONFIRM </a>
+                    <a href="process/del_process.php?productID=<?= $rowPrd['product_id']?>" class="defaultbtn enabledbtn"> CONFIRM </a>
                     <a class="close_dialog defaultbtn cancelbtn"> CANCEL </a>
                 </div>
             </div>
@@ -28,7 +29,7 @@ if($_GET['page'] == "product" && $_GET['id']){
 // Category
 if($_GET['page'] == "category" && $_GET['id']){
     $id = intval($_GET['id']);
-    $sql = "SELECT * FROM category WHERE ctg_id = '$id'";
+    $sql = "SELECT * FROM product_category WHERE ctg_id = '$id'";
     $result = mysqli_query($conn, $sql);
     $rowCat = mysqli_fetch_array($result);
     ?>
@@ -53,7 +54,7 @@ if($_GET['page'] == "category" && $_GET['id']){
 if($_GET['page'] == "subcategory" && $_GET['id']){
     $page = $_GET['page'];
     $id = intval($_GET['id']);
-    $sql = "SELECT * FROM subcategory WHERE subctg_id = '$id'";
+    $sql = "SELECT * FROM product_subcategory WHERE subctg_id = '$id'";
     $result = mysqli_query($conn, $sql);
     $rowSubctg = mysqli_fetch_array($result);
     ?>
@@ -74,11 +75,11 @@ if($_GET['page'] == "subcategory" && $_GET['id']){
     <?php
 }
 
-// Variation
-if($_GET['page'] == "variation" && $_GET['id']){
+// attributes
+if($_GET['page'] == "attributes" && $_GET['id']){
     $page = $_GET['page'];
     $id = intval($_GET['id']);
-    $sql = "SELECT * FROM variation WHERE vrt_id = '$id'";
+    $sql = "SELECT * FROM attributes WHERE attribute_id = '$id'";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_array($result);
     ?>
@@ -88,10 +89,10 @@ if($_GET['page'] == "variation" && $_GET['id']){
         </div>
         <div id="dialog_body">
             <div class="dialog_message">
-                <p> Are you sure you want to delete <span style="color: red"><?= $row['vrt_name'] ?></span></p>
+                <p> Are you sure you want to delete <span style="color: red"><?= $row['attribute_name'] ?></span></p>
             </div>
             <div class="dialog_action">
-                <a href="process/del_process.php?variationID=<?= $row['vrt_id']?>" class="defaultbtn enabledbtn"> CONFIRM </a>
+                <a href="process/del_process.php?attributesID=<?= $row['attribute_id']?>" class="defaultbtn enabledbtn"> CONFIRM </a>
                 <a class="close_dialog defaultbtn cancelbtn"> CANCEL </a>
             </div>
         </div>

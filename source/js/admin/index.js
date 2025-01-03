@@ -57,14 +57,33 @@ function ctgDISPsubctg(id){
     xhttp.send();
 }
 
+function addVariationField(page){
+    var container = document.getElementById(page);
+    var value = container.querySelector(".select_product_variant").value;
+    if(value != "" || value != 0){
+        console.log(page);
+        console.log(value);
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var multiple_variant_field = document.querySelector("#multiple_variant_field");
+                multiple_variant_field.insertAdjacentHTML('afterbegin', this.responseText);
+                displayImageModal();
+            }
+        };
+        xhttp.open("GET", "includes/addvariantfield.php?id=" + value, true);
+        xhttp.send();
+    }
+}
+
 // Add another input field
-function addInputField(){
+function addInputField(page){
     var multiple_input_container = document.querySelector("#multiple_input_container");
     var inputelement = '\
-    <div class="flex-rowdirection">\
+    <div class="flex-rowdirection mainrowdirection">\
         <div class="input">\
             <div class="inp">\
-                <input id="option_variation_name" type="text" name="option_variation_name[]" placeholder="Option name" required>\
+                <input id="' + page + '_name" type="text" name="' + page + '_name[]" placeholder="Option name" required>\
             </div>\
         </div>\
         <img src="../source/images/icon/svg/delete.svg" class="btn imageMediumSmall" alt="addanotherinput" onclick="delInputField(this)">\
@@ -74,7 +93,7 @@ function addInputField(){
 }
 
 function delInputField(delbtn){
-    delbtn.closest('.flex-rowdirection').remove();
+    delbtn.closest('.mainrowdirection').remove();
 }
 
 // Filter

@@ -33,7 +33,7 @@
                             <th> </th>
                         </tr>
                         <?php //Display all products
-                            $fetchCategory = "SELECT * FROM category ORDER BY created_at DESC";
+                            $fetchCategory = "SELECT * FROM product_category ORDER BY created_at DESC";
                             $exec_ctg = mysqli_query($conn, $fetchCategory);
     
                             if($exec_ctg -> num_rows > 0){
@@ -68,7 +68,7 @@
                         <select class="sort_category" name="subcategory" onchange="filterTable('subcategory')">
                             <option value="all"> All </option>
                             <?php
-                            $fetchCategory = "SELECT * FROM category";
+                            $fetchCategory = "SELECT * FROM product_category";
                             $exec = mysqli_query($conn, $fetchCategory);
                             while ($rowCategory = mysqli_fetch_array($exec)) {
                                     echo "<option value='" . $rowCategory['ctg_id'] . "'>" . $rowCategory['ctg_name'] . "</option>";
@@ -92,7 +92,7 @@
                             <th></th>
                         </tr>
                         <?php //Display all products
-                            $fetchsubctg = "SELECT * FROM subcategory LEFT JOIN category ON subcategory.ctg_id = category.ctg_id ORDER BY subcategory.created_at DESC";
+                            $fetchsubctg = "SELECT * FROM product_subcategory LEFT JOIN product_category ON product_subcategory.ctg_id = product_category.ctg_id ORDER BY product_subcategory.created_at DESC";
                             $querysubctg = mysqli_query($conn, $fetchsubctg);
     
                             if($querysubctg -> num_rows > 0){

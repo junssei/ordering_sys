@@ -25,6 +25,26 @@
                         <button class="smallbtn" onclick="addModal('product')"> + Product </button>
                     </div>
                 </div>
+                <div class="tablefilter_header">
+                    <div class="select_filter">
+                        <select class="sort_category" name="subcategory" onchange="filterTable('subcategory')">
+                            <option value="all"> All </option>
+                            <?php
+                            $fetchCategory = "SELECT * FROM product_category";
+                            $exec = mysqli_query($conn, $fetchCategory);
+                            while ($rowCategory = mysqli_fetch_array($exec)) {
+                                    echo "<option value='" . $rowCategory['ctg_id'] . "'>" . $rowCategory['ctg_name'] . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="select_filter">
+                        <select class="sort_chronological" name="sort" onchange="filterTable('subcategory')">
+                            <option value="newest"> Newest </option>
+                            <option value="oldest"> Oldest </option>
+                        </select>
+                    </div>
+                </div>
                 <div class="tablecontainer">
                     <table class="table">
                         <tr class="table_header">
@@ -44,19 +64,33 @@
                             if($exec_prd -> num_rows > 0){
                                 while ($rowProducts = mysqli_fetch_array($exec_prd)) {
                                     echo "<tr class='table_rows'>";
-                                    echo "<td><img src='../source/images/upload/products/" . $rowProducts['prd_filename'] . "' class='imageSmall'></td>";
-                                    echo "<td>" . $rowProducts['prd_name'] . "</td>";
-                                    echo "<td>" . $rowProducts['prd_brand'] . "</td>";
-                                    echo "<td>" . $rowProducts['ctg_id'] . "</td>";
-                                    echo "<td>" . $rowProducts['prd_price'] . "</td>";
+                                    echo "<td><img src='../source/images/upload/products/" . $rowProducts['image'] . "' class='imageSmall'></td>";
+                                    echo "<td>" . $rowProducts['product_name'] . "</td>";
+                                    echo "<td>" . $rowProducts['product_brand'] . "</td>";
+                                    echo "<td>" . $rowProducts['subctg_id'] . "</td>";
+                                    echo "<td>";
+                                    // $fetchOption = "SELECT * FROM attributes_option WHERE attribute_id = {$row['attribute_id']} LIMIT 3";
+                                    // $execOpt = mysqli_query($conn, $fetchOption);
+                                    // if($exec -> num_rows > 0){
+                                    //     while($rowOption = mysqli_fetch_array($execOpt)){
+                                    //         echo $rowOption['opt_value'] . ", ";
+                                    //     }
+                                    //     echo "...";
+                                    // } else {
+                                    //     echo "N/A";
+                                    // }
+                                    echo '<a onclick="addModal2(' . "'product_variation'," . $rowProducts['product_id'] . ')" class="editbtnlink"><img src="../source/images/icon/svg/circleplus.svg" alt="edit" class="editbtn"></a>';
+                                    echo "</td>";
+                                    echo "<td>" . $rowProducts['description'] . "</td>";
+                                    echo "<td>" . $rowProducts['baseprice'] . "</td>";
                                     echo '<td class="action_col"> 
-                                    <a onclick="editModal(' . "'product'," . $rowProducts['prd_id'] . ')" class="editbtnlink"><img src="../source/images/icon/svg/edit.svg" alt="edit" class="editbtn"></a>
+                                    <a onclick="editModal(' . "'product'," . $rowProducts['product_id'] . ')" class="editbtnlink"><img src="../source/images/icon/svg/edit.svg" alt="edit" class="editbtn"></a>
     
-                                    <a onclick="deltModal(' . "'product'," . $rowProducts['prd_id'] . ')" class="deletebtnlink"><img src="../source/images/icon/svg/delete.svg" alt="delete" class="deletebtn"></a>';
+                                    <a onclick="deltModal(' . "'product'," . $rowProducts['product_id'] . ')" class="deletebtnlink"><img src="../source/images/icon/svg/delete.svg" alt="delete" class="deletebtn"></a>';
                                     echo '</tr>';
                                 }
                             } else {
-                                echo "<tr class='table_rows'><td colspan='7' align='center'>No records found</td></tr>";
+                                echo "<tr class='table_rows'><td colspan='8' align='center'>No records found</td></tr>";
                             }
                         ?>
                     </table>

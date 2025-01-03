@@ -10,6 +10,11 @@ include 'includes/header.php';
         include 'includes/sidebar.php';
 
         // User: Admin Interface
+        if($_GET['page'] == "add_product") {
+            include 'includes/inventory/add_product.php';
+        }
+
+        // User: Admin Interface
         if($_GET['page'] == "product") {
             include 'includes/inventory/product.php';
         }
@@ -20,8 +25,8 @@ include 'includes/header.php';
         }
 
         // User: Customer Interface 
-        if ($_GET['page'] == "variation") { 
-            include 'includes/inventory/variation.php';
+        if ($_GET['page'] == "attributes") { 
+            include 'includes/inventory/attributes.php';
         }
 
         // User: Customer Interface 

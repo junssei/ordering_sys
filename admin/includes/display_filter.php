@@ -7,18 +7,18 @@ if($_GET['value'] && $_GET['page'] == "subcategory"){
 
     if($value == "all"){
         if($sort == 'oldest'){
-            $fetchsubctg = "SELECT * FROM subcategory LEFT JOIN category ON subcategory.ctg_id = category.ctg_id ORDER BY subcategory.created_at ASC";
+            $fetchsubctg = "SELECT * FROM product_subcategory LEFT JOIN product_category ON product_subcategory.ctg_id = product_category.ctg_id ORDER BY product_subcategory.created_at ASC";
             $querysubctg = mysqli_query($conn, $fetchsubctg);
         } else {
-            $fetchsubctg = "SELECT * FROM subcategory LEFT JOIN category ON subcategory.ctg_id = category.ctg_id ORDER BY subcategory.created_at DESC";
+            $fetchsubctg = "SELECT * FROM product_subcategory LEFT JOIN product_category ON product_subcategory.ctg_id = product_category.ctg_id ORDER BY product_subcategory.created_at DESC";
             $querysubctg = mysqli_query($conn, $fetchsubctg);
         }
     } else {
         if($sort == 'oldest'){
-            $fetchsubctg = "SELECT * FROM subcategory LEFT JOIN category ON subcategory.ctg_id = category.ctg_id WHERE subcategory.ctg_id = $value ORDER BY subcategory.created_at ASC";
+            $fetchsubctg = "SELECT * FROM product_subcategory LEFT JOIN product_category ON product_subcategory.ctg_id = product_category.ctg_id WHERE product_subcategory.ctg_id = $value ORDER BY product_subcategory.created_at ASC";
             $querysubctg = mysqli_query($conn, $fetchsubctg);
         } else {
-            $fetchsubctg = "SELECT * FROM subcategory LEFT JOIN category ON subcategory.ctg_id = category.ctg_id WHERE subcategory.ctg_id = $value ORDER BY subcategory.created_at DESC";
+            $fetchsubctg = "SELECT * FROM product_subcategory LEFT JOIN product_category ON product_subcategory.ctg_id = product_category.ctg_id WHERE product_subcategory.ctg_id = $value ORDER BY product_subcategory.created_at DESC";
             $querysubctg = mysqli_query($conn, $fetchsubctg);
         }
     }
@@ -61,10 +61,10 @@ if($_GET['page'] == "category"){
     $sort = $_GET['sort'];
 
     if($sort == 'oldest'){
-        $fetch = "SELECT * FROM {$page} ORDER BY created_at ASC";
+        $fetch = "SELECT * FROM product_{$page} ORDER BY created_at ASC";
         $query = mysqli_query($conn, $fetch);
     } else {
-        $fetch = "SELECT * FROM {$page} ORDER BY created_at DESC";
+        $fetch = "SELECT * FROM product_{$page} ORDER BY created_at DESC";
         $query = mysqli_query($conn, $fetch);
     }
 

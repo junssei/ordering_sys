@@ -1,76 +1,97 @@
 <?php
+session_start();
 require '../../source/db/connect.php';
 
 // Product
 if($_GET['page'] == "product" && $_GET['id']){
     $page = $_GET['page'];
     $pid = intval($_GET['id']);
-    $sql = "SELECT * FROM product WHERE prd_id = '$pid'";
+    $sql = "SELECT * FROM product WHERE product_id = '$pid'";
     $result = mysqli_query($conn, $sql);
     
     if ($rowPrd = mysqli_fetch_assoc($result)) {
         ?>
         <div class="dialog_container">
             <div id="dialog_header">
-                <h1>Edit <?=ucwords($page)?></h1>
+                <h1>Edit <?=ucwords($page)?> <?= "#" . $rowPrd['product_id'] ?> </h1>
                 <img class="close_dialog cancelbtnimg" src="../source/images/icon/svg/close.svg" alt="closebtn">
             </div>
             <form id="editproduct" class="dialog_form" action="process/upd_process.php" method="post" enctype="multipart/form-data" autocomplete="off">
                 <div class="dialog_imginp">
-                    <input type="hidden" name="<?=$page?>_id" value="<?= $rowPrd['prd_id'] ?>">
+                    <input type="hidden" name="admin_id" value="<?=$_SESSION['admidID'] ?>">
+                    <input type="hidden" name="<?=$page?>_id" value="<?= $rowPrd['product_id'] ?>">
                     <div class="inputfile" style="border: none;">
-                        <img src="../source/images/upload/products/<?= htmlspecialchars($rowPrd['prd_filename']) ?>" class="imagedisp imageLarge">
+                        <img src="../source/images/upload/products/<?= htmlspecialchars($rowPrd['image']) ?>" class="imagedisp imageLarge">
                         <div class="inp inpfile">
                             <input class="imageupld choosefilebtn" type="file" name="uploadimg<?=$page?>" <?= $fileupload_requirement ?>>
                         </div>
                     </div>
-                </div>
-                <div class="dialog_allinp">
                     <div class="input">
                         <div class="inp">
-                            <input id="product_name" type="text" name="<?=$page?>name" placeholder="Product Name" value="<?= htmlspecialchars($rowPrd['prd_name']) ?>" required>
+                            <input id="product_name" type="text" name="<?=$page?>_name" placeholder="Product Name" value="<?= htmlspecialchars($rowPrd['product_name']) ?>" required>
                         </div>
                     </div>
                     <div class="input">
                         <div class="inp">
-                            <input id="product_brand" type="text" name="<?=$page?>brand" placeholder="Product Brand" value="<?= htmlspecialchars($rowPrd['prd_brand']) ?>" required>
+                            <input id="product_brand" type="text" name="<?=$page?>_brand" placeholder="Product Brand" value="<?= htmlspecialchars($rowPrd['product_brand']) ?>">
                         </div> 
-                    </div>
-                    <div class="input_select">
-                        <select name="<?=$page?>category" required>
-                            <option value="N/A"> None </option>
-                            <?php
-                            $fetchCategory = "SELECT * FROM category";
-                            $exec = mysqli_query($conn, $fetchCategory);
-                            while ($rowCategory = mysqli_fetch_array($exec)) {
-                                if($rowCategory['ctg_id'] == $rowPrd['ctg_id']){
-                                    echo "<option value='" . $rowCategory['ctg_id'] . "' selected>" . $rowCategory['ctg_name'] . "</option>";   
-                                } else {
-                                    echo "<option value='" . $rowCategory['ctg_id'] . "'>" . $rowCategory['ctg_name'] . "</option>";
-                                }
-                            }
-                            ?>
-                        </select>
                     </div>
                     <div class="input_textarea">
                         <div class="input_inptextarea">
-                            <textarea name="<?=$page?>description" placeholder="Description..."></textarea>
+                            <textarea name="<?=$page?>_description" placeholder="Description..."><?= htmlspecialchars($rowPrd['description']) ?></textarea>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="<?=$page?>_category"> Category </label>
+                        <div class="input_select">
+                            <select name="<?=$page?>_category" required onchange="ctgDISPsubctg(this.value)" class="input_category">
+                            <?php
+                                $fetchSubcategory = "SELECT * FROM product_subcategory WHERE subctg_id = {$rowPrd['subctg_id']}";
+                                $querySubctg = mysqli_query($conn, $fetchSubcategory);
+                                $rowSubctg = mysqli_fetch_array($querySubctg, MYSQLI_ASSOC);
+                                $ctgID = $rowSubctg['ctg_id'];
+
+                                $fetchCategory = "SELECT * FROM product_category";
+                                $exec = mysqli_query($conn, $fetchCategory);
+                                while ($rowCategory = mysqli_fetch_array($exec)) {
+                                    if($rowCategory['ctg_id'] == $ctgID){
+                                        echo "<option value='" . $rowCategory['ctg_id'] . "' selected>" . $rowCategory['ctg_name'] . "</option>";   
+                                    } else {
+                                        echo "<option value='" . $rowCategory['ctg_id'] . "'>" . $rowCategory['ctg_name'] . "</option>";
+                                    }
+                                }
+                            ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="<?=$page?>_subcategory"> Subcategory </label>
+                        <div class="input_select ">
+                            <select name="<?=$page?>_subcategory" required class="input_subcategory">
+                                <?php
+                                $fetchSubcategory1 = "SELECT * FROM product_subcategory WHERE ctg_id = $ctgID";
+                                $querySubctg1 = mysqli_query($conn, $fetchSubcategory1);
+                                while ($rowSubcategory = mysqli_fetch_array($querySubctg1)) {
+                                    if($rowSubcategory['subctg_id'] == $rowPrd['subctg_id']){
+                                        echo "<option value='" . $rowSubcategory['subctg_id'] . "' selected>" . $rowSubcategory['subctg_name'] . "</option>";
+                                    } else {
+                                        echo "<option value='" . $rowSubcategory['subctg_id'] . "'>" . $rowSubcategory['subctg_name'] . "</option>";
+                                    }
+                                }
+                                ?>
+                            </select>
                         </div>
                     </div>
                     <div class="input">
                         <div class="inp">
-                            <input id="product_price" type="text" name="<?=$page?>price" placeholder="Set Price" value="<?= htmlspecialchars($rowPrd['prd_price']) ?>" required>
+                            <input id="product_price" type="text" name="<?=$page?>_price" placeholder="Set Price" value="<?= htmlspecialchars($rowPrd['baseprice']) ?>" required>
                         </div>
                     </div>
-                    <div class="input">
-                        <div class="inp">
-                            <input id="product_size" type="text" name="<?=$page?>size" placeholder="Set Size" value="<?= htmlspecialchars($rowPrd['prd_size']) ?>" required>
-                        </div>
-                    </div>
-                    
                     <div class="input_actions">
                         <input class="enabledbtn defaultbtn" type="submit" value="Update Product" name="update_<?=$page?>">
                     </div>
+                </div>
+                <div class="dialog_allinp">
                 </div>
             </form>
         </div>
@@ -82,13 +103,13 @@ if($_GET['page'] == "product" && $_GET['id']){
 if($_GET['page'] == "category" && $_GET['id']){
     $page = $_GET['page'];
     $cid = intval($_GET['id']);
-    $sql = "SELECT * FROM category WHERE ctg_id = '$cid'";
+    $sql = "SELECT * FROM product_category WHERE ctg_id = '$cid'";
     $result = mysqli_query($conn, $sql);
     $rowCat = mysqli_fetch_array($result);
     ?>
     <div class="dialog_container">
         <div id="dialog_header">
-            <h1> Edit <?=ucwords($page)?> </h1>
+            <h1> Edit <?=ucwords($page)?> <?= "#" . $rowCat['ctg_id'] ?> </h1>
             <img class="close_dialog cancelbtnimg" src="../source/images/icon/svg/close.svg" alt="closebtn">
         </div>
         <form id="editcategory" class="dialog_form" action="process/upd_process.php" method="post" enctype="multipart/form-data" autocomplete="off">
@@ -126,13 +147,13 @@ if($_GET['page'] == "category" && $_GET['id']){
 if($_GET['page'] == "subcategory" && $_GET['id']){
     $page = $_GET['page'];
     $id = intval($_GET['id']);
-    $sql = "SELECT * FROM subcategory WHERE subctg_id = '$id'";
+    $sql = "SELECT * FROM product_subcategory WHERE subctg_id = '$id'";
     $result = mysqli_query($conn, $sql);
     $rowSubctg = mysqli_fetch_array($result);
     ?>
     <div class="dialog_container">
         <div id="dialog_header">
-            <h1> Edit <?=ucwords($page)?> </h1>
+            <h1> Edit <?=ucwords($page)?> <?= "#" . $rowSubctg['subctg_id'] ?> </h1>
             <img class="close_dialog cancelbtnimg" src="../source/images/icon/svg/close.svg" alt="closebtn">
         </div>
         <form id="editcategory" class="dialog_form" action="process/upd_process.php" method="post" enctype="multipart/form-data" autocomplete="off">
@@ -156,7 +177,7 @@ if($_GET['page'] == "subcategory" && $_GET['id']){
                     <select name="category" required>
                         <option value=""> None </option>
                         <?php
-                        $fetchCategory = "SELECT * FROM category";
+                        $fetchCategory = "SELECT * FROM product_category";
                         $exec = mysqli_query($conn, $fetchCategory);
                         while ($rowCategory = mysqli_fetch_array($exec)) {
                             if($rowCategory['ctg_id'] == $rowSubctg['ctg_id']){
@@ -182,25 +203,25 @@ if($_GET['page'] == "subcategory" && $_GET['id']){
     <?php
 }
 
-//variation
-if($_GET['page'] == "variation" && $_GET['id']){
+//attributes
+if($_GET['page'] == "attributes" && $_GET['id']){
     $page = $_GET['page'];
     $id = intval($_GET['id']);
-    $sql = "SELECT * FROM variation WHERE vrt_id = '$id'";
+    $sql = "SELECT * FROM attributes WHERE attribute_id = '$id'";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_array($result);
     ?>
     <div class="dialog_container">
         <div id="dialog_header">
-            <h1> Add <?=ucwords($page)?> </h1>
+            <h1> Add <?=ucwords($page)?> <?= "#" . $row['attribute_id'] ?> </h1>
             <img class="close_dialog cancelbtnimg" src="../source/images/icon/svg/close.svg" alt="closebtn">
         </div>
         <form id="edit<?=$page?>" class="dialog_form" action="process/upd_process.php" method="post" autocomplete="off">
             <div class="dialog_allinp">
-                <input type="hidden" name="<?=$page?>_id" value="<?= $row['vrt_id'] ?>">
+                <input type="hidden" name="<?=$page?>_id" value="<?= $row['attribute_id'] ?>">
                 <div class="input">
                     <div class="inp">
-                        <input id="<?=$page?>_name" type="text" name="<?=$page?>name" placeholder="<?=ucwords($page)?> Name" required value="<?= htmlspecialchars($row['vrt_name']) ?>">
+                        <input id="<?=$page?>_name" type="text" name="<?=$page?>_name" placeholder="<?=ucwords($page)?> Name" required value="<?= htmlspecialchars($row['attribute_name']) ?>">
                     </div>
                 </div>
                 <div class="input_actions">

@@ -52,7 +52,15 @@
     cursor: pointer;
     position: relative;
     padding: 16px 16px;
+    flex-direction: row;
+    justify-content: space-between;
     border-radius: 32px 0 0px 32px;
+}
+
+.menu > div{
+    gap: 16px;
+    display: flex;
+    flex-direction: row;
 }
 
 .menu:hover{
@@ -68,6 +76,8 @@
 /* nav dropdown menus */
 .dropdown_menus{
     display: none;
+    font-size: 14px;
+    margin-left: 32px;
 }
 
 /* when the dropdown is active */
@@ -204,6 +214,66 @@
     background-color: var(--blue2);
 }
 
+/* Form Container */
+.form_container{
+    gap: 16px;
+    width: 100%;
+    padding: 16px 0;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+}
+
+.form_container .form_header{
+    display: flex;
+    flex-direction: column;
+}
+
+.form_container .form_header p{
+    font-size: 14px;
+    text-align: justify;
+}
+
+.form_container > .form_body{
+    gap: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form_body > .form_inputfield{
+    gap: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form_inputfield .input{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    border-radius: 4px;
+    position: relative;
+    align-items: center;
+    border: 2px solid var(--blue2);
+    background-color: var(--white);
+}
+
+.form_inputfield .input_select select{
+    width: 100%;
+    background-color: var(--white);
+}
+
+.input_select select:hover{
+    cursor: pointer;
+    background-color: var(--gray2);
+}
+
+#multiple_variant_field{
+    gap: 16px;
+    zoom: 90%;
+    display: flex;
+    flex-direction: column;
+}
+
 /* Modal/Dialog Style */
 .dialog{
     top: 50%;
@@ -268,10 +338,13 @@
 .dialog_form #multiple_input_container{
     gap: 16px;
     display: flex;
+    /* flex-wrap: wrap; */
+    overflow-y: auto;
+    max-height: 40rem;
     flex-direction: column;
 }
 
-.dialog_form .input,.dialog_allinp .input{
+.dialog_form .input,.dialog_allinp .input, .dialog_imginp .input{
     width: 100%;
     height: 40px;
     display: flex;
@@ -293,6 +366,8 @@
 
 .input .inp input{
     width: 100%;
+    word-wrap: break-word;
+    word-break: break-all;
 }
 
 .input_textarea{
@@ -325,10 +400,12 @@
 }
 
 .inputfile{
-    gap: 18px;
+    gap: 8px;
+    /* height: 100%; */
     display: flex;
     align-items: center;
     flex-direction: column;
+    justify-content: center;
 }
 
 .inputfile img{
@@ -337,7 +414,7 @@
 }
 
 .inputfile .inpfile{
-    gap: 18px;
+    gap: 16px;
     display: flex;
     position: relative;
 }
@@ -346,7 +423,7 @@
     background-color: var(--blue);
     color: white;
     padding: 4px 8px;
-    font-size: 16px;
+    font-size: 14px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -362,6 +439,7 @@
 .input_select{
     width: 100%;
     height: 40px;
+    position: relative;
     border-radius: 4px;
     border: 2px solid var(--blue2);
     background-color: var(--blue2);
@@ -379,26 +457,24 @@
     height: 40px;
 }
 
-
 /* Body of the Content, where mostly display tables */
 #content > #content_body{
-    height: 71vh;
+    height: 76vh;
     padding: 32px;
-    overflow-y: hidden;
+    overflow-y: auto;
     position: relative;
     background-color: var(--white);
-    
 }
 
 /* Options for Content Body */
 .content_body_row{
-    gap: 16px;
+    gap: 32px;
     display: flex;
     flex-direction: row;
 }
 
 .content_body_col{
-    gap: 16px;
+    gap: 32px;
     display: flex;
     overflow-y: auto;
     flex-direction: column;
@@ -497,6 +573,7 @@
 
 .table .table_header{
     top: 0;
+    z-index: 1;
     position: sticky;
     color: var(--white);
     background-color: var(--blue);
@@ -511,8 +588,18 @@
 
 .table .table_rows:hover {background-color: var(--gray4); cursor: pointer;}
 
+.table .table_rows{
+    overflow: hidden;
+    position: relative;
+}
+
 .table .table_rows td{
+    overflow: hidden;
+    max-width: 150px;
+    position: relative;
     padding: 16px 16px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .table_rows .action_col{

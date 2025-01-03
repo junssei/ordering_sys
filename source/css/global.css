@@ -65,10 +65,19 @@ input[type="text"], input[type="password"], input[type="email"], input[type="fil
     flex-direction: row;
 }
 
+.flex-rowfullwidth{
+    width: 100%;
+}
+
 .flex-coldirection{
+    gap: 16px;
     display: flex;
-    align-items: center;
     flex-direction: column;
+}
+
+/* justifycontent-spacebetween */
+.jc-spacebetween{
+    justify-content: space-between;
 }
 
 /* Button */
@@ -90,6 +99,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="fil
 }
 
 .smallbtn{
+    cursor: pointer;
     font-size: 16px;
     font-weight: 500;
     text-wrap: nowrap;
@@ -196,12 +206,23 @@ input[type="text"], input[type="password"], input[type="email"], input[type="fil
 .imageMedium{
     width: 64px;
     height: 64px;
+    cursor: pointer;
     object-fit: cover;
+}
+
+.imageMedium:hover{
+    background-color: var(--gray3);
 }
 
 .imageLarge{
     width: 120px;
     height: 120px;
+    object-fit: cover;
+}
+
+.imageExtraLarge{
+    width: 160px;
+    height: 160px;
     object-fit: cover;
 }
 

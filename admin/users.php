@@ -9,6 +9,11 @@ include 'includes/header.php';
         <?php 
         include 'includes/sidebar.php';
 
+        // User: Profile
+        if($_GET['page'] == "profile") {
+            include 'includes/users/profile.php';
+        }
+
         // User: Admin Interface
         if($_GET['page'] == "admin") {
             include 'includes/users/user_admin.php';

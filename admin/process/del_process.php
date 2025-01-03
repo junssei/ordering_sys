@@ -5,17 +5,18 @@ require '../../source/db/connect.php';
 // Product
 if (isset($_GET['productID'])) {
     $pID = $_GET['productID'];
-    $sql= "DELETE FROM product WHERE prd_id = '$pID'";
+    $sql= "DELETE FROM product WHERE product_id = '$pID'";
     $query = mysqli_query($conn, $sql);
 
-    $row = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM product WHERE prd_id = '$id'"));
-    $path = "../../source/images/upload/products/" . $row['prd_img'];
+    $row = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM product WHERE product_id = '$id'"));
+    $path = "../../source/images/upload/products/" . $row['image'];
     
     $query = mysqli_query($conn, $sql);
     if (!unlink($path) && $query) {
-        // session
+        $_SESSION['notification'] = "Image not exist";
         header('Location: ../inventory.php?page=product');
     } else {
+        $_SESSION['notification'] = $para . " succesfully!";
         header('Location: ../inventory.php?page=product');
         // session
     }
@@ -24,28 +25,28 @@ if (isset($_GET['productID'])) {
 // Category
 if (isset($_GET['categoryID'])){
     $id = $_GET['categoryID'];
-    $sql = "DELETE FROM category WHERE ctg_id = '$id'";
+    $sql = "DELETE FROM product_category WHERE ctg_id = '$id'";
     $query = mysqli_query($conn, $sql);
 
-    $row = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM category WHERE ctg_id = '$id'"));
+    $row = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM product_category WHERE ctg_id = '$id'"));
     $path = "../../source/images/upload/categories/" . $row['ctg_img'];
     
     $query = mysqli_query($conn, $sql);
     if (!unlink($path)) {
-        // session
+        $_SESSION['notification'] = "Image not exist";
         header('Location: ../inventory.php?page=category');
     } else {
+        $_SESSION['notification'] = $para . " succesfully!";
         header('Location: ../inventory.php?page=category');
-        // session
     }
 }
 
 // Subcategory
 if (isset($_GET['subcategoryID'])){
     $id = $_GET['subcategoryID'];
-    $sql = "DELETE FROM subcategory WHERE subctg_id = '$id'";
+    $sql = "DELETE FROM product_subcategory WHERE subctg_id = '$id'";
     
-    $row = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM subcategory WHERE subctg_id = '$id'"));
+    $row = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM product_subcategory WHERE subctg_id = '$id'"));
     $path = "../../source/images/upload/categories/" . $row['subctg_img'];
     
     $query = mysqli_query($conn, $sql);
@@ -55,34 +56,34 @@ if (isset($_GET['subcategoryID'])){
         header('Location: ../inventory.php?page=category');
     } else {
         $para = "Delete";
-        $_SESSION['notification'] = $para1 . " succesfully!";
+        $_SESSION['notification'] = $para . " succesfully!";
         header('Location: ../inventory.php?page=category');
     }
 }
 
-// Variation
-if (isset($_GET['variationID'])){
-    $id = $_GET['variationID'];
+// Attributes
+if (isset($_GET['attributesID'])){
+    $id = $_GET['attributesID'];
 
-    $sql = "DELETE FROM variation WHERE vrt_id = '$id'";
+    $sql = "DELETE FROM attributes WHERE attribute_id = '$id'";
     $query = mysqli_query($conn, $sql);
 
     if ($query) {
         $para = "Delete";
-        $_SESSION['notification'] = $para1 . " succesfully!";
-        header('Location: ../inventory.php?page=variation');
+        $_SESSION['notification'] = $para . " succesfully!";
+        header('Location: ../inventory.php?page=attributes');
     }
 }
 
-// Variation Option
-if (isset($_GET['vrtoptionID'])){
-    $id = $_GET['vrtoptionID'];
-    $sql = "DELETE FROM variation_option WHERE vrtopt_id = '$id'";
+// Attributes Option
+if (isset($_GET['attribute_optionID'])){
+    $id = $_GET['attribute_optionID'];
+    $sql = "DELETE FROM attributes_option WHERE attributeopt_id = '$id'";
     $query = mysqli_query($conn, $sql);
 
     if ($query) {
         $para = "Delete";
-        $_SESSION['notification'] = $para1 . " succesfully!";
-        header('Location: ../inventory.php?page=variation');
+        $_SESSION['notification'] = $para . " succesfully!";
+        header('Location: ../inventory.php?page=attributes');
     }
 }

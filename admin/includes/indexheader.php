@@ -4,8 +4,8 @@ if(!isset($_SESSION['loggedin'])){
     exit();
 }
 
-$id = $_SESSION['admidID'];
-$sql = "SELECT * FROM admin WHERE admin_id = '$id'";
+$admin_id = $_SESSION['admidID'];
+$sql = "SELECT * FROM admin WHERE admin_id = '$admin_id'";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 ?>
@@ -33,7 +33,7 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                     </div>
                 </div>
                 <div id="userpfp_actions">
-                    <a href=""> Edit Profile </a>
+                    <a href="users.php?page=profile"> Edit Profile </a>
                 </div>
             </div>
         </div>
