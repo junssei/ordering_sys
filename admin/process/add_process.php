@@ -34,6 +34,44 @@
         }
     }
 
+    // Variant
+    if(isset($_POST['submit_variant'])){
+        $variant_name = $_POST['variant_name'];
+
+        // Insert new input field
+        foreach($variant_name as $index => $value){
+            $trimvalue = trim($value);
+            $id = $_POST['product_id'][$index];
+            $variant_sku = $_POST['variant_sku'][$index];
+            $variant_price = $_POST['variant_price'][$index];
+            $variant_stock = $_POST['variant_stock'][$index];
+
+            // For Image
+            $filename = $_FILES["uploadimgvariation"]["name"][$index];
+            $tempname = $_FILES["uploadimgvariation"]["tmp_name"][$index];
+            $folder = "../../source/images/upload/products/" . $filename;
+
+            // Now let's move the uploaded image into the folder: image
+            if (move_uploaded_file($tempname, $folder)) {
+                echo "<script> console.log('Image uploaded successfully!') </script>";
+            } else {
+                echo "<script> console.log('Failed to upload image!') </script>";
+            }
+
+            if(!empty($trimvalue)){
+            $insertVariation = "INSERT INTO product_variation VALUES ('', '$id', '$trimvalue', '$variant_price', '$variant_sku', '$variant_stock', '$filename', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP())";
+            
+            $query = mysqli_query($conn, $insertVariation);
+            }
+
+        }
+        if ($query) {
+            $para = "Insert";
+            $_SESSION['notification'] = $para . " succesfully!";
+            header('Location: ../inventory.php?page=add_product');
+        }
+    }
+
     // Categories
     if(isset($_POST['submit_category'])){
         $category_name = $_POST['categoryname'];

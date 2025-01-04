@@ -13,7 +13,7 @@ if(isset($_POST['update_product'])){
     $product_subcategory = $_POST['product_subcategory'];
     
     if(empty($product_subcategory) || $product_subcategory == 0){
-        $_SESSION['notification'] = " succesfully!";
+        $_SESSION['notification'] = "Category is empty.";
         header('Location: ../inventory.php?page=product');
     }
 
@@ -40,6 +40,48 @@ if(isset($_POST['update_product'])){
     if ($query) {
         $para1 = "Update";
         $_SESSION['notification'] = $para1 . " succesfully!";
+        header('Location: ../inventory.php?page=product');
+    }
+}
+
+if(isset($_POST['update_product_variation'])){
+    $variation_id = $_POST['variation_id'];
+
+    // Update Variation
+    foreach($variation_id as $index => $id){
+        $variant_name = $_POST['variant_name'][$index];
+        $trimvalue = trim($variant_name);
+        $variant_sku = $_POST['variant_sku'][$index];
+        $variant_price = $_POST['variant_price'][$index];
+        $variant_stock = $_POST['variant_stock'][$index];
+        
+        if(!empty($_FILES["uploadimgvariation"]["name"][$index])){
+            // For Image
+            $filename = $_FILES["uploadimgvariation"]["name"][$index];
+            $tempname = $_FILES["uploadimgvariation"]["tmp_name"][$index];
+            $folder = "../../source/images/upload/products/" . $filename;
+
+            // Now let's move the uploaded image into the folder: image
+            if (move_uploaded_file($tempname, $folder)) {
+                echo "<script> console.log('Image uploaded successfully!') </script>";
+            } else {
+                echo "<script> console.log('Failed to upload image!') </script>";
+            }
+
+            if(!empty($trimvalue)){
+            $updateVariation = "UPDATE product_variation SET name = '$trimvalue', price = '$variant_price', sku = '$variant_sku', stock = '$variant_stock', image = '$filename', updated_at = CURRENT_TIMESTAMP() WHERE variation_id = '$id'";
+            }
+        } else {
+            if(!empty($trimvalue)){
+            $updateVariation = "UPDATE product_variation SET name = '$trimvalue', price = '$variant_price', sku = '$variant_sku', stock = '$variant_stock', updated_at = CURRENT_TIMESTAMP() WHERE variation_id = '$id'";
+            }
+        }
+        $query = mysqli_query($conn, $updateVariation);
+    }
+
+    if ($query) {
+        $para = "Update";
+        $_SESSION['notification'] = $para . " succesfully!";
         header('Location: ../inventory.php?page=product');
     }
 }

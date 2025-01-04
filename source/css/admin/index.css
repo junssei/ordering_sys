@@ -269,7 +269,7 @@
 
 #multiple_variant_field{
     gap: 16px;
-    zoom: 90%;
+    /* zoom: 90%; */
     display: flex;
     flex-direction: column;
 }
@@ -373,7 +373,7 @@
 .input_textarea{
     width: 100%;
     display: flex;
-    min-width: 350px;
+    min-width: 100px;
     min-height: 80px;
     border-radius: 4px;
     position: relative;
@@ -455,6 +455,10 @@
 .input_select select option{
     width: 100%;
     height: 40px;
+}
+
+.select_product_attribute{
+    width: 100%;
 }
 
 /* Body of the Content, where mostly display tables */
@@ -606,33 +610,4 @@
     text-align: right;
 }
 
-.searchcontainer{
-    gap: 8px;
-    width: 80px;
-    height: 100%;
-    display: flex;
-    padding: 6px 14px;
-    position: relative;
-    flex-direction: row;
-    align-items: center;
-    border-radius: 20px;
-    border: 2px solid var(--blue);
-    transition: width 0.5s ease-in-out;
-    background: rgba(149, 191, 255, 0.1);
-}
 
-.searchcontainer:focus-within{
-    width: 200px;
-    background: var(--white);
-}
-
-.searchcontainer > img{
-    width: 18px;
-    height: 18px;
-}
-
-.searchcontainer > input{
-    width: 100%;
-    height: 100%;
-    background-color: transparent;
-}

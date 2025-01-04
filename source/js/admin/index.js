@@ -140,15 +140,3 @@ function searchFilter(page){
         }
     }
 }
-
-// For all input fields that has a text or input, it will set the width to max/limit 200px
-var search_fields = document.getElementsByClassName("search_field");
-for (let i = 0; i < search_fields.length; i++) {
-    search_fields[i].addEventListener("input", function () {
-        if (this.value.trim() !== "") {
-            this.parentElement.style.width = "200px";
-        } else {
-            this.parentElement.style.width = "";
-        }
-    });
-}

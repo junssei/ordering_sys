@@ -202,9 +202,9 @@ if($_GET['page'] == "product") { $page = $_GET['page']; ?>
                                 while ($rowCurrentOpt = mysqli_fetch_array($exec)) {
                                     echo '<div class="flex-rowdirection">';
                                     echo '<div class="input">
-                                            <input type="hidden" name="current_option_id[]" value="' . $rowCurrentOpt['attributeopt_id'] . '">
+                                            <input type="hidden" name="option_id[]" value="' . $rowCurrentOpt['attributeopt_id'] . '">
                                             <div class="inp">
-                                                <input id="' . $page . '_name" type="text" name="current_option_name[]" placeholder="Option name" required value="' . $rowCurrentOpt['opt_value'] . '">
+                                                <input id="' . $page . '_name" type="text" name="option_name[]" placeholder="Option name" required value="' . $rowCurrentOpt['opt_value'] . '">
                                             </div>
                                         </div>
                                         <a href="process/del_process.php?attribute_optionID=' . $rowCurrentOpt['attributeopt_id'] . '" class="deletebtnlink"><img src="../source/images/icon/svg/delete.svg" alt="delete" class="deletebtn"></a>';
@@ -220,31 +220,4 @@ if($_GET['page'] == "product") { $page = $_GET['page']; ?>
             </div>
         </form>
     </div>
-<?php } if($_GET['page'] == "variant") { $page = $_GET['page']; ?>
-    <div class="dialog_container">
-        <div id="dialog_header">
-            <h1> Add <?=ucwords($page)?> </h1>
-            <img class="close_dialog cancelbtnimg" src="../source/images/icon/svg/close.svg" alt="closebtn">
-        </div>
-        <form id="addsubcategory" class="dialog_form" action="process/add_process.php" method="post" enctype="multipart/form-data" autocomplete="off">
-            <div class="dialog_allinp">
-                <div class="input_select">
-                    <select name="category" required>
-                        <option value="" disabled selected hidden>Choose a product for a variant</option>
-                        <?php
-                        $fetch = "SELECT * FROM product";
-                        $exec = mysqli_query($conn, $fetch);
-                        while ($row = mysqli_fetch_array($exec)) {
-                                echo "<option value='" . $row['product_id'] . "'>" . $row['product_name'] . "</option>";
-                        }
-                        ?>
-                    </select>
-                </div>
-                <div class="input_actions">
-                    <input class="enabledbtn defaultbtn" type="submit" value="Add <?=$page?>" name="submit_<?=$page?>">
-                </div>
-            </div>
-        </form>
-    </div>
-    
-<?php } ?>
+<?php } 

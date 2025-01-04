@@ -11,7 +11,7 @@
             <div class="form_container">
                 <div class="form_header">
                     <h1> Add Product </h1>
-                    <p> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum, eligendi placeat quasi, nulla illum qui voluptas obcaecati saepe maiores eius, nostrum repellat voluptate tempore dolorem accusamus ipsa unde. Doloribus, cupiditate. </p>
+                    <p> The "Add Product" feature lets you add new items. You can include basic details such as the product name, price, and stock quantity to help you manage and track your items easily. </p>
                 </div>
                 <form id="addproduct" class="form_body" action="process/add_process.php" method="post" enctype="multipart/form-data" autocomplete="off">
                     <div class="form_inputfield">
@@ -21,6 +21,11 @@
                                 <img src="../source/images/upload/products/gallery.png" class="imagedisp imageExtraLarge">
                                 <div class="inp inpfile">
                                     <input class="imageupld choosefilebtn" type="file" name="uploadimgproduct" <?= $fileupload_requirement ?>>
+                                </div>
+                                <div class="input_textarea">
+                                    <div class="input_inptextarea">
+                                        <textarea name="product_description" placeholder="Description..."></textarea>
+                                    </div>
                                 </div>
                             </div>
                             <div class="flex-coldirection flex-rowfullwidth">
@@ -39,7 +44,8 @@
                                 <div class="flex-coldirection">
                                     <div class="input">
                                         <div class="inp">
-                                            <input id="product_price" type="text" name="product_price" placeholder="Set Base Price" required>
+                                            ₱
+                                            <input id="product_price" type="number" name="product_price" placeholder="Set Base Price" required min="1">
                                         </div>
                                     </div>
                                     <!-- Category -->
@@ -67,12 +73,39 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <!-- Attributes
+                                    <div class="flex-rowdirection">
+                                        <div class="input_select">
+                                            <select name="product" required class="select_product_attribute">
+                                                <option value="" disabled selected hidden>Choose a attribute </option>
+                                                <option value=""> None </option>
+                                                <?php
+                                                $fetch = "SELECT * FROM attributes";
+                                                $exec = mysqli_query($conn, $fetch);
+                                                while ($row = mysqli_fetch_array($exec)) {
+                                                        echo "<option value='" . $row['attribute_id'] . "'>" . $row['attribute_name'] . "</option>";
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <a class="defaultbtn" onclick="addAttributeField('attribute')"> + Attribute </a>
+                                    </div>
+                                    <div id="multiple_attribute_field">
+                                        <div class="flex-coldirection">
+                                            <p class="fontsizeMedium"> This product have a [name of the attribute] </p>
+                                            <div class="flex-rowdirection">
+                                            <?php
+                                            $fetch = "SELECT * FROM attributes_option WHERE attribute_id = 8";
+                                            $exec = mysqli_query($conn, $fetch);
+                                            while ($row = mysqli_fetch_array($exec)) {
+                                                echo '<input type="checkbox" id="' . $row['attributeopt_id'] . '" name="attribute[]" value="' . $row['opt_value'] . '">';
+                                                echo '<label for="attribute">' . $row['opt_value'] . '</label><br>';
+                                            }
+                                            ?>
+                                            </div>
+                                        </div>
+                                    </div> -->
                                 </div>
-                            </div>
-                        </div>
-                        <div class="input_textarea">
-                            <div class="input_inptextarea">
-                                <textarea name="product_description" placeholder="Description..."></textarea>
                             </div>
                         </div>
                         <div class="input_actions">
@@ -83,9 +116,8 @@
             </div>
             <div id="variant" class="form_container">
                 <div class="form_header">
-                    <div class="tablecontainer_header flex-rowdirection jc-spacebetween">
-                        <h1> Add Variant </h1>
-                    </div>
+                    <h1> Add Variant </h1>
+                    <p> You can only add a variant to a product if the product already exists in your product list. </p>
                 </div>
                 <form id="add_variant" class="form_body" action="process/add_process.php" method="post" enctype="multipart/form-data" autocomplete="off">
                     <div class="flex-rowdirection">
@@ -102,45 +134,13 @@
                                 ?>
                             </select>
                         </div>
-                        <a class="defaultbtn" onclick="addVariationField('variant')"> + Variant </a>
+                        <a class="defaultbtn enabledbtn" onclick="addVariationField('variant')"> + Variant </a>
                     </div>
                     <div id="multiple_variant_field">
-                        <!-- <div class="form_inputfield">
-                            <div class="flex-rowdirection mainrowdirection">
-                                <div class="inputfile">
-                                    <label class="inp inpfile">
-                                        <img src="../source/images/upload/products/gallery.png" class="imagedisp imageMedium">
-                                        <input class="imageupld choosefilebtn" type="file" name="uploadimgvariation[]" style="display:none" <?= $fileupload_requirement ?>>
-                                    </label>
-                                </div>
-                                <div class="flex-coldirection flex-rowfullwidth">
-                                    <p> [Product Name] </p>
-                                    <div class="flex-rowdirection">
-                                        <div class="input">
-                                            <div class="inp">
-                                                <input id="variant_name" type="text" name="variant_name[]" placeholder="Variant Name" required>
-                                            </div>
-                                        </div>
-                                        <div class="input">
-                                            <div class="inp">
-                                                <input id="variant_price" type="text" name="variant_price[]" placeholder="Set Price" required>
-                                            </div>
-                                        </div>
-                                        <div class="input">
-                                            <div class="inp">
-                                                <input id="variant_sku" type="text" name="variant_sku[]" placeholder="SKU (eg. EG-100)">
-                                            </div> 
-                                        </div>
-                                        <div class="input">
-                                            <div class="inp">
-                                                <input id="variant_stock" type="text" name="variant_stock[]" placeholder="Stock">
-                                            </div> 
-                                        </div>
-                                        <img src="../source/images/icon/svg/delete.svg" class="btn imageMediumSmall" alt="addanotherinput" onclick="delInputField(this)">
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
+                        
+                    </div>
+                    <div class="input_actions">
+                        <input class="enabledbtn defaultbtn" type="submit" value="Save All Variant" name="submit_variant">
                     </div>
                 </form>
             </div>

@@ -69,17 +69,7 @@
                                     echo "<td>" . $rowProducts['product_brand'] . "</td>";
                                     echo "<td>" . $rowProducts['subctg_id'] . "</td>";
                                     echo "<td>";
-                                    // $fetchOption = "SELECT * FROM attributes_option WHERE attribute_id = {$row['attribute_id']} LIMIT 3";
-                                    // $execOpt = mysqli_query($conn, $fetchOption);
-                                    // if($exec -> num_rows > 0){
-                                    //     while($rowOption = mysqli_fetch_array($execOpt)){
-                                    //         echo $rowOption['opt_value'] . ", ";
-                                    //     }
-                                    //     echo "...";
-                                    // } else {
-                                    //     echo "N/A";
-                                    // }
-                                    echo '<a onclick="addModal2(' . "'product_variation'," . $rowProducts['product_id'] . ')" class="editbtnlink"><img src="../source/images/icon/svg/circleplus.svg" alt="edit" class="editbtn"></a>';
+                                    echo '<a onclick="editModal(' . "'product_variation'," . $rowProducts['product_id'] . ')" class="editbtnlink link"> View Variation </a>';
                                     echo "</td>";
                                     echo "<td>" . $rowProducts['description'] . "</td>";
                                     echo "<td>" . $rowProducts['baseprice'] . "</td>";

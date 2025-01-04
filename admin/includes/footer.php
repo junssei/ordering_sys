@@ -1,4 +1,3 @@
-
-<?php include '../source/js/manage_js.php'; ?>
+<?php include '../source/js/admin/manage_js.php'; ?>
 </body>
 </html>

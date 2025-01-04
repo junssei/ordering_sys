@@ -15,7 +15,8 @@ $row = mysqli_fetch_array($query, MYSQLI_ASSOC);
             </label>
         </div>
         <div class="flex-coldirection flex-rowfullwidth">
-            <p> <?=$row['product_name']?> </p>
+            <p> <?=$row['product_name']?> <span class="tagsSmall"> P<?=$row['baseprice']?> </span></p>
+            <input type="hidden" name="product_id[]" value="<?= $row['product_id'] ?>">
             <div class="flex-rowdirection">
                 <div class="input">
                     <div class="inp">
@@ -24,7 +25,8 @@ $row = mysqli_fetch_array($query, MYSQLI_ASSOC);
                 </div>
                 <div class="input">
                     <div class="inp">
-                        <input id="variant_price" type="text" name="variant_price[]" placeholder="Set Price" required>
+                        ₱
+                        <input id="variant_price" type="number" name="variant_price[]" placeholder="Set Price" required min="1">
                     </div>
                 </div>
                 <div class="input">
