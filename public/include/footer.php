@@ -26,16 +26,19 @@
                             <li><a href=""> All products </a></li>
                         </ul>
                     </div>
-                    <div class="links">
+                    <div class="images_links">
                         <h2> Payment </h2>
                         <ul>
-                            <li><a href=""> About us </a></li>
-                            <li><a href=""> All products </a></li>
+                            <li><a href=""><img src="../source/images/icon/svg/paypal.svg" class="icondefault"></a></li>
+                            <li><a href=""><img src="../source/images/icon/svg/gcash.svg" class="icondefault"></a></li>
+                            <li><a href=""><img src="../source/images/icon/svg/cash.svg" class="icondefault"></a></li>
+                            <li><a href=""><img src="../source/images/icon/svg/googlepay.svg" class="icondefault"></a></li>
+                            <li><a href=""><img src="../source/images/icon/svg/visa.svg" class="icondefault"></a></li>
                         </ul>
                     </div>
                     <div class="images_links">
                         <h2> Follow us </h2>
-                        <ul class="">
+                        <ul>
                             <li><a href=""><img src="../source/images/icon/svg/facebook.svg"></a></li>
                             <li><a href=""><img src="../source/images/icon/svg/twitter.svg"></a></li>
                             <li><a href=""><img src="../source/images/icon/svg/telegram.svg"></a></li>

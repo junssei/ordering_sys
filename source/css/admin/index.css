@@ -144,13 +144,13 @@
     cursor: pointer;
 }
 
-#header_right > #user_profile{
+#header_right > #profile_section{
     display: flex;
     position: relative;
     flex-direction: row;
 }
 
-#user_profile > #userimg > img{
+#profile_section > #user_image > img{
     width: 33px; 
     height: 33px; 
     cursor: pointer;
@@ -158,7 +158,7 @@
     border: 2px solid var(--blue);
 }
 
-#user_profile > #userpfp{
+#profile_section > #user_profile{
     z-index: 1;
     gap: 8px;
     display: none;
@@ -172,7 +172,7 @@
     border-radius: 20px 0px 20px 20px;
 }
 
-#userpfp img{
+#user_profile img{
     width: 64px; 
     height: 64px;
     border-radius: 100%;
@@ -609,5 +609,3 @@
 .table_rows .action_col{
     text-align: right;
 }
-
-

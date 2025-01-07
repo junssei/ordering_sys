@@ -11,3 +11,13 @@ for (let i = 0; i < search_fields.length; i++) {
         }
     });
 }
+
+// Display Profile Options by clicking the image
+var pfpmenu = document.getElementById("user_profile");
+document.getElementById("user_image").addEventListener('click', function(){
+    if(pfpmenu.style.display === "flex"){
+        pfpmenu.style.display = "none";
+    } else {
+        pfpmenu.style.display = "flex";
+    }
+});

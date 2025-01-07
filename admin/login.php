@@ -46,6 +46,6 @@ include 'includes/header.php';
     </div>
 </div>
 <?php
-session_unset();
+// session_unset();
 include 'includes/footer.php';
 ?>

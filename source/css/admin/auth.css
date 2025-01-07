@@ -78,6 +78,7 @@
     width: 100%;
     height: 100%;
     font-size: var(--size1);
+    background-color: transparent;
 }
 
 

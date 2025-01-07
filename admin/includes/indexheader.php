@@ -20,11 +20,11 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
         <div id="notification">
             <img src="../source/images/icon/svg/notification.svg" alt="notification">
         </div>
-        <div id="user_profile">
-            <div id="userimg">
+        <div id="profile_section">
+            <div id="user_image">
                 <img src="../source/images/upload/profile/default.jpg" alt="avatar">
             </div>
-            <div id="userpfp">
+            <div id="user_profile">
                 <div id="userpfp_info">
                     <img src="../source/images/upload/profile/default.jpg" alt="avatar">
                     <div>

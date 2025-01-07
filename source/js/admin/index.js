@@ -9,15 +9,15 @@ document.getElementById("togglehamburger").addEventListener("click", function(e)
 })
 
 
-// Display Profile Options by clicking the image
-var pfpmenu = document.getElementById("userpfp");
-document.getElementById("userimg").addEventListener('click', function(){
-    if(pfpmenu.style.display === "flex"){
-        pfpmenu.style.display = "none";
-    } else {
-        pfpmenu.style.display = "flex";
-    }
-});
+// // Display Profile Options by clicking the image
+// var pfpmenu = document.getElementById("userpfp");
+// document.getElementById("userimg").addEventListener('click', function(){
+//     if(pfpmenu.style.display === "flex"){
+//         pfpmenu.style.display = "none";
+//     } else {
+//         pfpmenu.style.display = "flex";
+//     }
+// });
 
 // Dropdown
 var dropdown = document.getElementsByClassName("dropdown");

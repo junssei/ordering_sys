@@ -1,0 +1,100 @@
+.products_container{
+    gap: 32px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.products_container .categoryfilter_section{
+    width: 100%;
+    display: flex;
+    max-width: 200px;
+    position: relative;
+    flex-direction: column;
+}
+
+.categoryfilter_section .filter_section{
+    gap: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.filter_section .filter_categories{
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.filter_categories li{
+    gap: 8px;
+    font-size: 14px;
+    list-style: none;
+    flex-direction: row;
+    display: inline-flex;
+    align-items: baseline;
+}
+
+.filter_categories li input[type="checkbox"]{
+    width: 11px;
+    height: 11px;
+}
+
+.products_container #product_section{
+    width: 100%;
+}
+
+/* Filter Section at table */
+#product_section > .filter_section{
+    gap: 16px;
+    zoom: 85%;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+.filter_section .select_filter{
+    width: 130px;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    border-radius: 4px;
+    border: 2px solid var(--blue2);
+    background-color: var(--white);
+}
+
+.select_filter > select{
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 8px 8px;
+    background-color: transparent;
+}
+
+.select_filter > select option{
+    width: 100%;
+    cursor: pointer;
+}
+
+.select_filter > select option:hover{
+    cursor: pointer;
+}
+
+/* Search Filter Section */
+.filtersection_actions{
+    gap: 16px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.filter_section > .filtersection_actions > button{
+    border: none;
+    background-color: var(--blue);
+}
+
+.filter_section > .filtersection_actions > button:hover{
+    background-color: var(--blue2);
+}
+

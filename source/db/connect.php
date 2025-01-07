@@ -1,4 +1,9 @@
 <?php
+// $host = "auth-db1762.hstgr.io";
+// $db = "u746273317_bigcasdb";
+// $dbusername = "u746273317_bigcas";
+// $dbpassword = "f9!+O+twN";
+
 $host = "localhost";
 $dbusername = "root";
 $db = "bigcasdb";
