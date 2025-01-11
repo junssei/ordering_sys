@@ -18,8 +18,10 @@
     width: 300px;
     display: flex;
     flex-direction: column;
+    @media screen and (max-width: 800px){
+        display: none;
+    }
 }
-
 
 .quickaccess_menu a{
     gap: 12px;
@@ -73,6 +75,9 @@
     flex-direction: column;
     border: 2px solid var(--gray);
     background-color: var(--white);
+    @media screen and (max-width: 1000px){
+        zoom: 70%;
+    }
 }
 
 .orderitem_container .orderitem_subcontainer{
@@ -80,6 +85,13 @@
     padding: 42px;
     position: relative;
     flex-direction: column;
+    @media screen and (max-width: 1000px){
+        padding: 24px;
+    }
+
+    @media screen and (max-width: 500px){
+        padding: 8px;
+    }
 }
 
 .orderitem_subcontainer .orderitem_header{
@@ -89,7 +101,14 @@
     justify-content: space-between;
 }
 
-.orderitem_header .status{
+.orderitem_header .status_tags{
+    gap: 8px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.status_tags .status{
     padding: 4px 8px;
     border-radius: 8px;
     color: var(--white);

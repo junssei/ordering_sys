@@ -38,6 +38,18 @@
     padding: 48px 48px;
     position: relative;
     flex-direction: column;
+
+    @media screen and (max-width: 1000px){ 
+        padding: 48px 16px;
+    }
+
+    @media screen and (max-width: 450px){
+        padding: 16px 16px;
+    }
+
+    @media screen and (max-width: 350px){
+        padding: 16px 8px;
+    }
 }
 
 /* Hero Section */

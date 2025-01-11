@@ -40,22 +40,21 @@ if (isset($_SESSION['notification'])){
         <header>
             <div id="sub_header">
                 <div id="header_navigation">
-                    <a class="header_logo" href="index.php">
+                    <a class="header_logo logo1" href="index.php">
                         <img src="../source/images/logo/DefaultWordmark.png" class="wordLogoSmall" alt="logo">
+                    </a>
+                    <a class="header_logo logo2" href="index.php">
+                        <img src="../source/images/logo/LogoMark.png" class="logoSmall" alt="logo">
                     </a>
                     <nav>
                         <a href="index.php" class="<?php if($currentPage === "index"){ echo "active"; } ?>" > Home </a>
                         <a href="product.php"> Products </a>
-                        <a href="about.php?about=contact"> Contact </a>
+                        <a href="about.php?b=contact"> Contact </a>
                         <a href="user.php?u=orders"> Order </a>
                     </nav>
                 </div>
                 <div id="header_userside">
                     <div class="userside_actions">
-                        <div class="searchcontainer">
-                            <img src="../source/images/icon/svg/search.svg" alt="search_icon">
-                            <input type="text" placeholder="Search" class="search_field" onkeyup="searchFilter('variation')">
-                        </div>
                         <div id="notification">
                             <img src="../source/images/icon/svg/notification.svg" alt="notification">
                         </div>
@@ -110,3 +109,9 @@ if (isset($_SESSION['notification'])){
                 </div>
             </div>
         </header>
+        <div class="globalsearch_container">
+            <div class="globalsearch_subcontainer">
+                <img src="../source/images/icon/svg/search.svg" alt="search_icon">
+                <input type="text" placeholder="Search product" class="" onkeyup="">
+            </div>
+        </div>

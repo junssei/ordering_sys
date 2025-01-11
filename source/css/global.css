@@ -456,6 +456,9 @@ input[type="text"], input[type="number"], input[type="password"], input[type="em
     border: 2px solid var(--blue);
     transition: width 0.5s ease-in-out;
     background: rgba(149, 191, 255, 0.1);
+    @media screen and (max-width: 550px){
+        display: none;
+    }
 }
 
 .searchcontainer:focus-within{

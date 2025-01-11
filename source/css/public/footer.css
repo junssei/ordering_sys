@@ -13,14 +13,21 @@ footer #sub_footer{
     padding: 48px 48px;
     position: relative;
     flex-direction: column;
+    @media screen and (max-width: 450px){
+        padding: 16px 16px;
+    }
 }
 
 #sub_footer #footer_links{
     gap: 16px;
     width: 100%;
     display: flex;
+    align-items: start;
     flex-direction: row;
     justify-content: space-between;
+    @media screen and (max-width: 450px){
+        flex-direction: column;
+    }
 }
 
 #footer_links .links_left, #footer_links .links_right{
@@ -32,6 +39,9 @@ footer #sub_footer{
 #footer_links .links_right{
     display: flex;
     justify-content: end;
+    @media screen and (max-width: 450px){
+        justify-content: start;
+    }
 }
 
 
@@ -57,7 +67,6 @@ footer #sub_footer{
     font-weight: 600;
     letter-spacing: 0.5px;
 }
-
 
 .links ul{
     gap: 8px;

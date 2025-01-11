@@ -56,8 +56,8 @@ function deleteCart(id, user){
     xhttp.send();
 }
 
-function updateCart(){
-    console.log("update cart");
+function updateCart(id){
+    console.log(id);
     // var quantity = document.getElementById("quantity_" + id).value;
     // var xhttp = new XMLHttpRequest();
     // xhttp.onreadystatechange = function() {
