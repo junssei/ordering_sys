@@ -7,10 +7,13 @@ include "include/header.php"
         <div class="form_decor">
             <a href="product.php" class="button2 btn"> View Products </a>
         </div>
-<?php if($_GET['auth'] == "login"){ ?>
+    <?php if($_GET['auth'] == "login"){ ?>
         <form class="form_container" method="post" action="process/auth/validation.php" method="post" autocomplete="off" autocapitalize="words">
             <div class="form_subcontainer">
                 <div class="subcontainer_header">
+                    <div class="header_logo">
+                        <img src="../source/images/logo/LogoMark2.png" class="logoMedium">
+                    </div>
                     <h1> Login </h1>
                     <p> Login with your user credentials </p>
                 </div>
@@ -50,7 +53,7 @@ include "include/header.php"
             </div>
         </form>
     <?php } if($_GET['auth'] == "register") { ?>
-        <form class="form_container" action="process/auth/registerProcess.php" method="post" autocomplete="on" autocapitalize="words">
+        <form class="form_container" action="process/auth/registerProcess.php" method="post" autocomplete="off" autocapitalize="words">
             <div class="form_subcontainer">
                 <div class="subcontainer_header">
                     <h1> Sign Up </h1>

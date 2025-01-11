@@ -5,9 +5,9 @@
                     <div class="links">
                         <h2> Contact Information </h2>
                         <ul>
-                            <li><img src="..\source\images\icon\svg\Email.svg" alt="icon"> bigcas@gmail.com </li>
-                            <li><img src="..\source\images\icon\svg\Phone.svg" alt="icon"> +63 912 154 1566 </li>
-                            <li><img src="..\source\images\icon\svg\Location.svg" alt="icon"> Prk. Sta. Lucia, Mahayahay, Iligan City 9200 </li>
+                            <li><img src="..\source\images\icon\svg\Email.svg" alt="icon"><span>bigcas.sarisari@bigcas.store</span></li>
+                            <li><img src="..\source\images\icon\svg\Phone.svg" alt="icon"><span>+63 912 154 1566</span></li>
+                            <li><img src="..\source\images\icon\svg\Location.svg" alt="icon"> <span>Prk. Sta. Lucia, Mahayahay, Iligan City 9200</span></li>
                         </ul>
                     </div>
                     <div class="links">
@@ -50,9 +50,11 @@
                 <div class="links_right">
                     <div class="important_links">
                         <ul>
-                            <li><a href=""> Sign up </a></li>
-                            <li><a href=""> Privacy Policy </a></li>
-                            <li><a href=""> Terms & Conditions </a></li>
+                            <?php if(!$loggedin) { ?>
+                            <li><a href="login.php?auth=register">Sign up</a></li>
+                            <?php } ?>
+                            <li><a href="about.php?b=privacypolicy"> Privacy Policy </a></li>
+                            <li><a href="about.php?b=termsncondition"> Terms & Conditions </a></li>
                         </ul>
                     </div>
                 </div>

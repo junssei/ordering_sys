@@ -339,8 +339,9 @@ input[type="text"], input[type="number"], input[type="password"], input[type="em
 }
 
 .logoMedium{
-    width: 400px;
-    height: 400px;
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
 }
 
 .wordLogoSmall{
@@ -386,7 +387,7 @@ input[type="text"], input[type="number"], input[type="password"], input[type="em
 }
 
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: var(--white);
     /* border-radius: 20px; */
 }
 
@@ -403,9 +404,11 @@ input[type="text"], input[type="number"], input[type="password"], input[type="em
 .popupnotification{
     top: 0%;
     left: 50%;
-    z-index: 1;
+    z-index: 2;
+    width: 100%;
     padding: 32px;
     display: block;
+    max-width: 200px;
     text-align: center;
     visibility: hidden;
     position: absolute;
@@ -413,8 +416,12 @@ input[type="text"], input[type="number"], input[type="password"], input[type="em
     background-color: var(--gray3);
     transform: translate(-50%, -50%);
     animation-name: popuphide;
-    animation-duration: 1.5s;
+    animation-duration: 2s;
     animation-timing-function: ease-in-out;
+}
+
+.popupnotification p{
+    word-wrap: break-word;
 }
 
 /* Notification & Animation */

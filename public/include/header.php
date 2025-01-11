@@ -1,8 +1,8 @@
 <?php require '../source/db/connect.php';
-
+session_start();
 if(!isset($_SESSION['userloggedin'])) {
-    $loggedin = false;
     $id = 0;
+    $loggedin = false;
 } else {
     $loggedin = true;
     $id = $_SESSION['customerID'];
@@ -29,17 +29,25 @@ if (isset($_SESSION['notification'])){
 ?>
 <div id="container">
     <div id="subcontainer">
+        <!-- <div id="sidetool">
+            <div>
+                <img src="" alt="cart">
+            </div>
+            <div>
+                <img src="" alt="chat">
+            </div>
+        </div> -->
         <header>
             <div id="sub_header">
                 <div id="header_navigation">
-                    <a href="index.php">
+                    <a class="header_logo" href="index.php">
                         <img src="../source/images/logo/DefaultWordmark.png" class="wordLogoSmall" alt="logo">
                     </a>
                     <nav>
                         <a href="index.php" class="<?php if($currentPage === "index"){ echo "active"; } ?>" > Home </a>
                         <a href="product.php"> Products </a>
-                        <a href=""> Contact </a>
-                        <a href="order.php"> Order </a>
+                        <a href="about.php?about=contact"> Contact </a>
+                        <a href="user.php?u=orders"> Order </a>
                     </nav>
                 </div>
                 <div id="header_userside">
@@ -52,7 +60,7 @@ if (isset($_SESSION['notification'])){
                             <img src="../source/images/icon/svg/notification.svg" alt="notification">
                         </div>
                         
-                        <a href="cart.php" class="userside_basket">
+                        <a href="user.php?u=cart" class="userside_basket">
                             <!-- fetch cart -->
                              <?php
                                 if(isset($id)){
@@ -63,9 +71,7 @@ if (isset($_SESSION['notification'])){
                                 }
                              ?>
                             <img src="../source/images/icon/svg/basket3.svg" class="iconLarge" alt="cart">
-                            <div id="basket_products">
-                                
-                            </div>
+                            <div id="basket_products"></div>
                         </a>
                     </div>
                     <div class="userside_actions">
@@ -83,15 +89,19 @@ if (isset($_SESSION['notification'])){
                             </div>
                             <div id="user_profile">
                                 <div id="userprofile_header">
-                                    <div>
+                                    <div id="userprofile_info">
                                         <img src="../source/images/upload/profile/default.jpg" alt="avatar">
-                                        <h3 id="username"> <?php echo $row['username']; ?> </h3>
-                                        <p id="email"> <?php echo $row['email']; ?> </p>
+                                        <div id="userprofile_details">
+                                            <h3 id="username"> <?php echo $row['username']; ?> </h3>
+                                            <p id="email"> <?php echo $row['email']; ?> </p>
+                                        </div>
                                     </div>
-                                    <a href="users.php?page=profile" class="button3 roundbtn"> Manage your profile </a>
                                 </div>
                                 <div id="userprofile_actions">
-                                <a href="logout.php" class="defaultbtn cancelbtn"> Signout </a>
+                                    <a href="user.php?u=profile" class=""> Manage your profile </a>
+                                    <a href="user.php?u=cart" class=""> My Cart </a>
+                                    <a href="user.php?u=orders" class=""> My Orders </a>
+                                    <a href="logout.php" class="logout"> Signout </a>
                                 </div>
                             </div>
                         </div>
