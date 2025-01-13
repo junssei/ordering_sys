@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 07, 2025 at 04:43 AM
+-- Generation Time: Jan 13, 2025 at 09:54 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,23 @@ SET time_zone = "+00:00";
 --
 -- Database: `bigcasdb`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `address`
+--
+
+CREATE TABLE `address` (
+  `address_id` int(11) NOT NULL,
+  `unit_number` int(255) NOT NULL,
+  `street_number` varchar(255) NOT NULL,
+  `address_line1` varchar(255) NOT NULL,
+  `address_line2` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `region` varchar(255) NOT NULL,
+  `postal_code` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -127,7 +144,8 @@ CREATE TABLE `cart` (
 INSERT INTO `cart` (`cart_id`, `customer_id`, `created_at`) VALUES
 (1, 1, '2025-01-05 12:21:43'),
 (2, 2, '2025-01-05 15:34:11'),
-(3, 3, '2025-01-05 15:34:42');
+(3, 3, '2025-01-05 15:34:42'),
+(4, 4, '2025-01-08 12:15:33');
 
 -- --------------------------------------------------------
 
@@ -143,6 +161,17 @@ CREATE TABLE `cart_item` (
   `quantity` int(100) NOT NULL,
   `price` double(12,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cart_item`
+--
+
+INSERT INTO `cart_item` (`cart_item_id`, `cart_id`, `product_id`, `variation_id`, `quantity`, `price`) VALUES
+(39, 1, 2, 6, 2, 20.00),
+(40, 1, 1, 2, 2, 20.00),
+(41, 1, 1, 1, 1, 15.00),
+(42, 1, 2, 4, 1, 10.00),
+(43, 1, 3, 11, 1, 10.00);
 
 -- --------------------------------------------------------
 
@@ -171,7 +200,20 @@ CREATE TABLE `customer` (
 INSERT INTO `customer` (`customer_id`, `username`, `password`, `firstname`, `lastname`, `address`, `email`, `phone`, `image`, `created_at`, `updated_at`) VALUES
 (1, 'jibsy', '$2y$10$NxYaq4Zmehq6WRV0b7w0MOK3YM7Y0Ogn/gbaS3YbF5JcassezCiNa', 'June Vincent', 'Fernandez', '', 'junevincentmagsayofernandez@gmail.com', '', '', '2025-01-05 08:33:15', '2025-01-05 08:33:15'),
 (2, 'jessa', '$2y$10$8TCj1fqliLqJmv6H7oDfj.jwHw8FdwHvhveV6gnml.PUMQeCh17VO', 'Jessa Mae', 'Bigcas', '', 'jessamaebigcas@gmail.com', '', '', '2025-01-05 15:32:47', '2025-01-05 15:32:47'),
-(3, 'kiervy', '$2y$10$Q0LWCufyJRq6UDISLmieZOYBTws9vGnkV/0zO50XF7xd0b8hljr/K', 'Kiervy', 'Estole', '', 'kiervyestole@gmail.com', '', '', '2025-01-05 15:34:42', '2025-01-05 15:34:42');
+(3, 'kiervy', '$2y$10$Q0LWCufyJRq6UDISLmieZOYBTws9vGnkV/0zO50XF7xd0b8hljr/K', 'Kiervy', 'Estole', '', 'kiervyestole@gmail.com', '', '', '2025-01-05 15:34:42', '2025-01-05 15:34:42'),
+(4, 'junevincentfernandez', '$2y$10$8sUZwcwlQS6Tgf8nytczTucCjBQOk5f8ntzAtV/PlFAnte4QB79PS', 'June Vincent', 'Fernandez', '', 'junevincentmagsayo.fernandez@my.smcligan.edu.ph', '', '', '2025-01-08 12:15:33', '2025-01-08 12:15:33');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer_address`
+--
+
+CREATE TABLE `customer_address` (
+  `customer_id` int(11) NOT NULL,
+  `address_id` int(11) NOT NULL,
+  `is_default` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -184,7 +226,7 @@ CREATE TABLE `orderp` (
   `customer_id` int(11) NOT NULL,
   `order_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `status` int(11) NOT NULL,
-  `total_amount` int(11) NOT NULL,
+  `total_amount` double(12,2) NOT NULL,
   `delivery_method` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -193,8 +235,9 @@ CREATE TABLE `orderp` (
 --
 
 INSERT INTO `orderp` (`order_id`, `customer_id`, `order_date`, `status`, `total_amount`, `delivery_method`) VALUES
-(1, 1, '2025-01-06 19:11:43', 0, 85, 'Pickup'),
-(2, 1, '2025-01-06 21:39:56', 0, 70, 'Pickup');
+(1, 1, '2025-01-06 19:11:43', 0, 85.00, 'Pickup'),
+(2, 1, '2025-01-06 21:39:56', 0, 70.00, 'Pickup'),
+(3, 1, '2025-01-08 08:29:18', 0, 205.00, 'Pickup');
 
 -- --------------------------------------------------------
 
@@ -220,7 +263,10 @@ INSERT INTO `order_product` (`order_product_id`, `order_id`, `product_id`, `vari
 (8, 1, 1, 3, 1, 50.00),
 (9, 1, 2, 6, 1, 20.00),
 (10, 2, 1, 2, 3, 60.00),
-(11, 2, 2, 4, 1, 10.00);
+(11, 2, 2, 4, 1, 10.00),
+(12, 3, 1, 3, 3, 150.00),
+(13, 3, 2, 5, 3, 45.00),
+(14, 3, 3, 11, 1, 10.00);
 
 -- --------------------------------------------------------
 
@@ -234,6 +280,7 @@ CREATE TABLE `payment` (
   `payment_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `payment_method` varchar(255) NOT NULL,
   `payment_status` varchar(255) NOT NULL,
+  `payment_image` varchar(255) DEFAULT NULL,
   `amount` double(12,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -241,12 +288,15 @@ CREATE TABLE `payment` (
 -- Dumping data for table `payment`
 --
 
-INSERT INTO `payment` (`payment_id`, `order_id`, `payment_date`, `payment_method`, `payment_status`, `amount`) VALUES
-(7, 1, '2025-01-06 19:11:43', 'Cash', '0', 100.00),
-(8, 1, '2025-01-06 19:11:43', 'Cash', '0', 100.00),
-(9, 1, '2025-01-06 19:11:43', 'Cash', '0', 100.00),
-(10, 2, '2025-01-06 21:39:56', 'Cash', '0', 100.00),
-(11, 2, '2025-01-06 21:39:56', 'Cash', '0', 100.00);
+INSERT INTO `payment` (`payment_id`, `order_id`, `payment_date`, `payment_method`, `payment_status`, `payment_image`, `amount`) VALUES
+(7, 1, '2025-01-06 19:11:43', 'Cash', '0', NULL, 100.00),
+(8, 1, '2025-01-06 19:11:43', 'Cash', '0', NULL, 100.00),
+(9, 1, '2025-01-06 19:11:43', 'Cash', '0', NULL, 100.00),
+(10, 2, '2025-01-06 21:39:56', 'Cash', '0', NULL, 100.00),
+(11, 2, '2025-01-06 21:39:56', 'Cash', '0', NULL, 100.00),
+(12, 3, '2025-01-08 08:29:18', 'Cash', '0', NULL, 300.00),
+(13, 3, '2025-01-08 08:29:18', 'Cash', '0', NULL, 300.00),
+(14, 3, '2025-01-08 08:29:18', 'Cash', '0', NULL, 300.00);
 
 -- --------------------------------------------------------
 
@@ -382,6 +432,12 @@ INSERT INTO `product_variation` (`variation_id`, `product_id`, `name`, `price`, 
 --
 
 --
+-- Indexes for table `address`
+--
+ALTER TABLE `address`
+  ADD PRIMARY KEY (`address_id`);
+
+--
 -- Indexes for table `admin`
 --
 ALTER TABLE `admin`
@@ -421,6 +477,13 @@ ALTER TABLE `cart_item`
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`customer_id`);
+
+--
+-- Indexes for table `customer_address`
+--
+ALTER TABLE `customer_address`
+  ADD KEY `address_id` (`address_id`),
+  ADD KEY `customer_id` (`customer_id`);
 
 --
 -- Indexes for table `orderp`
@@ -478,6 +541,12 @@ ALTER TABLE `product_variation`
 --
 
 --
+-- AUTO_INCREMENT for table `address`
+--
+ALTER TABLE `address`
+  MODIFY `address_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
@@ -499,37 +568,37 @@ ALTER TABLE `attributes_option`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `cart_item`
 --
 ALTER TABLE `cart_item`
-  MODIFY `cart_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `cart_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `orderp`
 --
 ALTER TABLE `orderp`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `order_product`
 --
 ALTER TABLE `order_product`
-  MODIFY `order_product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `order_product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -578,6 +647,13 @@ ALTER TABLE `cart_item`
   ADD CONSTRAINT `cart_item_ibfk_1` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`cart_id`),
   ADD CONSTRAINT `cart_item_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`),
   ADD CONSTRAINT `cart_item_ibfk_3` FOREIGN KEY (`variation_id`) REFERENCES `product_variation` (`variation_id`);
+
+--
+-- Constraints for table `customer_address`
+--
+ALTER TABLE `customer_address`
+  ADD CONSTRAINT `customer_address_ibfk_1` FOREIGN KEY (`address_id`) REFERENCES `address` (`address_id`),
+  ADD CONSTRAINT `customer_address_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`);
 
 --
 -- Constraints for table `orderp`
