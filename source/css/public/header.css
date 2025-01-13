@@ -70,7 +70,9 @@ header #sub_header{
 
 #header_navigation nav{
     gap: 16px;
+    width: 100%;
     display: flex;
+    margin-left: 16px;
     flex-direction: row;
     @media screen and (max-width: 850px){
         display: none;
