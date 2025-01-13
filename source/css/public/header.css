@@ -14,39 +14,55 @@ header #sub_header{
     padding: 16px 48px;
     flex-direction: row;
     justify-content: space-between;
+    
+    @media screen and (max-width: 1000px){
+        padding: 16px 16px;
+    }
+    
+    @media screen and (max-width: 500px){
+        padding: 16px 8px;
+    }
+
+    @media screen and (max-width: 320px){
+        gap: 0;
+    }
 }
 
 #sub_header > #header_navigation{
-    gap: 32px;
     width: 100%;
     display: flex;
     position: relative;
     align-items: center;
     flex-direction: row;   
+    justify-content: space-between;
 }
 
-#header_navigation .logo2{
+#header_navigation .logo2, #header_navigation .menu{
     display: none;
 }
 
-@media screen and (max-width: 1000px){
-    header #sub_header{
-        padding: 16px 8px;
-    }
-}
-
-@media screen and (max-width: 450px){
+@media screen and (max-width: 600px){
     #header_navigation .logo1{
         display: none;
     }
     #header_navigation .logo2{
         display: flex;
     }
-    
+}
+
+@media screen and (max-width: 460px){
+    #header_navigation .logo2{
+        display: none;
+    }
+}
+
+#header_navigation .logo_section{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
 }
 
 #sub_header > #header_userside{
-    gap: 8px;
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -61,6 +77,13 @@ header #sub_header{
     }
 }
 
+@media screen and (max-width: 850px){
+    #header_navigation .menu{
+        display: flex;
+    }
+}
+
+
 #header_navigation nav > a{
     font-weight: 600;
 }
@@ -70,7 +93,6 @@ header #sub_header{
 }
 
 #header_userside > .userside_actions{
-    gap: 8px;
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -191,7 +213,7 @@ header #sub_header{
 .userside_actions .userside_basket{
     display: flex;
     cursor: pointer;
-    padding: 0px 16px;
+    padding: 0px 8px;
     position: relative;
 }
 
@@ -200,7 +222,7 @@ header #sub_header{
     top: 0px;
     padding: 4px;
     min-width: 16px;
-    right: 15px;
+    right: 5px;
     color: var(--white);
     font-size: 12px;
     word-wrap: wrap;
@@ -218,7 +240,14 @@ header #sub_header{
     padding: 0 48px;
     align-items: center;
     flex-direction: row;
-    /* background-color: var(--white); */
+    background-color: var(--white);
+    @media screen and (max-width: 1000px){
+        padding: 0 16px;
+    }
+
+    @media screen and (max-width: 350px){
+        padding: 0 8px;
+    }
 }
 
 .globalsearch_container .globalsearch_subcontainer{
@@ -227,13 +256,13 @@ header #sub_header{
     position: relative;
     align-items: center;
     flex-direction: row;
-    border
-    background-color: var(--gray);
+    background-color: var(--white);
 }
 
 .globalsearch_subcontainer img{
     height: 100%;
     padding: 16px;
+    filter: --filterBlue;
     background-color: var(--blue);
 }
 

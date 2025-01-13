@@ -40,19 +40,27 @@ if (isset($_SESSION['notification'])){
         <header>
             <div id="sub_header">
                 <div id="header_navigation">
-                    <a class="header_logo logo1" href="index.php">
-                        <img src="../source/images/logo/DefaultWordmark.png" class="wordLogoSmall" alt="logo">
-                    </a>
-                    <a class="header_logo logo2" href="index.php">
-                        <img src="../source/images/logo/LogoMark.png" class="logoSmall" alt="logo">
-                    </a>
+                    <div class="logo_section">
+                        <img src="../source/images/icon/svg/menu-01.svg" class="menu" alt="menu">
+                        <a class="header_logo logo1" href="index.php">
+                            <img src="../source/images/logo/DefaultWordmark.png" class="wordLogoSmall" alt="logo">
+                        </a>
+                        <a class="header_logo logo2" href="index.php">
+                            <img src="../source/images/logo/LogoMark.png" class="logoSmall" alt="logo">
+                        </a>
+                    </div>
                     <nav>
                         <a href="index.php" class="<?php if($currentPage === "index"){ echo "active"; } ?>" > Home </a>
-                        <a href="product.php"> Products </a>
+                        <a href="product.php" class="<?php if($currentPage === "product"){ echo "active"; } ?>" > Products </a>
                         <a href="about.php?b=contact"> Contact </a>
                         <a href="user.php?u=orders"> Order </a>
                     </nav>
+                    <div class="searchcontainer">
+                        <img src="../source/images/icon/svg/search.svg" alt="search_icon">
+                        <input class="search_field" type="text" placeholder="Search" onkeyup="searchFilter('category')">
+                    </div>
                 </div>
+                
                 <div id="header_userside">
                     <div class="userside_actions">
                         <div id="notification">
@@ -109,9 +117,3 @@ if (isset($_SESSION['notification'])){
                 </div>
             </div>
         </header>
-        <div class="globalsearch_container">
-            <div class="globalsearch_subcontainer">
-                <img src="../source/images/icon/svg/search.svg" alt="search_icon">
-                <input type="text" placeholder="Search product" class="" onkeyup="">
-            </div>
-        </div>

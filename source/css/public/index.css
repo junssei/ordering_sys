@@ -43,12 +43,8 @@
         padding: 48px 16px;
     }
 
-    @media screen and (max-width: 450px){
-        padding: 16px 16px;
-    }
-
-    @media screen and (max-width: 350px){
-        padding: 16px 8px;
+    @media screen and (max-width: 500px){
+        padding: 48px 8px;
     }
 }
 

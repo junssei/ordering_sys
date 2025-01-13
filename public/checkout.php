@@ -59,9 +59,15 @@ include "include/header.php"
             }
             ?>
                 <div class="payment_section">
-                    <h2> Total Amount: <?=  $totalAmount ?> </h2>
+                    <h2> Total Amount: &#8369;<?=  $totalAmount ?> </h2>
                     <input type="hidden" name="customerID" value="<?= $id ?>">
                     <input type="hidden" name="totalAmount" value="<?= $totalAmount ?>">
+                    <div class="inputwlabel">
+                        <label for="payment_amount"> Pay Amount </label>
+                        <div class="input">
+                            <input name="payment_amount" type="number" min=1 value="<?=$totalAmount?>" required>
+                        </div>
+                    </div>
                     <div class="inputwlabel">
                         <label for="payment_method"> Payment Method </label>
                         <select name="payment_method">
@@ -72,12 +78,6 @@ include "include/header.php"
                         </select>
                     </div>
                     <div class="inputwlabel">
-                        <label for="payment_amount"> Amount </label>
-                        <div class="input">
-                            <input name="payment_amount" type="number" min=1 value="<?=$totalAmount?>" required>
-                        </div>
-                    </div>
-                    <div class="inputwlabel">
                         <label for="delivery_method"> Delivery Method </label>
                         <select name="delivery_method">
                             <option value="" disabled selected hidden> Choose a delivery method </option>
@@ -85,8 +85,10 @@ include "include/header.php"
                             <option> Delivery </option>
                         </select>
                     </div>
-                    <div id="paypal-button-container"></div>
-                    <p id="result-message"></p>
+                    <div hidden>
+                        <div id="paypal-button-container"></div>
+                        <p id="result-message"></p>
+                    </div>
                     <input type="submit" name="submit_order" class="defaultbtn btn1 enabledbtn" value="Place Order">
                     <a href="user.php?u=cart" class="defaultbtn btn1 cancelbtn"> Cancel Order </a>
                 </div>
