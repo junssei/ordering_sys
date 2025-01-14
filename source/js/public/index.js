@@ -1,5 +1,9 @@
+document.getElementById("menu").addEventListener('click', function(){
+
+});
+
 function selects(checkbox, name){ 
-    var ele=document.getElementsByName(name + '[]');  
+    var ele = document.getElementsByName(name + '[]');  
     if(checkbox.checked == true){
         for(var i=0; i<ele.length; i++){  
             if(ele[i].type=='checkbox')  
@@ -58,49 +62,50 @@ function deleteCart(id, user){
 
 function updateCart(id){
     console.log(id);
-    // var quantity = document.getElementById("quantity_" + id).value;
-    // var xhttp = new XMLHttpRequest();
-    // xhttp.onreadystatechange = function() {
-    //     if (this.readyState == 4 && this.status == 200) {
-    //         document.getElementById("cart_count").innerHTML = this.responseText;
-    //         displayCart(user);
-    //     }
-    // };
-    // xhttp.open("GET", "process/cart_process.php?cartItem=" + id + "&quantity=" + quantity + "&uid=" + user, true);
-    // xhttp.send();
 }
 
-var incrementbtn = document.getElementsByClassName('incr');
-var decrementbtn = document.getElementsByClassName('decr');
-
-for(let i = 0; i < incrementbtn.length; i++){
-    var btn = incrementbtn[i];
-    btn.addEventListener('click', function(event){
-        var btnClicked = event.target;
-
-        var input = btnClicked.parentElement.querySelector('input');
-        var inputvalue = input.value;
-
-        var newValue = parseInt(inputvalue) + 1
-        input.value = newValue;
-    })
-}
-
-for(let i = 0; i < decrementbtn.length; i++){
-    var btn = decrementbtn[i];
-    btn.addEventListener('click', function(event){
-        var btnClicked = event.target;
-        
-        var input = btnClicked.parentElement.querySelector('input');
-        var inputvalue = input.value;
-        
-        var newValue = parseInt(inputvalue) - 1
-        input.value = newValue;
-        
-        if(newValue < 1){
-            input.value = 1;
-        } else {
-            input.value = newValue;
+function updateCartQuantity(id, value){
+    console.log(id + " : " + value);
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
         }
-    })
+    };
+    xhttp.open("GET", "process/cart_process.php?quantity=" + id + "&value=" + value, true);
+    xhttp.send();
 }
+
+const incrementbtn = document.querySelectorAll('.incr');
+const decrementbtn = document.querySelectorAll('.decr');
+
+incrementbtn.forEach(btn => btn.addEventListener('click', event => {
+    var btnClicked = event.target;
+    
+    var input = btnClicked.parentElement.querySelector('input');
+    var id = input.dataset.productId;
+    var inputvalue = input.value;
+
+    var newValue = parseInt(inputvalue) + 1
+    input.value = newValue;
+
+    updateCartQuantity(id, newValue);
+}));
+
+decrementbtn.forEach(btn => btn.addEventListener('click', event => {
+    var btnClicked = event.target;
+        
+    var input = btnClicked.parentElement.querySelector('input');
+    var id = input.dataset.productId;
+    var inputvalue = input.value;
+    
+    var newValue = parseInt(inputvalue) - 1
+    input.value = newValue;
+    
+    if(newValue < 1){
+        input.value = 1;
+    } else {
+        input.value = newValue;
+        updateCartQuantity(id, newValue);
+    }
+}));

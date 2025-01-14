@@ -41,7 +41,7 @@ if (isset($_SESSION['notification'])){
             <div id="sub_header">
                 <div id="header_navigation">
                     <div class="logo_section">
-                        <img src="../source/images/icon/svg/menu-01.svg" class="menu" alt="menu">
+                        <img src="../source/images/icon/svg/menu-01.svg" id="menu" class="menu" alt="menu">
                         <a class="header_logo logo1" href="index.php">
                             <img src="../source/images/logo/DefaultWordmark.png" class="wordLogoSmall" alt="logo">
                         </a>
@@ -83,15 +83,26 @@ if (isset($_SESSION['notification'])){
                     </div>
                     <div class="userside_actions">
                         <?php if(!$loggedin) { ?>
-                        <a href="login.php?auth=login" class="button2 btn"> Login </a>
-                        <a href="login.php?auth=register" class="button1 btn"> Sign-up </a>
+                        <div class="login_section">
+                            <div class="login_buttons">
+                                <a href="login.php?auth=login" class="button2 btn"> Login </a>
+                                <a href="login.php?auth=register" class="button1 btn"> Sign-up </a>
+                            </div>
+                            <div id="user_image" class="user_profileimg login_userimg">
+                                <img src="../source/images/upload/profile/default.jpg" alt="avatar">
+                            </div>
+                            <div id="user_profile">
+                                <a href="login.php?auth=login" class="button2 btn"> Login </a>
+                                <a href="login.php?auth=register" class="button1 btn"> Sign-up </a>
+                            </div>
+                        </div>
                         <?php } else {
                             $sql = "SELECT * FROM customer WHERE customer_id = '$id'";
                             $result = mysqli_query($conn, $sql);
                             $row = mysqli_fetch_array($result, MYSQLI_ASSOC); 
                         ?>                        
                         <div id="profile_section">
-                            <div id="user_image">
+                            <div id="user_image" class="user_profileimg">
                                 <img src="../source/images/upload/profile/<?php if(!empty($row["image"])) { echo $row["image"]; } else { echo "default.jpg"; } ?>" alt="avatar">
                             </div>
                             <div id="user_profile">

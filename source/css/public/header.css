@@ -31,7 +31,7 @@ header #sub_header{
 #sub_header > #header_navigation{
     width: 100%;
     display: flex;
-    position: relative;
+    /* position: relative; */
     align-items: center;
     flex-direction: row;   
     justify-content: space-between;
@@ -74,16 +74,8 @@ header #sub_header{
     display: flex;
     margin-left: 16px;
     flex-direction: row;
-    @media screen and (max-width: 850px){
-        display: none;
-    }
 }
 
-@media screen and (max-width: 850px){
-    #header_navigation .menu{
-        display: flex;
-    }
-}
 
 
 #header_navigation nav > a{
@@ -92,6 +84,45 @@ header #sub_header{
 
 #header_navigation nav > a:hover{
     color: var(--blue2);
+}
+
+@media screen and (max-width: 850px){
+    #header_navigation .menu{
+        display: flex;
+        cursor: pointer;
+    }
+
+    #header_navigation nav{
+        top: 0;
+        left: 0;
+        width: 0%;
+        margin: 0;
+        z-index: 1;
+        display: none;
+        height: 100vh;
+        position: absolute;
+        align-items: center;
+        color: var(--white);
+        flex-direction: column;
+        justify-content: center;
+        background-color: var(--blueOpacity);
+        animation-name: slidemenu;
+        animation-duration: 1.5s;
+        animation-timing-function: ease-in-out;
+    }
+
+    #header_navigation nav > a{
+        color: var(--white);
+    }
+    #header_navigation nav > a:hover{
+        color: var(--red);
+    }
+
+    /* Notification & Animation */
+    @keyframes slidemenu{
+        0% {width: 0%;}
+        100% {width: 100%;}
+    }
 }
 
 #header_userside > .userside_actions{
@@ -106,7 +137,7 @@ header #sub_header{
     align-items: center;
 }
 
-.userside_actions #profile_section, #profile_section > #user_image{
+.userside_actions #profile_section, .user_profileimg{
     gap: 16px;
     display: flex;
     position: relative;
@@ -115,7 +146,7 @@ header #sub_header{
     justify-content: center;
 }
 
-#profile_section > #user_image > img{
+.user_profileimg > img{
     width: 33px; 
     height: 33px; 
     cursor: pointer;
@@ -210,6 +241,51 @@ header #sub_header{
 #userprofile_actions .logout:hover{
     cursor: pointer;
     color: var(--red2);
+}
+
+.userside_actions .login_section{
+    gap: 8px;
+    display: flex;
+    position: relative;
+    flex-direction: row;
+}
+
+.login_section .login_buttons{
+    gap: 8px;
+    display: flex;
+    flex-direction: row;
+}
+
+.login_section .login_userimg{
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
+    .login_section .login_userimg{
+        display: flex;
+    }
+
+    .login_section .login_buttons{
+        display: none;
+    }
+}
+
+.login_section > #user_profile{
+    top: 0;
+    right: 0;
+    gap: 16px;
+    z-index: 1;
+    width: 100%;
+    padding: 24px;
+    display: none;
+    min-width: 100px;
+    text-align: center;
+    position: absolute;
+    flex-direction: column;
+    border: 2px solid var(--blue2);
+    background-color: var(--white);
+    transform: translate(-5%, 35%);
+    border-radius: 20px 0px 20px 20px;
 }
 
 .userside_actions .userside_basket{

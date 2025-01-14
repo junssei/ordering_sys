@@ -1,5 +1,4 @@
 <?php
-session_start();
 $title = "Login";
 include "include/header.php"
 ?>

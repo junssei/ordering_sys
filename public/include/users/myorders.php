@@ -1,7 +1,7 @@
 <div class="order_container">
     <div class="order_subcontainer">
         <h1> My Orders </h1>
-        <?php if(isset($id)){ ?>
+        <?php if($loggedin){ ?>
         <div class="order_orderlist">
             <?php
             $fetchOrder = "SELECT * FROM orderp WHERE customer_id = $id";

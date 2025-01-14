@@ -8,7 +8,7 @@
                 </div>
                 <div id="cart_items">
                     <?php
-                    if(isset($id)){
+                    if($loggedin){
                     $fetchCart = "SELECT * FROM cart_item LEFT JOIN cart ON cart_item.cart_id = cart.cart_id WHERE cart.customer_id = $id";
                     $exec = mysqli_query($conn, $fetchCart);
                         if($exec -> num_rows > 0){
@@ -50,7 +50,7 @@
                                             <p class="product_price"> &#8369;<?=$rowPRD['productPrice']?> </p>
                                             <div class="input inputnumber">
                                                 <span class="decr"> - </span>
-                                                <input type="number" value="<?=$row['quantity']?>" min=1 name="quantity[]" oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null">
+                                                <input type="number" value="<?=$row['quantity']?>" min=1 name="quantity[]" oninput="this.value = this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" data-product-id = "<?=$row['cart_item_id']?>">
                                                 <span class="incr"> + </span>
                                             </div>
                                         </div>
