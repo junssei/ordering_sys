@@ -5,10 +5,10 @@ $dbusername = "root";
 $db = "bigcasdb";
 $dbpassword = "";
 
-$host = "auth-db1762.hstgr.io";
-$db = "u746273317_bigcasdb";
-$dbusername = "u746273317_bigcas";
-$dbpassword = "f9!+O+twN";
+// $host = "auth-db1762.hstgr.io";
+// $db = "u746273317_bigcasdb";
+// $dbusername = "u746273317_bigcas";
+// $dbpassword = "f9!+O+twN";
 
 $conn = new mysqli($host, $dbusername, $dbpassword, $db);
 
