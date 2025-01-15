@@ -29,14 +29,6 @@ if (isset($_SESSION['notification'])){
 ?>
 <div id="container">
     <div id="subcontainer">
-        <!-- <div id="sidetool">
-            <div>
-                <img src="" alt="cart">
-            </div>
-            <div>
-                <img src="" alt="chat">
-            </div>
-        </div> -->
         <header>
             <div id="sub_header">
                 <div id="header_navigation">
@@ -49,7 +41,7 @@ if (isset($_SESSION['notification'])){
                             <img src="../source/images/logo/LogoMark.png" class="logoSmall" alt="logo">
                         </a>
                     </div>
-                    <nav>
+                    <nav class="navigation_section">
                         <a href="index.php" class="<?php if($currentPage === "index"){ echo "active"; } ?>" > Home </a>
                         <a href="product.php" class="<?php if($currentPage === "product"){ echo "active"; } ?>" > Products </a>
                         <a href="about.php?b=contact"> Contact </a>
