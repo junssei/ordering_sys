@@ -21,5 +21,3 @@ document.getElementById("user_image").addEventListener('click', function(){
         pfpmenu.style.display = "flex";
     }
 });
-
-// 
