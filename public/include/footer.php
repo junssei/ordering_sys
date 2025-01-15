@@ -41,8 +41,6 @@
                         <ul>
                             <li><a href=""><img src="../source/images/icon/svg/facebook.svg"></a></li>
                             <li><a href=""><img src="../source/images/icon/svg/twitter.svg"></a></li>
-                            <li><a href=""><img src="../source/images/icon/svg/telegram.svg"></a></li>
-                            <li><a href=""><img src="../source/images/icon/svg/whatsapp.svg"></a></li>
                             <li><a href=""><img src="../source/images/icon/svg/instagram.svg"></a></li>
                         </ul>
                     </div>
