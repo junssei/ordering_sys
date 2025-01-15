@@ -60,5 +60,13 @@ if(isset($_GET['quantity'])){
     echo "Update Succesfully!";
 }
 
+if(isset($_GET['variation'])){
+    $id = $_GET['variation'];
+    $value = $_GET['value'];
+    $queryDelete = mysqli_query($conn, "UPDATE cart_item SET variation_id = $value WHERE cart_item_id = $id");
+
+    echo "Update Succesfully!";
+}
+
 mysqli_close($conn);
 ?>

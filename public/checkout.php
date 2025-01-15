@@ -25,7 +25,7 @@ include "include/header.php"
 
                             $queryCart = mysqli_query($conn, "SELECT * FROM cart_item WHERE cart_item_id = $value");
                             while($row = mysqli_fetch_array($queryCart)){
-                                $queryProductVariation  = mysqli_query($conn ,"SELECT * FROM product_variation LEFT JOIN product ON product_variation.product_id = product.product_id WHERE product_variation.variation_id = $variationID");
+                                $queryProductVariation  = mysqli_query($conn ,"SELECT * FROM product_variation LEFT JOIN product ON product_variation.product_id = product.product_id WHERE product_variation.variation_id = {$row['variation_id']}");
                                 $rowVariation = mysqli_fetch_array($queryProductVariation, MYSQLI_ASSOC);
                                 echo "<input type='hidden' name='cartItem[]' value='". $value . "'>";
                                 echo "<input type='hidden' name='product[]' value='". $rowVariation['product_id'] . "'>";
@@ -35,10 +35,10 @@ include "include/header.php"
                                 echo "<input type='hidden' name='variation[]' value='". $rowVariation['variation_id'] . "'>";
                                 
                                 echo "<p> &#8369;" . $rowVariation['price'] . "</p>";
-                                echo "<p> Quantity: " . $quantity . "</p>";
-                                echo "<input type='hidden' name='quantity[]' value='". $quantity . "'>";
+                                echo "<p> Quantity: " . $row['quantity'] . "</p>";
+                                echo "<input type='hidden' name='quantity[]' value='". $row['quantity'] . "'>";
                                 
-                                $itemtotalPrice = ($quantity * $rowVariation['price']);
+                                $itemtotalPrice = ($row['quantity'] * $rowVariation['price']);
                                 echo "<p> &#8369;" . $itemtotalPrice . "</p>";
                                 echo "<input type='hidden' name='price[]' value='". $itemtotalPrice . "'>";
                                 

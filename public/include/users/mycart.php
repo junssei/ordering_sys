@@ -29,7 +29,7 @@
                                             <div class="item_content">
                                                 <p class="product_name">  <?=$rowPRD['productName']?> </p>
                                                 <div class="item_variation">
-                                                    <select name="variation[]" onchange="updateCart(this.value)">
+                                                    <select name="variation[]" onchange="updateCartVariation(<?=$row['cart_item_id']?>, this.value)">
                                                         <?php 
                                                             $fetchVariation = "SELECT * FROM product_variation WHERE product_id = {$row["product_id"]}";
                                                             $queryVariation = mysqli_query($conn, $fetchVariation);

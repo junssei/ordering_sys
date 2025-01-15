@@ -25,12 +25,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_order'])){
         $insertOrderProduct = "INSERT INTO order_product VALUES ('', '$orderid', '$value', '$variation_id', '$quantity', '$price')";
         $queryOrderproduct = mysqli_query($conn, $insertOrderProduct);
         
-        $insertPayment = "INSERT INTO payment VALUES ('', '$orderid', CURRENT_TIMESTAMP(), '$paymentMethod', '0', '', '$paymentAmount')";
+        $insertPayment = "INSERT INTO payment VALUES ('', '$orderid', CURRENT_TIMESTAMP(), '$paymentMethod', '0', NULL, '$paymentAmount')";
         $queryPayment = mysqli_query($conn, $insertPayment);
 
         $deleteCart = "DELETE FROM cart_item WHERE cart_item_id = $cartItem";
         $querydel = mysqli_query($conn, $deleteCart);
     }
+    $_SESSION['notification'] = "Checkout succesfully! Check your orders for more details";
     header("Location: ../user.php?u=cart");
 }
 ?>

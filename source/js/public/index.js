@@ -60,8 +60,16 @@ function deleteCart(id, user){
     xhttp.send();
 }
 
-function updateCart(id){
-    console.log(id);
+function updateCartVariation(id, value){
+    console.log(id + " : " + value);
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log("Variation: " + this.responseText);
+        }
+    };
+    xhttp.open("GET", "process/cart_process.php?variation=" + id + "&value=" + value, true);
+    xhttp.send();
 }
 
 function updateCartQuantity(id, value){
@@ -69,7 +77,7 @@ function updateCartQuantity(id, value){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText);
+            console.log("Quantity: " + this.responseText);
         }
     };
     xhttp.open("GET", "process/cart_process.php?quantity=" + id + "&value=" + value, true);
