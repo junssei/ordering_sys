@@ -14,20 +14,20 @@ include "include/header.php"
             </div>
             <div class="user_subcontainer">
                 <?php
-                if($_GET['b'] == "contact"){
+                if ($_GET['b'] == "contact") {
                     include 'include/about/contact.php';
                 }
 
-                if($_GET['b'] == "aboutus"){
+                if ($_GET['b'] == "aboutus") {
                     include 'include/about/us.php';
                 }
 
 
-                if($_GET['b'] == "privacypolicy"){
+                if ($_GET['b'] == "privacypolicy") {
                     include 'include/about/privacypolicy.php';
                 }
 
-                if($_GET['b'] == "termsncondition"){
+                if ($_GET['b'] == "termsncondition") {
                     include 'include/about/termsncondition.php';
                 }
                 ?>

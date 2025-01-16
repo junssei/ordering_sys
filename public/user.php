@@ -15,15 +15,15 @@ include "include/header.php"
             </div>
             <div class="user_subcontainer">
                 <?php
-                if($_GET['u'] == 'cart'){
+                if ($_GET['u'] == 'cart') {
                     include 'include/users/mycart.php';
                 }
 
-                if($_GET['u'] == 'orders'){
+                if ($_GET['u'] == 'orders') {
                     include 'include/users/myorders.php';
                 }
-                
-                if($_GET['u'] == 'profile'){
+
+                if ($_GET['u'] == 'profile') {
                     include 'include/users/myprofile.php';
                 }
 

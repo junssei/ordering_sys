@@ -2,11 +2,11 @@
 $title = "Login";
 include "include/header.php"
 ?>
-    <div class="form_section">
-        <div class="form_decor">
-            <a href="product.php" class="button2 btn"> View Products </a>
-        </div>
-    <?php if($_GET['auth'] == "login"){ ?>
+<div class="form_section">
+    <div class="form_decor">
+        <a href="product.php" class="button2 btn"> View Products </a>
+    </div>
+    <?php if ($_GET['auth'] == "login") { ?>
         <form class="form_container" method="post" action="process/auth/validation.php" method="post" autocomplete="off" autocapitalize="words">
             <div class="form_subcontainer">
                 <div class="subcontainer_header">
@@ -21,11 +21,11 @@ include "include/header.php"
                     <div class="input">
                         <div class="inp inp_nm">
                             <img class="iconSmall" src="../source/images/icon/svg/mail.svg" alt="email_icon">
-                            <input id="email" type="text" name="email" placeholder="Email or username" required <?php 
-                                if (isset($_SESSION['username'])) {
-                                    echo "value='" . $_SESSION['username'] . "'";
-                                }
-                            ?>>
+                            <input id="email" type="text" name="email" placeholder="Email or username" required <?php
+                                                                                                                if (isset($_SESSION['username'])) {
+                                                                                                                    echo "value='" . $_SESSION['username'] . "'";
+                                                                                                                }
+                                                                                                                ?>>
                         </div>
                     </div>
                     <!-- Input password -->
@@ -37,9 +37,9 @@ include "include/header.php"
                         <img id="eyepassword_icon" class="iconSmall icon_fn" src="../source/images/icon/svg/eye-invisibility.svg" onclick="passwordVisibility()" alt="password_invisibility">
                     </div>
                     <?php
-                        if (isset($_SESSION['error'])) {
-                            echo "<p class='error' style='text-align: center;'>" . $_SESSION['error'] . "</p>";
-                        }
+                    if (isset($_SESSION['error'])) {
+                        echo "<p class='error' style='text-align: center;'>" . $_SESSION['error'] . "</p>";
+                    }
                     ?>
                     <div class="input_actions">
                         <span><a class="link" href="">Forgot Password?</a></span>
@@ -51,7 +51,8 @@ include "include/header.php"
                 </div>
             </div>
         </form>
-    <?php } if($_GET['auth'] == "register") { ?>
+    <?php }
+    if ($_GET['auth'] == "register") { ?>
         <form class="form_container" action="process/auth/registerProcess.php" method="post" autocomplete="off" autocapitalize="words">
             <div class="form_subcontainer">
                 <div class="subcontainer_header">
@@ -63,22 +64,22 @@ include "include/header.php"
                     <div class="input">
                         <div class="inp inp_fnm">
                             <img class="iconSmall" src="../source/images/icon/svg/user.svg" alt="user_icon">
-                            <input id="first_name" class="charlength" type="text" name="firstname" placeholder="First Name" required <?php 
-                                if (isset($_SESSION['regfirstname'])) {
-                                    echo "value='" . $_SESSION['regfirstname'] . "'";
-                                }
-                            ?>>
+                            <input id="first_name" class="charlength" type="text" name="firstname" placeholder="First Name" required <?php
+                                                                                                                                        if (isset($_SESSION['regfirstname'])) {
+                                                                                                                                            echo "value='" . $_SESSION['regfirstname'] . "'";
+                                                                                                                                        }
+                                                                                                                                        ?>>
                         </div>
                     </div>
                     <!-- Input last name -->
                     <div class="input">
                         <div class="inp inp_lnm">
                             <img class="iconSmall" src="../source/images/icon/svg/user.svg" alt="email_icon">
-                            <input id="last_name" class="charlength" type="text" name="lastname" placeholder="Last Name" required <?php 
-                                if (isset($_SESSION['reglastname'])) {
-                                    echo "value='" . $_SESSION['reglastname'] . "'";
-                                }
-                            ?>>
+                            <input id="last_name" class="charlength" type="text" name="lastname" placeholder="Last Name" required <?php
+                                                                                                                                    if (isset($_SESSION['reglastname'])) {
+                                                                                                                                        echo "value='" . $_SESSION['reglastname'] . "'";
+                                                                                                                                    }
+                                                                                                                                    ?>>
                         </div>
                     </div>
                     <!-- Input email-->
@@ -86,18 +87,18 @@ include "include/header.php"
                         <div class="input">
                             <div class="inp inp_ml">
                                 <img class="iconSmall" src="../source/images/icon/svg/mail.svg" alt="email_icon">
-                                <input id="email" type="email" name="email" placeholder="Email" required <?php 
-                                        if (isset($_SESSION['regemail'])) {
-                                            echo "value='" . $_SESSION['regemail'] . "'";
-                                        }
-                                    ?>>
+                                <input id="email" type="email" name="email" placeholder="Email" required <?php
+                                                                                                            if (isset($_SESSION['regemail'])) {
+                                                                                                                echo "value='" . $_SESSION['regemail'] . "'";
+                                                                                                            }
+                                                                                                            ?>>
                             </div>
                         </div>
                         <div>
-                            <?php 
-                                if (isset($_SESSION['registerEmailExist'])) {
-                                    echo "<p class='error' style='text-align: right;'>" . $_SESSION['registerEmailExist'] . "</p>";
-                                }
+                            <?php
+                            if (isset($_SESSION['registerEmailExist'])) {
+                                echo "<p class='error' style='text-align: right;'>" . $_SESSION['registerEmailExist'] . "</p>";
+                            }
                             ?>
                         </div>
                     </div>
@@ -106,17 +107,17 @@ include "include/header.php"
                         <div class="input">
                             <div class="inp inp_un">
                                 <img class="iconSmall" src="../source/images/icon/svg/user.svg" alt="user_icon">
-                                <input id="user_name" class="charlength" type="text" name="username" placeholder="Username" required <?php 
-                                    if (isset($_SESSION['regusername'])) {
-                                        echo "value='" . $_SESSION['regusername'] . "'";
-                                    }
-                                ?>>
+                                <input id="user_name" class="charlength" type="text" name="username" placeholder="Username" required <?php
+                                                                                                                                        if (isset($_SESSION['regusername'])) {
+                                                                                                                                            echo "value='" . $_SESSION['regusername'] . "'";
+                                                                                                                                        }
+                                                                                                                                        ?>>
                             </div>
                             <div>
-                                <?php 
-                                    if (isset($_SESSION['registerUserExist'])) {
-                                        echo "<p class='error' style='text-align: right;'>" . $_SESSION['registerUserExist'] . "</p>";
-                                    }
+                                <?php
+                                if (isset($_SESSION['registerUserExist'])) {
+                                    echo "<p class='error' style='text-align: right;'>" . $_SESSION['registerUserExist'] . "</p>";
+                                }
                                 ?>
                             </div>
                         </div>
@@ -150,11 +151,11 @@ include "include/header.php"
                             <span id="errormsg" class="error"></span>
                         </div>
                     </div>
-                    
+
                     <?php
-                        if (isset($_SESSION['registerPSWerror'])) {
-                            echo "<p class='error' style='text-align: center;'>" . $_SESSION['registerPSWerror'] . "</p>";
-                        }
+                    if (isset($_SESSION['registerPSWerror'])) {
+                        echo "<p class='error' style='text-align: center;'>" . $_SESSION['registerPSWerror'] . "</p>";
+                    }
                     ?>
                     <div class="input_actions">
                         <input id="registerbtn" class="defaultbtn" type="submit" value="REGISTER" disabled>
@@ -166,6 +167,6 @@ include "include/header.php"
             </div>
         </form>
     <?php } ?>
-    </div>
+</div>
 <?php
 include "include/footer.php"; ?>

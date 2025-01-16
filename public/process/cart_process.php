@@ -55,6 +55,7 @@ if(isset($_GET['cartItem'])){
 if(isset($_GET['quantity'])){
     $id = $_GET['quantity'];
     $value = $_GET['value'];
+
     $queryDelete = mysqli_query($conn, "UPDATE cart_item SET quantity = $value WHERE cart_item_id = $id");
 
     echo "Update Succesfully!";

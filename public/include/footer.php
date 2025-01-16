@@ -48,8 +48,8 @@
                 <div class="links_right">
                     <div class="important_links">
                         <ul>
-                            <?php if(!$loggedin) { ?>
-                            <li><a href="login.php?auth=register">Sign up</a></li>
+                            <?php if (!$loggedin) { ?>
+                                <li><a href="login.php?auth=register">Sign up</a></li>
                             <?php } ?>
                             <li><a href="about.php?b=privacypolicy"> Privacy Policy </a></li>
                             <li><a href="about.php?b=termsncondition"> Terms & Conditions </a></li>
@@ -64,7 +64,8 @@
         </div>
     </footer>
     </div>
-</div>
-<?php include '../source/js/public/manage_js.php'; ?>
-</body>
-</html>
+    </div>
+    <?php include '../source/js/public/manage_js.php'; ?>
+    </body>
+
+    </html>

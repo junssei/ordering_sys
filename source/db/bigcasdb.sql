@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 13, 2025 at 09:54 AM
+-- Generation Time: Jan 16, 2025 at 04:31 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -167,11 +167,8 @@ CREATE TABLE `cart_item` (
 --
 
 INSERT INTO `cart_item` (`cart_item_id`, `cart_id`, `product_id`, `variation_id`, `quantity`, `price`) VALUES
-(39, 1, 2, 6, 2, 20.00),
-(40, 1, 1, 2, 2, 20.00),
-(41, 1, 1, 1, 1, 15.00),
-(42, 1, 2, 4, 1, 10.00),
-(43, 1, 3, 11, 1, 10.00);
+(56, 1, 1, 3, 2, 20.00),
+(57, 1, 3, 9, 2, 10.00);
 
 -- --------------------------------------------------------
 
@@ -237,7 +234,10 @@ CREATE TABLE `orderp` (
 INSERT INTO `orderp` (`order_id`, `customer_id`, `order_date`, `status`, `total_amount`, `delivery_method`) VALUES
 (1, 1, '2025-01-06 19:11:43', 0, 85.00, 'Pickup'),
 (2, 1, '2025-01-06 21:39:56', 0, 70.00, 'Pickup'),
-(3, 1, '2025-01-08 08:29:18', 0, 205.00, 'Pickup');
+(3, 1, '2025-01-08 08:29:18', 0, 205.00, 'Pickup'),
+(4, 1, '2025-01-15 04:19:27', 0, 105.00, 'Pickup'),
+(5, 1, '2025-01-15 04:23:10', 0, 105.00, 'Pickup'),
+(6, 1, '2025-01-15 04:42:54', 0, 140.00, 'Pickup');
 
 -- --------------------------------------------------------
 
@@ -250,23 +250,27 @@ CREATE TABLE `order_product` (
   `order_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `variation_id` int(11) NOT NULL,
-  `quantity` int(100) NOT NULL,
-  `price` double(12,2) NOT NULL
+  `quantity` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `order_product`
 --
 
-INSERT INTO `order_product` (`order_product_id`, `order_id`, `product_id`, `variation_id`, `quantity`, `price`) VALUES
-(7, 1, 1, 1, 1, 15.00),
-(8, 1, 1, 3, 1, 50.00),
-(9, 1, 2, 6, 1, 20.00),
-(10, 2, 1, 2, 3, 60.00),
-(11, 2, 2, 4, 1, 10.00),
-(12, 3, 1, 3, 3, 150.00),
-(13, 3, 2, 5, 3, 45.00),
-(14, 3, 3, 11, 1, 10.00);
+INSERT INTO `order_product` (`order_product_id`, `order_id`, `product_id`, `variation_id`, `quantity`) VALUES
+(7, 1, 1, 1, 1),
+(8, 1, 1, 3, 1),
+(9, 1, 2, 6, 1),
+(10, 2, 1, 2, 3),
+(11, 2, 2, 4, 1),
+(12, 3, 1, 3, 3),
+(13, 3, 2, 5, 3),
+(14, 3, 3, 11, 1),
+(15, 4, 2, 7, 3),
+(16, 5, 2, 7, 3),
+(17, 5, 1, 1, 2),
+(18, 6, 1, 2, 2),
+(19, 6, 1, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -296,7 +300,11 @@ INSERT INTO `payment` (`payment_id`, `order_id`, `payment_date`, `payment_method
 (11, 2, '2025-01-06 21:39:56', 'Cash', '0', NULL, 100.00),
 (12, 3, '2025-01-08 08:29:18', 'Cash', '0', NULL, 300.00),
 (13, 3, '2025-01-08 08:29:18', 'Cash', '0', NULL, 300.00),
-(14, 3, '2025-01-08 08:29:18', 'Cash', '0', NULL, 300.00);
+(14, 3, '2025-01-08 08:29:18', 'Cash', '0', NULL, 300.00),
+(15, 5, '2025-01-15 04:23:10', 'Cash', '0', '', 105.00),
+(16, 5, '2025-01-15 04:23:10', 'Cash', '0', '', 105.00),
+(17, 6, '2025-01-15 04:42:54', 'Cash', '0', NULL, 140.00),
+(18, 6, '2025-01-15 04:42:54', 'Cash', '0', NULL, 140.00);
 
 -- --------------------------------------------------------
 
@@ -499,7 +507,7 @@ ALTER TABLE `order_product`
   ADD PRIMARY KEY (`order_product_id`),
   ADD KEY `order_id` (`order_id`),
   ADD KEY `variation_id` (`variation_id`),
-  ADD KEY `product_id` (`product_id`);
+  ADD KEY `order_product_ibfk_3` (`product_id`);
 
 --
 -- Indexes for table `payment`
@@ -574,7 +582,7 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `cart_item`
 --
 ALTER TABLE `cart_item`
-  MODIFY `cart_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `cart_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `customer`
@@ -586,19 +594,19 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `orderp`
 --
 ALTER TABLE `orderp`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `order_product`
 --
 ALTER TABLE `order_product`
-  MODIFY `order_product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `order_product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -667,7 +675,7 @@ ALTER TABLE `orderp`
 ALTER TABLE `order_product`
   ADD CONSTRAINT `order_product_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orderp` (`order_id`),
   ADD CONSTRAINT `order_product_ibfk_2` FOREIGN KEY (`variation_id`) REFERENCES `product_variation` (`variation_id`),
-  ADD CONSTRAINT `order_product_ibfk_3` FOREIGN KEY (`product_id`) REFERENCES `product_variation` (`product_id`);
+  ADD CONSTRAINT `order_product_ibfk_3` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`);
 
 --
 -- Constraints for table `payment`
