@@ -17,17 +17,14 @@
                                     <h3> Order #<?= $row['order_id'] ?> </h3>
                                     <div class="status_tags">
                                         <span class="status">
-                                            <?php
-                                            if ($row['status'] == 0) {
-                                                echo "Pending";
-                                            } else if ($row['status'] == 1) {
-                                                echo "Order Confirmed";
-                                            }
-                                            ?>
-                                        </span>
-                                        <span class="status">
                                             <?= $row['delivery_method'] ?>
                                         </span>
+                                        <?php if ($row['status'] == 0) { ?>
+                                            <span class="pending_status"> Pending </span>
+                                            <a href="process/order_process.php?cancel=<?= $row['order_id'] ?>" class="cancelbtn button1 btn"> Cancel </a>
+                                        <?php } else if ($row['status'] == 1) { ?>
+                                            <span class="confirmed_status"> Order Confirmed </span>
+                                        <?php } ?>
                                     </div>
                                 </div>
                                 <table id="orderitem_table">
@@ -57,7 +54,7 @@
                                     <tr id="ordeitemtable_footer">
                                         <td></td>
                                         <td></td>
-                                        <td><b>Total</b></td>
+                                        <td></td>
                                         <td>&#8369;<?= $row['total_amount'] ?></td>
                                     </tr>
                                 </table>

@@ -1,146 +1,159 @@
-.user_container{
-    gap: 16px;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
+.user_container {
+  gap: 16px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
 }
 
-.user_container .user_subcontainer{
-    gap: 16px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+.user_container .user_subcontainer {
+  gap: 16px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.user_container .quickaccess_menu{
-    zoom: 90%;
-    gap: 24px;
-    width: 300px;
-    display: flex;
-    flex-direction: column;
-    @media screen and (max-width: 800px){
-        display: none;
-    }
+.user_container .quickaccess_menu {
+  zoom: 90%;
+  gap: 24px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  @media screen and (max-width: 800px) {
+    display: none;
+  }
 }
 
-.quickaccess_menu a{
-    gap: 12px;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
+.quickaccess_menu a {
+  gap: 12px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
 }
 
-.quickaccess_menu a:hover{
-    color: var(--blue2);
+.quickaccess_menu a:hover {
+  color: var(--blue2);
 }
 
-.quickaccess_menu a img{
-    width: 20px;
-    height: 20px;
+.quickaccess_menu a img {
+  width: 20px;
+  height: 20px;
 }
 
-.quickaccess_menu a span{
-    font-size: 18px;
-    font-weight: 400;
+.quickaccess_menu a span {
+  font-size: 18px;
+  font-weight: 400;
 }
 
-.user_container .order_container{
-    width: 100%;
-    display: flex;
-    position: relative;
-    flex-direction: row;
+.user_container .order_container {
+  width: 100%;
+  display: flex;
+  position: relative;
+  flex-direction: row;
 }
 
-.order_container .order_subcontainer{
-    gap: 24px;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    position: relative;
-    flex-direction: column;
+.order_container .order_subcontainer {
+  gap: 24px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+  flex-direction: column;
 }
 
-.order_subcontainer .order_orderlist{
-    gap: 16px;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
+.order_subcontainer .order_orderlist {
+  gap: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
 }
 
-.order_orderlist .orderitem_container{
-    gap: 8px;
-    width: 100%;
-    display: flex;
-    border-radius: 8px;
-    flex-direction: column;
-    border: 2px solid var(--gray);
-    background-color: var(--white);
-    @media screen and (max-width: 1000px){
-        zoom: 70%;
-    }
+.order_orderlist .orderitem_container {
+  gap: 8px;
+  width: 100%;
+  display: flex;
+  border-radius: 8px;
+  flex-direction: column;
+  border: 2px solid var(--gray);
+  background-color: var(--white);
+  @media screen and (max-width: 1000px) {
+    zoom: 70%;
+  }
 }
 
-.orderitem_container .orderitem_subcontainer{
-    display: flex;
-    padding: 42px;
-    position: relative;
-    flex-direction: column;
-    @media screen and (max-width: 1000px){
-        padding: 24px;
-    }
+.orderitem_container .orderitem_subcontainer {
+  display: flex;
+  padding: 42px;
+  position: relative;
+  flex-direction: column;
+  @media screen and (max-width: 1000px) {
+    padding: 24px;
+  }
 
-    @media screen and (max-width: 500px){
-        padding: 8px;
-        zoom: 85%;
-    }
+  @media screen and (max-width: 500px) {
+    padding: 8px;
+    zoom: 85%;
+  }
 }
 
-.orderitem_subcontainer .orderitem_header{
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    justify-content: space-between;
+.orderitem_subcontainer .orderitem_header {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-.orderitem_header .status_tags{
-    gap: 8px;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
+.orderitem_header .status_tags {
+  gap: 8px;
+  display: flex;
+  user-select: none;
+  align-items: center;
+  flex-direction: row;
 }
 
-.status_tags .status{
-    padding: 4px 8px;
-    border-radius: 8px;
-    color: var(--white);
-    background-color: var(--gray5);
+.status_tags .status {
+  padding: 4px 8px;
+  border-radius: 8px;
+  color: var(--white);
+  background-color: var(--gray5);
 }
 
-.orderitem_subcontainer #orderitem_table{
-    width: 100%;
-    border-collapse: collapse;
+.status_tags .pending_status {
+  padding: 4px 8px;
+  border-radius: 8px;
+  color: var(--white);
+  background-color: var(--gray5);
 }
 
-#orderitem_table > #ordeitemtable_header{
-    
+.status_tags .confirmed_status {
+  padding: 4px 8px;
+  border-radius: 8px;
+  color: var(--white);
+  background-color: var(--green2);
 }
 
-#ordeitemtable_header th{
-    text-align: left;
+.orderitem_subcontainer #orderitem_table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-#orderitem_table .orderitemtable_row{
+#orderitem_table > #ordeitemtable_header {
 }
 
-#orderitem_table .orderitemtable_row td{
-    overflow: hidden;
-    max-width: 150px;
-    position: relative;
-    white-space: nowrap;
-    padding: 16px 16px 16px 0;
-    text-overflow: ellipsis;
+#ordeitemtable_header th {
+  text-align: left;
 }
 
-#orderitem_table > #ordeitemtable_footer{
+#orderitem_table .orderitemtable_row {
+}
 
+#orderitem_table .orderitemtable_row td {
+  overflow: hidden;
+  max-width: 150px;
+  position: relative;
+  white-space: nowrap;
+  padding: 16px 16px 16px 0;
+  text-overflow: ellipsis;
+}
+
+#orderitem_table > #ordeitemtable_footer {
 }

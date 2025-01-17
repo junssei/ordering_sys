@@ -2,7 +2,7 @@
 session_start();
 require '../../source/db/connect.php';
 
-if(isset($_GET['type']) && $_GET['type'] == "variation"){
+if (isset($_GET['type']) && $_GET['type'] == "variation") {
     $pid = intval($_GET["pid"]);
     $vid = intval($_GET['vid']);
     $uid = intval($_GET['uid']);
@@ -32,7 +32,7 @@ if(isset($_GET['type']) && $_GET['type'] == "variation"){
                 mysqli_query($conn, $insertCart);
             }
         }
-        
+
         $fetchUserCart = "SELECT * FROM cart_item LEFT JOIN cart ON cart_item.cart_id = cart.cart_id WHERE cart.customer_id = $uid";
         $querycart = mysqli_query($conn, $fetchUserCart);
         $count = mysqli_num_rows($querycart);
@@ -40,7 +40,7 @@ if(isset($_GET['type']) && $_GET['type'] == "variation"){
     }
 }
 
-if(isset($_GET['cartItem'])){
+if (isset($_GET['cartItem'])) {
     $id = $_GET['cartItem'];
     $uid = intval($_GET['uid']);
     $queryDelete = mysqli_query($conn, "DELETE FROM cart_item WHERE cart_item_id = $id");
@@ -52,7 +52,7 @@ if(isset($_GET['cartItem'])){
     echo $count;
 }
 
-if(isset($_GET['quantity'])){
+if (isset($_GET['quantity'])) {
     $id = $_GET['quantity'];
     $value = $_GET['value'];
 
@@ -61,7 +61,7 @@ if(isset($_GET['quantity'])){
     echo "Update Succesfully!";
 }
 
-if(isset($_GET['variation'])){
+if (isset($_GET['variation'])) {
     $id = $_GET['variation'];
     $value = $_GET['value'];
     $queryDelete = mysqli_query($conn, "UPDATE cart_item SET variation_id = $value WHERE cart_item_id = $id");
@@ -70,4 +70,3 @@ if(isset($_GET['variation'])){
 }
 
 mysqli_close($conn);
-?>
