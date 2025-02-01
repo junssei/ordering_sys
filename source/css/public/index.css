@@ -6,150 +6,154 @@
 @import url(checkout.css);
 
 /* Other */
-.active{
-    color: var(--blue2);
+.active {
+  color: var(--blue2);
 }
 
 /* Container */
-#container{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+#container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-#container > #subcontainer{
-    flex: 1;
+#container > #subcontainer {
+  flex: 1;
 }
 
 /* Body */
-#body_container{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    position: relative;
+#body_container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  min-height: 100vh;
+  position: relative;
 }
 
-#body_container > #body_subcontainer{
-    gap: 64px;
-    width: 100%;
-    display: flex;
-    padding: 48px 48px;
-    position: relative;
-    flex-direction: column;
+#body_container > #body_subcontainer {
+  gap: 64px;
+  width: 100%;
+  display: flex;
+  padding: 48px 48px;
+  position: relative;
+  flex-direction: column;
 
-    @media screen and (max-width: 1000px){ 
-        padding: 48px 16px;
-    }
+  @media screen and (max-width: 1000px) {
+    padding: 48px 16px;
+  }
 
-    @media screen and (max-width: 500px){
-        padding: 48px 8px;
-    }
+  @media screen and (max-width: 500px) {
+    padding: 48px 8px;
+  }
 }
 
 /* Hero Section */
-#body_subcontainer #hero_section{
-    height: 300px;
-    display: flex;
-    position: relative;
-    align-items: center;
-    justify-content: center;
-    border: 6px solid var(--red);
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../../source/images/upload/customize/hero_section.jpg");
-    cursor: url("../../../source/images/upload/customize/wicker-basket.png"), auto;
+#body_subcontainer #hero_section {
+  height: 300px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  border: 6px solid var(--red);
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../../../source/images/upload/customize/hero_section.jpg");
+  cursor: url("../../../source/images/upload/customize/wicker-basket.png"), auto;
 }
 
-#body_subcontainer #hero_section:hover{
-    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url("../../../source/images/upload/customize/hero_section.jpg");
+#body_subcontainer #hero_section:hover {
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)),
+    url("../../../source/images/upload/customize/hero_section.jpg");
 }
 
 /* Category Section */
-#body_subcontainer #category_section, #product_section{
-    gap: 16px;
-    display: flex;
-    flex-direction: column;
+#body_subcontainer #category_section,
+#product_section {
+  gap: 16px;
+  display: flex;
+  flex-direction: column;
 }
 
-
-#category_section > .display_section,  #product_section > .display_section{
-    gap: 16px;
-    display: flex;
-    flex-wrap: wrap;
+#category_section > .display_section,
+#product_section > .display_section {
+  gap: 16px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
-#category_section > .display_section{
-    justify-content: space-around;
+#category_section > .display_section {
+  justify-content: space-around;
 }
 
-#product_section > .display_section{
-    justify-content: space-evenly;
+#product_section > .display_section {
+  justify-content: space-evenly;
 }
 
-.display_section .category_card{
-    gap: 16px;
-    /* zoom: 150%; */
-    width: 100%;
-    display: flex;
-    padding: 16px;
-    font-size: 12px;
-    max-width: 100px;
-    font-weight: 600;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    border-bottom: 2px solid transparent ;
+.display_section .category_card {
+  gap: 16px;
+  /* zoom: 150%; */
+  width: 100%;
+  display: flex;
+  padding: 16px;
+  font-size: 12px;
+  max-width: 100px;
+  font-weight: 600;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-bottom: 2px solid transparent;
 }
 
-.display_section .category_card:hover{
-    border-radius: 6px;
-    color: var(--white);
-    background-color: var(--blue2);
-    border-bottom: 2px solid var(--red2);
+.display_section .category_card:hover {
+  border-radius: 6px;
+  color: var(--white);
+  background-color: var(--blue2);
+  border-bottom: 2px solid var(--red2);
 }
 
-.display_section .product_card{
-    gap: 16px;
-    zoom: 80%;
-    width: 100%;
-    display: flex;
-    max-width: 250px;
-    padding: 12px 14px;
-    border-radius: 4px;
-    position: relative;
-    align-items: center;
-    flex-direction: column;
-    justify-content: space-between;
-    border: 1px solid var(--gray4);
-    background-color: var(--white);
+.display_section .product_card {
+  gap: 16px;
+  zoom: 80%;
+  width: 100%;
+  display: flex;
+  max-width: 250px;
+  padding: 12px 14px;
+  border-radius: 4px;
+  position: relative;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid var(--gray4);
+  background-color: var(--white);
 }
 
-.display_section .product_card:hover{
-    background-color: var(--gray3);
+.display_section .product_card:hover {
+  background-color: var(--gray3);
 }
 
-.product_card .card_content{
-    gap: 8px;
-    display: flex;
-    flex-direction: column;
+.product_card .card_content {
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
 }
 
-.product_card .card_image{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.product_card .card_image {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.product_card .product_details{
-    width: 100%;
-    display: flex;
-    font-size: 14px;
-    font-weight: 500;
-    flex-direction: row;
-    justify-content: space-between;
+.product_card .product_details {
+  width: 100%;
+  display: flex;
+  font-size: 14px;
+  font-weight: 500;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-.product_details .product_price{
-    color: var(--red2);
+.product_details .product_price {
+  color: var(--red2);
 }
