@@ -1,6 +1,6 @@
 <?php require '../source/db/connect.php';
 session_start();
-if(!isset($_SESSION['userloggedin'])) {
+if (!isset($_SESSION['userloggedin'])) {
     $id = 0;
     $loggedin = false;
 } else {
@@ -13,6 +13,7 @@ $currentPage = basename($_SERVER['REQUEST_URI'], ".php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,103 +21,114 @@ $currentPage = basename($_SERVER['REQUEST_URI'], ".php");
     <title> <?= $title ?> </title>
     <?php include '../source/css/public/manage_css.php'; ?>
 </head>
+
 <body>
-<?php
-if (isset($_SESSION['notification'])){
-    echo "<div class='popupnotification'><p>" . $_SESSION['notification'] . "</p></div>";
-    unset($_SESSION['notification']);
-}
-?>
-<div id="container">
-    <div id="subcontainer">
-        <header>
-            <div id="sub_header">
-                <div id="header_navigation">
-                    <div class="logo_section">
-                        <img src="../source/images/icon/svg/menu-01.svg" id="menu" class="menu" alt="menu">
-                        <a class="header_logo logo1" href="index.php">
-                            <img src="../source/images/logo/DefaultWordmark.png" class="wordLogoSmall" alt="logo">
-                        </a>
-                        <a class="header_logo logo2" href="index.php">
-                            <img src="../source/images/logo/LogoMark.png" class="logoSmall" alt="logo">
-                        </a>
-                    </div>
-                    <nav class="navigation_section">
-                        <a href="index.php" class="<?php if($currentPage === "index"){ echo "active"; } ?>" > Home </a>
-                        <a href="product.php" class="<?php if($currentPage === "product"){ echo "active"; } ?>" > Products </a>
-                        <a href="about.php?b=contact"> Contact </a>
-                        <a href="user.php?u=orders"> Order </a>
-                    </nav>
-                    <div class="searchcontainer">
-                        <img src="../source/images/icon/svg/search.svg" alt="search_icon">
-                        <input class="search_field" type="text" placeholder="Search" onkeyup="searchFilter('category')">
-                    </div>
-                </div>
-                
-                <div id="header_userside">
-                    <div class="userside_actions">
-                        <div id="notification">
-                            <img src="../source/images/icon/svg/notification.svg" alt="notification">
+    <?php
+    if (isset($_SESSION['notification'])) {
+        echo "<div class='popupnotification'><p>" . $_SESSION['notification'] . "</p></div>";
+        unset($_SESSION['notification']);
+    }
+    ?>
+    <div id="container">
+        <div id="subcontainer">
+            <header>
+                <div id="sub_header">
+                    <div id="header_navigation">
+                        <div class="logo_section">
+                            <img src="../source/images/icon/svg/menu-01.svg" id="menu" class="menu" alt="menu">
+                            <a class="header_logo logo1" href="index.php">
+                                <img src="../source/images/logo/DefaultWordmark.png" class="wordLogoSmall" alt="logo">
+                            </a>
+                            <a class="header_logo logo2" href="index.php">
+                                <img src="../source/images/logo/LogoMark.png" class="logoSmall" alt="logo">
+                            </a>
                         </div>
-                        
-                        <a href="user.php?u=cart" class="userside_basket">
-                            <!-- fetch cart -->
-                             <?php
-                                if(isset($id)){
+                        <nav class="navigation_section">
+                            <a href="index.php" class="<?php if ($currentPage === "index") {
+                                                            echo "active";
+                                                        } ?>"> Home </a>
+                            <a href="product.php" class="<?php if ($currentPage === "product") {
+                                                                echo "active";
+                                                            } ?>"> Products </a>
+                            <a href="about.php?b=contact"> Contact </a>
+                            <?php if ($loggedin) { ?>
+                                <a href="user.php?u=orders"> Order <sup class="order_count"> 0 </sup></a>
+                            <?php } ?>
+                        </nav>
+                        <div class="searchcontainer">
+                            <img src="../source/images/icon/svg/search.svg" alt="search_icon">
+                            <input class="search_field" type="text" placeholder="Search" onkeyup="searchFilter('category')">
+                        </div>
+                    </div>
+
+                    <div id="header_userside">
+                        <div class="userside_actions">
+                            <div id="notification">
+                                <img src="../source/images/icon/svg/notification.svg" alt="notification">
+                            </div>
+
+                            <a href="user.php?u=cart" class="userside_basket">
+                                <!-- fetch cart -->
+                                <?php
+                                if (isset($id)) {
                                     $fetchUserCart = "SELECT * FROM cart_item LEFT JOIN cart ON cart_item.cart_id = cart.cart_id WHERE cart.customer_id = $id";
                                     $querycart = mysqli_query($conn, $fetchUserCart);
                                     $count = mysqli_num_rows($querycart);
                                     echo "<span id='cart_count'> $count </span>";
                                 }
-                             ?>
-                            <img src="../source/images/icon/svg/basket3.svg" class="iconLarge" alt="cart">
-                            <div id="basket_products"></div>
-                        </a>
-                    </div>
-                    <div class="userside_actions">
-                        <?php if(!$loggedin) { ?>
-                        <div class="login_section">
-                            <div class="login_buttons">
-                                <a href="login.php?auth=login" class="button2 btn"> Login </a>
-                                <a href="login.php?auth=register" class="button1 btn"> Sign-up </a>
-                            </div>
-                            <div id="user_image" class="user_profileimg login_userimg">
-                                <img src="../source/images/upload/profile/default.jpg" alt="avatar">
-                            </div>
-                            <div id="user_profile">
-                                <a href="login.php?auth=login" class="button2 btn"> Login </a>
-                                <a href="login.php?auth=register" class="button1 btn"> Sign-up </a>
-                            </div>
+                                ?>
+                                <img src="../source/images/icon/svg/basket3.svg" class="iconLarge" alt="cart">
+                                <div id="basket_products"></div>
+                            </a>
                         </div>
-                        <?php } else {
-                            $sql = "SELECT * FROM customer WHERE customer_id = '$id'";
-                            $result = mysqli_query($conn, $sql);
-                            $row = mysqli_fetch_array($result, MYSQLI_ASSOC); 
-                        ?>                        
-                        <div id="profile_section">
-                            <div id="user_image" class="user_profileimg">
-                                <img src="../source/images/upload/profile/<?php if(!empty($row["image"])) { echo $row["image"]; } else { echo "default.jpg"; } ?>" alt="avatar">
-                            </div>
-                            <div id="user_profile">
-                                <div id="userprofile_header">
-                                    <div id="userprofile_info">
+                        <div class="userside_actions">
+                            <?php if (!$loggedin) { ?>
+                                <div class="login_section">
+                                    <div class="login_buttons">
+                                        <a href="login.php?auth=login" class="button2 btn"> Login </a>
+                                        <a href="login.php?auth=register" class="button1 btn"> Sign-up </a>
+                                    </div>
+                                    <div id="user_image" class="user_profileimg login_userimg">
                                         <img src="../source/images/upload/profile/default.jpg" alt="avatar">
-                                        <div id="userprofile_details">
-                                            <h3 id="username"> <?php echo $row['username']; ?> </h3>
-                                            <p id="email"> <?php echo $row['email']; ?> </p>
+                                    </div>
+                                    <div id="user_profile">
+                                        <a href="login.php?auth=login" class="button2 btn"> Login </a>
+                                        <a href="login.php?auth=register" class="button1 btn"> Sign-up </a>
+                                    </div>
+                                </div>
+                            <?php } else {
+                                $sql = "SELECT * FROM customer WHERE customer_id = '$id'";
+                                $result = mysqli_query($conn, $sql);
+                                $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                            ?>
+                                <div id="profile_section">
+                                    <div id="user_image" class="user_profileimg">
+                                        <img src="../source/images/upload/profile/<?php if (!empty($row["image"])) {
+                                                                                        echo $row["image"];
+                                                                                    } else {
+                                                                                        echo "default.jpg";
+                                                                                    } ?>" alt="avatar">
+                                    </div>
+                                    <div id="user_profile">
+                                        <div id="userprofile_header">
+                                            <div id="userprofile_info">
+                                                <img src="../source/images/upload/profile/default.jpg" alt="avatar">
+                                                <div id="userprofile_details">
+                                                    <h3 id="username"> <?php echo $row['username']; ?> </h3>
+                                                    <p id="email"> <?php echo $row['email']; ?> </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="userprofile_actions">
+                                            <a href="user.php?u=profile" class=""> Manage your profile </a>
+                                            <a href="user.php?u=cart" class=""> My Cart </a>
+                                            <a href="user.php?u=orders" class=""> My Orders </a>
+                                            <a href="logout.php" class="logout"> Signout </a>
                                         </div>
                                     </div>
                                 </div>
-                                <div id="userprofile_actions">
-                                    <a href="user.php?u=profile" class=""> Manage your profile </a>
-                                    <a href="user.php?u=cart" class=""> My Cart </a>
-                                    <a href="user.php?u=orders" class=""> My Orders </a>
-                                    <a href="logout.php" class="logout"> Signout </a>
-                                </div>
-                            </div>
+                            <?php } ?>
                         </div>
-                        <?php } ?>
                     </div>
                 </div>
-            </div>
-        </header>
+            </header>

@@ -21,7 +21,7 @@ if ($_SERVER['HTTP_HOST'] === 'localhost' || $_SERVER['HTTP_HOST'] === '127.0.0.
     $host = "auth-db1762.hstgr.io";
     $db = "u746273317_bigcasdb";
     $dbusername = "u746273317_bigcas";
-    $dbpassword = "f9!+O+twN";
+    $dbpassword = "CUTILLASb1gc4s!";
 }
 
 $conn = new mysqli($host, $dbusername, $dbpassword, $db);

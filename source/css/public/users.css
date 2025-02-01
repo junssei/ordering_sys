@@ -13,10 +13,13 @@
 }
 
 .user_container .quickaccess_menu {
+  top: 10%;
   zoom: 90%;
   gap: 24px;
   width: 300px;
+  height: 100px;
   display: flex;
+  position: sticky;
   flex-direction: column;
   @media screen and (max-width: 800px) {
     display: none;
@@ -81,6 +84,7 @@
 }
 
 .orderitem_container .orderitem_subcontainer {
+  gap: 32px;
   display: flex;
   padding: 42px;
   position: relative;

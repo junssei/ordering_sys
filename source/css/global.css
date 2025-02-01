@@ -1,509 +1,528 @@
 @import url(style.css);
 
-*{
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-body{
-    width: 100%;
-    height: 100%;
-    font-weight: 400;
-    position: relative;
-    font-style: normal;
-    font-family: "Poppins", serif;
-    background-color: var(--white2);
+body {
+  width: 100%;
+  height: 100%;
+  font-weight: 400;
+  position: relative;
+  font-style: normal;
+  font-family: "Poppins", serif;
+  background-color: var(--white2);
 }
 
 /* Default for Links */
-a{  
-    color: black;
-    text-decoration: none;
+a {
+  color: black;
+  text-decoration: none;
 }
 
-.link{ 
-    color: var(--black);
-    text-decoration: underline transparent;
-    transition: text-decoration 300ms ease;
+.link {
+  color: var(--black);
+  text-decoration: underline transparent;
+  transition: text-decoration 300ms ease;
 }
 
-.link:hover{
-    color: var(--blue);
-    text-decoration: 2px underline;
+.link:hover {
+  color: var(--blue);
+  text-decoration: 2px underline;
 }
 
 /* Dialog */
-dialog{
-    zoom: 85%;
-    z-index: 1;
-    padding: 32px;
-    border-radius: 8px;
-    border: 1px solid var(--gray5);
+dialog {
+  zoom: 85%;
+  z-index: 1;
+  padding: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--gray5);
 }
 
 /* Input Style */
-input{
-    border: none;
+input {
+  border: none;
 }
 
-input:focus, select:focus, textarea:focus{
-    outline: none;
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
 }
 
-input[type="text"], input[type="number"], input[type="password"], input[type="email"], input[type="file"]::file-selector-button, textarea, select{
-    font-weight: 400;
-    font-style: normal;
-    font-family: "Poppins", serif;
+input[type="text"],
+input[type="number"],
+input[type="password"],
+input[type="email"],
+input[type="file"]::file-selector-button,
+textarea,
+select {
+  font-weight: 400;
+  font-style: normal;
+  font-family: "Poppins", serif;
 }
 
 /* Direction */
-.flex-rowdirection{
-    gap: 16px;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
+.flex-rowdirection {
+  gap: 16px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
 }
 
-.flex-rowfullwidth{
-    width: 100%;
+.flex-rowfullwidth {
+  width: 100%;
 }
 
-.flex-coldirection{
-    gap: 16px;
-    display: flex;
-    flex-direction: column;
+.flex-coldirection {
+  gap: 16px;
+  display: flex;
+  flex-direction: column;
 }
 
 /* justifycontent-spacebetween */
-.jc-spacebetween{
-    justify-content: space-between;
+.jc-spacebetween {
+  justify-content: space-between;
 }
 
 /* Button */
-.roundbtn{
-    padding: 8px 16px;
-    border-radius: 72px;
+.roundbtn {
+  padding: 8px 16px;
+  border-radius: 72px;
 }
 
-
-.btn{
-    cursor: pointer;
-    padding: 4px 8px;
-    border-radius: 4px;
+.btn {
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
 }
 
-.btn1{
-    width: 100%;
-    cursor: pointer;
-    padding: 8px 0;
-    border-radius: 4px;
-    position: relative;
+.btn1 {
+  width: 100%;
+  cursor: pointer;
+  padding: 8px 0;
+  border-radius: 4px;
+  position: relative;
 }
 
-.btn2{
-    width: 100%;
-    cursor: pointer;
-    padding: 16px 0;
-    position: relative;
+.btn2 {
+  width: 100%;
+  cursor: pointer;
+  padding: 16px 0;
+  position: relative;
 }
 
-.defaultbtn{
-    width: 100%;
-    font-size: 16px;
-    font-weight: 500;
-    text-wrap: nowrap;
-    text-align: center;
-    padding: 12px 8px;
-    font-style: normal;
-    border-radius: 4px;
-    color: var(--white);
-    font-family: "Poppins", serif;
-    background-color: var(--gray4);
+.defaultbtn {
+  width: 100%;
+  font-size: 16px;
+  font-weight: 500;
+  text-wrap: nowrap;
+  text-align: center;
+  padding: 12px 8px;
+  font-style: normal;
+  border-radius: 4px;
+  color: var(--white);
+  font-family: "Poppins", serif;
+  background-color: var(--gray4);
 }
 
-.button1{ /*default btn components */
-    font-weight: 600;
-    text-wrap: nowrap;
-    border-radius: 4px;
-    color: var(--white);
-    align-items: center;
-    display: inline-flex;
-    justify-content: center;
-    background: var(--blue);
+.button1 {
+  /*default btn components */
+  font-weight: 600;
+  text-wrap: nowrap;
+  border-radius: 4px;
+  color: var(--white);
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  background: var(--blue);
 }
 
-.button1:hover{
-    background-color: var(--blue2);
+.button1:hover {
+  background-color: var(--blue2);
 }
 
-.button2{
-    font-weight: 600;
-    text-wrap: nowrap;
-    border-radius: 4px;
-    color: var(--blue2);
-    align-items: center;
-    display: inline-flex;
-    justify-content: center;
-    background: transparent;
-    border: 1px solid var(--blue2);
+.button2 {
+  font-weight: 600;
+  text-wrap: nowrap;
+  border-radius: 4px;
+  color: var(--blue2);
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--blue2);
 }
 
-.button2:hover{
-    color: var(--white);
-    align-items: center;
-    display: inline-flex;
-    justify-content: center;
-    background: var(--blue);
-    border: 1px solid var(--blue2);
+.button2:hover {
+  color: var(--white);
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  background: var(--blue);
+  border: 1px solid var(--blue2);
 }
 
-.button3{
-    font-weight: 600;
-    text-wrap: nowrap;
-    color: var(--blue);
-    align-items: center;
-    display: inline-flex;
-    justify-content: center;
-    background: transparent;
-    border: 2px solid var(--gray5);
+.button3 {
+  font-weight: 600;
+  text-wrap: nowrap;
+  color: var(--blue);
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  background: transparent;
+  border: 2px solid var(--gray5);
 }
 
-.button3:hover{
-    color: var(--white);
-    background: var(--blue);
+.button3:hover {
+  color: var(--white);
+  background: var(--blue);
 }
 
-.button4{
-    font-weight: 600;
-    text-wrap: nowrap;
-    color: var(--white);
-    align-items: center;
-    display: inline-flex;
-    justify-content: center;
-    background: var(--blue);
+.button4 {
+  font-weight: 600;
+  text-wrap: nowrap;
+  color: var(--white);
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  background: var(--blue);
 }
 
-.button4:hover{
-    color: var(--white);
-    background: var(--blue2);
+.button4:hover {
+  color: var(--white);
+  background: var(--blue2);
 }
 
-.smallbtn{
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 500;
-    text-wrap: nowrap;
-    text-align: center;
-    font-style: normal;
-    padding: 4px 8px;
-    border-radius: 72px;
-    color: var(--white);
-    font-family: "Poppins", serif;
-    background-color: var(--gray4);
+.smallbtn {
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  text-wrap: nowrap;
+  text-align: center;
+  font-style: normal;
+  padding: 4px 8px;
+  border-radius: 72px;
+  color: var(--white);
+  font-family: "Poppins", serif;
+  background-color: var(--gray4);
 }
 
-.defaultbtn:hover, .smallbtn:hover{
-    cursor: pointer;
-    background-color: var(--gray5);
+.defaultbtn:hover,
+.smallbtn:hover {
+  cursor: pointer;
+  background-color: var(--gray5);
 }
 
 /* Error or Red Colors */
-.error{
-    color: var(--red);
+.error {
+  color: var(--red);
 }
 
-.deletebtn:hover{
-    cursor: pointer;
-    filter: var(--filterRed2);
+.deletebtn:hover {
+  cursor: pointer;
+  filter: var(--filterRed2);
 }
 
-.cancelbtn{
-    color: var(--white);
-    background-color: var(--red);
+.cancelbtn {
+  color: var(--white);
+  background-color: var(--red);
 }
 
-.cancelbtn:hover{
-    color: var(--white);
-    background-color: var(--red2);
+.cancelbtn:hover {
+  color: var(--white);
+  background-color: var(--red2);
 }
 
-.cancelbtnimg:hover{
-    cursor: pointer;
-    filter: var(--filterRed2);
+.cancelbtnimg:hover {
+  cursor: pointer;
+  filter: var(--filterRed2);
 }
 
 /* Success or Green Colors */
-.success{
-    color: var(--green3);
+.success {
+  color: var(--green3);
 }
 
 /* Blue Colors */
-.enabledbtn{
-    background-color: var(--blue);
+.enabledbtn {
+  background-color: var(--blue);
 }
 
-.enabledbtn:hover{
-    background-color: var(--blue2);
+.enabledbtn:hover {
+  background-color: var(--blue2);
 }
 
-.editbtn:hover{
-    filter: var(--filterBlue2);
+.editbtn:hover {
+  filter: var(--filterBlue2);
 }
 
-.editbtnlink:hover{
-    cursor: pointer;
+.editbtnlink:hover {
+  cursor: pointer;
 }
 
 /* Disabled or Gray Color */
-.disabled{
-    
+.disabled {
+  background-color: var(--gray5);
 }
 
 /* Icon */
-.icon_fn{ /* icon that has functions */
-    cursor: pointer;
+.icon_fn {
+  /* icon that has functions */
+  cursor: pointer;
 }
 
-.icondefault{
-    height: 18px;
-    max-width: auto;
+.icondefault {
+  height: 18px;
+  max-width: auto;
 }
 
-.iconSmall{
-    width: 18px;
-    height: 18px;
+.iconSmall {
+  width: 18px;
+  height: 18px;
 }
 
-.iconNormal{
-    width: 24px;
-    height: 24px;
+.iconNormal {
+  width: 24px;
+  height: 24px;
 }
 
-.iconMedium{
-    width: 32px;
-    height: 32px;
+.iconMedium {
+  width: 32px;
+  height: 32px;
 }
 
-.iconLarge{
-    width: 42px;
-    height: 42px;
-}
-
-/* Product Image */
-.imagedefault{
-    height: auto;
-    max-width: 100%; 
-}
-
-.imageSmall{
-    width: 32px;
-    height: 32px;
-    object-fit: cover;
+.iconLarge {
+  width: 42px;
+  height: 42px;
 }
 
 /* Product Image */
-.imageMediumSmall{
-    width: 40px;
-    height: 40px;
-    object-fit: cover;
+.imagedefault {
+  height: auto;
+  max-width: 100%;
 }
 
-.imageMedium{
-    width: 64px;
-    height: 64px;
-    cursor: pointer;
-    object-fit: cover;
+.imageSmall {
+  width: 32px;
+  height: 32px;
+  object-fit: cover;
 }
 
-.imageMedium:hover{
-    background-color: var(--gray3);
+/* Product Image */
+.imageMediumSmall {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
 }
 
-.imageLarge{
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
+.imageMedium {
+  width: 64px;
+  height: 64px;
+  cursor: pointer;
+  object-fit: cover;
 }
 
-.imageExtraLarge{
-    width: 160px;
-    height: 160px;
-    object-fit: cover;
+.imageMedium:hover {
+  background-color: var(--gray3);
+}
+
+.imageLarge {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+}
+
+.imageExtraLarge {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
 }
 
 /* Image Logo */
-.logoSmall{
-    width: 64px;
-    height: 42px;
-    object-fit: cover;
+.logoSmall {
+  width: 64px;
+  height: 42px;
+  object-fit: cover;
 }
 
-.logoMedium{
-    width: 250px;
-    height: 250px;
-    object-fit: cover;
+.logoMedium {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
 }
 
-.wordLogoSmall{
-    width: 137px;
-    height: 42px;
+.wordLogoSmall {
+  width: 137px;
+  height: 42px;
 }
 
-.wordLogoMedium{
-    width: 220px;
-    height: 66px;
+.wordLogoMedium {
+  width: 220px;
+  height: 66px;
 }
 
-.bold{
-    font-weight: 600;
+.bold {
+  font-weight: 600;
 }
 
-.tagsSmall{
-    font-size: 12px;
-    color: var(--gray5);
+.tagsSmall {
+  font-size: 12px;
+  color: var(--gray5);
 }
 
-.fontsizeSmall{
-    font-size: 12px;
+.fontsizeSmall {
+  font-size: 12px;
 }
 
-.fontsizeMedium{
-    font-size: 14px;
+.fontsizeMedium {
+  font-size: 14px;
 }
 
 /* Card Img Size */
-.card_imageS{
-    width: 100%;
-    height: 100%;
-    min-width: 250px;
-    max-height: 250px;
-    object-fit: cover;
-    border: 1px solid var(--gray3);
-    background-color: var(--white);
+.card_imageS {
+  width: 100%;
+  height: 100%;
+  min-width: 250px;
+  max-height: 250px;
+  object-fit: cover;
+  border: 1px solid var(--gray3);
+  background-color: var(--white);
 }
 
 ::-webkit-scrollbar {
-    width: 4px;
+  width: 4px;
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--white);
-    /* border-radius: 20px; */
+  background: var(--white);
+  /* border-radius: 20px; */
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--blue);
-    /* border-radius: 30px; */
+  background: var(--blue);
+  /* border-radius: 30px; */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--blue2);
+  background: var(--blue2);
 }
 
 /* Animation Notification */
-.popupnotification{
-    top: 0%;
-    left: 50%;
-    z-index: 2;
-    width: 100%;
-    padding: 32px;
-    display: block;
-    max-width: 200px;
-    text-align: center;
-    visibility: hidden;
-    position: absolute;
-    border-radius: 14px;
-    background-color: var(--gray3);
-    transform: translate(-50%, -50%);
-    animation-name: popuphide;
-    animation-duration: 2s;
-    animation-timing-function: ease-in-out;
+.popupnotification {
+  top: 0%;
+  left: 50%;
+  z-index: 2;
+  width: 100%;
+  padding: 32px;
+  display: block;
+  max-width: 200px;
+  text-align: center;
+  visibility: hidden;
+  position: absolute;
+  border-radius: 14px;
+  background-color: var(--gray3);
+  transform: translate(-50%, -50%);
+  animation-name: popuphide;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
 }
 
-.popupnotification p{
-    word-wrap: break-word;
+.popupnotification p {
+  word-wrap: break-word;
 }
 
 /* Notification & Animation */
-@keyframes popuphide{
-    0% 	{ opacity: 0; visibility: visible;}
-	10% { opacity: 1; }
-	90% { opacity: 1;
-        top: 8%;
-        left: 50%;
-        /* transform: translate(-50%, -50%); */
-    }
-	99% { opacity: 0; 
-        top: 13%;
-        left: 50%;
-        /* transform: translate(-50%, -50%); */
-        }
-	100% { opacity: 0; visibility: hidden;}
+@keyframes popuphide {
+  0% {
+    opacity: 0;
+    visibility: visible;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+    top: 8%;
+    left: 50%;
+    /* transform: translate(-50%, -50%); */
+  }
+  99% {
+    opacity: 0;
+    top: 13%;
+    left: 50%;
+    /* transform: translate(-50%, -50%); */
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
 /* Search all the same */
-.searchcontainer{
-    gap: 8px;
-    width: 90px;
-    height: 100%;
-    display: flex;
-    max-height: 24px;
-    padding: 6px 14px;
-    position: relative;
-    flex-direction: row;
-    align-items: center;
-    border-radius: 20px;
-    border: 2px solid var(--blue);
-    transition: width 0.5s ease-in-out;
-    background: rgba(149, 191, 255, 0.1);
-    @media screen and (min-width: 1000px){
-        width: 10%;
-    }
-    @media screen and (max-width: 1000px){
-        max-width: 110px;
-    }
-    @media screen and (max-width: 500px){
-        max-width: 90px;
-    }
-    @media screen and (max-width: 420){
-        width: 100%;
-    }
-    
-}
-
-.searchcontainer:focus-within{
-    width: 200px;
-    background: var(--white);
-}
-
-.searchcontainer > img{
-    width: 18px;
-    height: 18px;
-}
-
-.searchcontainer > input{
+.searchcontainer {
+  gap: 8px;
+  width: 90px;
+  height: 100%;
+  display: flex;
+  max-height: 24px;
+  padding: 6px 14px;
+  position: relative;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 20px;
+  border: 2px solid var(--blue);
+  transition: width 0.5s ease-in-out;
+  background: rgba(149, 191, 255, 0.1);
+  @media screen and (min-width: 1000px) {
+    width: 10%;
+  }
+  @media screen and (max-width: 1000px) {
+    max-width: 110px;
+  }
+  @media screen and (max-width: 500px) {
+    max-width: 90px;
+  }
+  @media screen and (max-width: 420) {
     width: 100%;
-    height: 100%;
-    background-color: transparent;
+  }
+}
+
+.searchcontainer:focus-within {
+  width: 200px;
+  background: var(--white);
+}
+
+.searchcontainer > img {
+  width: 18px;
+  height: 18px;
+}
+
+.searchcontainer > input {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
 }
 
 /* Reminder */
-.reminder{
-    font-size: 24px;
-    font-weight: 600;
-    text-align: center;
-    color: var(--blue2);
-    text-transform: uppercase;
+.reminder {
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+  color: var(--blue2);
+  text-transform: uppercase;
 }
 
-.reminderwimage{
-    gap: 16px;
-    display: flex;
-    font-size: 24px;
-    font-weight: 600;
-    color: var(--blue2);
-    text-align: center;
-    align-items: center;
-    flex-direction: column;
-    text-transform: uppercase;
+.reminderwimage {
+  gap: 16px;
+  display: flex;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--blue2);
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+  text-transform: uppercase;
 }

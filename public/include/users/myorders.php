@@ -1,10 +1,15 @@
 <div class="order_container">
     <div class="order_subcontainer">
         <h1> My Orders </h1>
+        <div class="order_filter">
+            <a href="user.php?u=orders"> All </a>
+            <a href="user.php?u=orders&filter=pending"> Pending </a>
+            <a href="user.php?u=orders&filter=confirmed"> Confirmed </a>
+        </div>
         <?php if ($loggedin) { ?>
             <div class="order_orderlist">
                 <?php
-                $fetchOrder = "SELECT * FROM orderp WHERE customer_id = $id";
+                $fetchOrder = "SELECT * FROM orderp WHERE customer_id = $id ORDER BY order_id DESC";
                 $queryOrder = mysqli_query($conn, $fetchOrder);
                 $count = 1;
 
@@ -14,16 +19,20 @@
                         <div class="orderitem_container">
                             <div class="orderitem_subcontainer">
                                 <div class="orderitem_header">
-                                    <h3> Order #<?= $row['order_id'] ?> </h3>
+                                    <div class="status_tags">
+                                        <h3> Order #<?= $row['order_id'] ?> </h3>
+                                        <?php if ($row['status'] == 0) { ?>
+                                            <span class="pending_status"> Pending </span>
+                                        <?php } else if ($row['status'] == 1) { ?>
+                                            <span class="confirmed_status"> Order Confirmed </span>
+                                        <?php } ?>
+                                    </div>
                                     <div class="status_tags">
                                         <span class="status">
                                             <?= $row['delivery_method'] ?>
                                         </span>
                                         <?php if ($row['status'] == 0) { ?>
-                                            <span class="pending_status"> Pending </span>
                                             <a href="process/order_process.php?cancel=<?= $row['order_id'] ?>" class="cancelbtn button1 btn"> Cancel </a>
-                                        <?php } else if ($row['status'] == 1) { ?>
-                                            <span class="confirmed_status"> Order Confirmed </span>
                                         <?php } ?>
                                     </div>
                                 </div>

@@ -4,11 +4,11 @@
             <div class="cart_section">
                 <div class="cart_header">
                     <h2> (<?= $count ?>) Cart </h2>
-                    <p><input type="checkbox" onchange="selects(this, 'cartitemID')"> SELECT ALL</p>
+                    <?php if ($loggedin) { ?>
+                        <p><input type="checkbox" onchange="selects(this, 'cartitemID')"> SELECT ALL</p>
                 </div>
                 <div id="cart_items">
                     <?php
-                    if ($loggedin) {
                         $fetchCart = "SELECT * FROM cart_item LEFT JOIN cart ON cart_item.cart_id = cart.cart_id WHERE cart.customer_id = $id";
                         $exec = mysqli_query($conn, $fetchCart);
                         if ($exec->num_rows > 0) {
@@ -22,44 +22,44 @@
                                 FROM product LEFT JOIN product_variation ON product.product_id = product_variation.product_id WHERE product.product_id = {$row["product_id"]}";
                                 $queryProduct = mysqli_query($conn, $fetchProduct);
                                 $rowPRD = mysqli_fetch_array($queryProduct, MYSQLI_ASSOC); ?>
-                                <div class="cart_item">
-                                    <div class="item_img">
-                                        <input type="checkbox" name="cartitemID[]" value="<?= $row["cart_item_id"] ?>">
-                                        <img src="../source/images/upload/products/<?= $rowPRD['image'] ?>">
-                                    </div>
-                                    <div class="item_details">
-                                        <div class="item_name">
-                                            <div class="item_content">
-                                                <p class="product_name"> <?= $rowPRD['productName'] ?> </p>
-                                                <div class="item_variation">
-                                                    <select name="variation[]" onchange="updateCartVariation(<?= $row['cart_item_id'] ?>, this.value)">
-                                                        <?php
-                                                        $fetchVariation = "SELECT * FROM product_variation WHERE product_id = {$row["product_id"]}";
-                                                        $queryVariation = mysqli_query($conn, $fetchVariation);
-                                                        while ($rowVariation = mysqli_fetch_array($queryVariation)) {
-                                                            if ($rowVariation['variation_id'] == $row['variation_id']) {
-                                                                echo "<option value='" . $rowVariation['variation_id'] . "' selected>" . $rowVariation['name'] . "</option>";
-                                                            } else {
-                                                                echo "<option value='" . $rowVariation['variation_id'] . "'>" . $rowVariation['name'] . "</option>";
-                                                            }
+                            <div class="cart_item">
+                                <div class="item_img">
+                                    <input type="checkbox" name="cartitemID[]" value="<?= $row["cart_item_id"] ?>">
+                                    <img src="../source/images/upload/products/<?= $rowPRD['image'] ?>">
+                                </div>
+                                <div class="item_details">
+                                    <div class="item_name">
+                                        <div class="item_content">
+                                            <p class="product_name"> <?= $rowPRD['productName'] ?> </p>
+                                            <div class="item_variation">
+                                                <select name="variation[]" onchange="updateCartVariation(<?= $row['cart_item_id'] ?>, this.value)">
+                                                    <?php
+                                                    $fetchVariation = "SELECT * FROM product_variation WHERE product_id = {$row["product_id"]}";
+                                                    $queryVariation = mysqli_query($conn, $fetchVariation);
+                                                    while ($rowVariation = mysqli_fetch_array($queryVariation)) {
+                                                        if ($rowVariation['variation_id'] == $row['variation_id']) {
+                                                            echo "<option value='" . $rowVariation['variation_id'] . "' selected>" . $rowVariation['name'] . "</option>";
+                                                        } else {
+                                                            echo "<option value='" . $rowVariation['variation_id'] . "'>" . $rowVariation['name'] . "</option>";
                                                         }
-                                                        ?>
-                                                    </select>
-                                                </div>
+                                                    }
+                                                    ?>
+                                                </select>
                                             </div>
-                                            <img src="../source/images/icon/svg/delete.svg" class="deletebtn" alt="deleteicon" onclick="deleteCart(<?= $row['cart_item_id'] ?>, <?= $id ?>)">
                                         </div>
-                                        <div class="item_price">
-                                            <p class="product_price"> &#8369;<?= $rowPRD['productPrice'] ?> </p>
-                                            <div class="input inputnumber">
-                                                <span class="decr"> - </span>
-                                                <input type="number" value="<?= $row['quantity'] ?>" min=1 name="quantity[]" oninput="this.value = this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" data-product-id="<?= $row['cart_item_id'] ?>">
-                                                <span class="incr"> + </span>
-                                            </div>
+                                        <img src="../source/images/icon/svg/delete.svg" class="deletebtn" alt="deleteicon" onclick="deleteCart(<?= $row['cart_item_id'] ?>, <?= $id ?>)">
+                                    </div>
+                                    <div class="item_price">
+                                        <p class="product_price"> &#8369;<?= $rowPRD['productPrice'] ?> </p>
+                                        <div class="input inputnumber">
+                                            <span class="decr"> - </span>
+                                            <input type="number" value="<?= $row['quantity'] ?>" min=1 name="quantity[]" oninput="this.value = this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" data-product-id="<?= $row['cart_item_id'] ?>">
+                                            <span class="incr"> + </span>
                                         </div>
                                     </div>
                                 </div>
-                    <?php   }
+                            </div>
+                <?php   }
                         } else {
                             echo '<p class="reminder"> No Products </p>';
                         }
@@ -67,7 +67,7 @@
                         echo '<div class="reminderwimage"><img src="../source/images/logo/LogoMark2.png" class="logoSmall"><p> Please log in </p>
                         </div>';
                     }
-                    ?>
+                ?>
                 </div>
             </div>
             <div class="checkout_section">
@@ -75,7 +75,7 @@
                     <h2> Checkout </h2>
                     <p> Total Amount: &#8369; <span id="totalAmount"> 0 </span> </p>
                 </div>
-                <input type="submit" value="Checkout">
+                <input type="submit" value="Checkout" class="disabled">
             </div>
         </div>
         <!-- Product -->

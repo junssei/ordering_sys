@@ -8,10 +8,12 @@ include "include/header.php"
             <div class="quickaccess_menu">
                 <h1> Quick Access </h1>
                 <a href="user.php?u=cart"><img src="../source/images/icon/svg/Cart.svg" alt="icon"><span> My Cart </span></a>
-                <a href="user.php?u=orders"><img src="../source/images/icon/svg/box.svg" alt="icon"><span> My Orders </span></a>
-                <a href="user.php?u=profile"><img src="../source/images/icon/svg/user-profile-01.svg" alt="icon"><span> My Account </span></a>
-                <a href="user.php?u=address"><img src="../source/images/icon/svg/marker-02.svg" alt="icon"><span> My Addresses </span></a>
-                <a href="user.php?u=wishlist"><img src="../source/images/icon/svg/heart.svg" alt="icon"><span> Wishlist </span></a>
+                <?php if ($loggedin) { ?>
+                    <a href="user.php?u=orders"><img src="../source/images/icon/svg/box.svg" alt="icon"><span> My Orders </span></a>
+                    <a href="user.php?u=profile"><img src="../source/images/icon/svg/user-profile-01.svg" alt="icon"><span> My Account </span></a>
+                    <a href="user.php?u=address"><img src="../source/images/icon/svg/marker-02.svg" alt="icon"><span> My Addresses </span></a>
+                    <a href="user.php?u=wishlist"><img src="../source/images/icon/svg/heart.svg" alt="icon"><span> Wishlist </span></a>
+                <?php } ?>
             </div>
             <div class="user_subcontainer">
                 <?php
