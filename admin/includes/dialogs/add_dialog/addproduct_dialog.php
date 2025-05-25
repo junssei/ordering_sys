@@ -34,7 +34,11 @@
                     <select name="<?= $page ?>_category" required onchange="ctgDISPsubctg(this.value)" class="input_category">
                         <option value="0"> None </option>
                         <?php
+<<<<<<< HEAD
                         $fetchcategory = "SELECT * FROM product_category";
+=======
+                        $fetchcategory = "CALL GetAllCategories()";
+>>>>>>> 9d3848ab5ee271ef87d46074b903f57f1d1dea4a
                         $exec = mysqli_query($conn, $fetchcategory);
                         while ($fetchcategory = mysqli_fetch_array($exec)) {
                             echo "<option value='" . $fetchcategory['ctg_id'] . "'>" . $fetchcategory['ctg_name'] . "</option>";

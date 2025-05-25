@@ -2,7 +2,7 @@
 require '../../source/db/connect.php';
 if($_GET['id']) { 
     $id = $_GET['id'];
-    $fetchSubcategory = "SELECT * FROM product_subcategory WHERE ctg_id = $id";
+    $fetchSubcategory = "CALL GetSubcategoriesByCategoryID($id)";
     $exec = mysqli_query($conn, $fetchSubcategory);
 
     if($exec -> num_rows > 0){
