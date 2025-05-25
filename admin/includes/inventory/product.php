@@ -58,7 +58,7 @@
                             <th></th>
                         </tr>
                         <?php //Display all products
-                            $fetchProducts = "SELECT * FROM product";
+                            $fetchProducts = "CALL GetAllProducts()";
                             $exec_prd = mysqli_query($conn, $fetchProducts);
     
                             if($exec_prd -> num_rows > 0){

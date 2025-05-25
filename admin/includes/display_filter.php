@@ -1,27 +1,11 @@
 <?php 
 require '../../source/db/connect.php';
 if($_GET['value'] && $_GET['page'] == "subcategory"){
-    $page = $_GET['page'];
     $sort = $_GET['sort'];
     $value = $_GET['value'];
 
-    if($value == "all"){
-        if($sort == 'oldest'){
-            $fetchsubctg = "SELECT * FROM product_subcategory LEFT JOIN product_category ON product_subcategory.ctg_id = product_category.ctg_id ORDER BY product_subcategory.created_at ASC";
-            $querysubctg = mysqli_query($conn, $fetchsubctg);
-        } else {
-            $fetchsubctg = "SELECT * FROM product_subcategory LEFT JOIN product_category ON product_subcategory.ctg_id = product_category.ctg_id ORDER BY product_subcategory.created_at DESC";
-            $querysubctg = mysqli_query($conn, $fetchsubctg);
-        }
-    } else {
-        if($sort == 'oldest'){
-            $fetchsubctg = "SELECT * FROM product_subcategory LEFT JOIN product_category ON product_subcategory.ctg_id = product_category.ctg_id WHERE product_subcategory.ctg_id = $value ORDER BY product_subcategory.created_at ASC";
-            $querysubctg = mysqli_query($conn, $fetchsubctg);
-        } else {
-            $fetchsubctg = "SELECT * FROM product_subcategory LEFT JOIN product_category ON product_subcategory.ctg_id = product_category.ctg_id WHERE product_subcategory.ctg_id = $value ORDER BY product_subcategory.created_at DESC";
-            $querysubctg = mysqli_query($conn, $fetchsubctg);
-        }
-    }
+    $call = "CALL GetFilteredSubcategories('$value', '$sort')";
+    $querysubctg = mysqli_query($conn, $call);
 
     if($querysubctg -> num_rows > 0){
         echo '

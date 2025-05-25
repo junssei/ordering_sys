@@ -15,11 +15,9 @@ include 'includes/header.php';
             <div class="input">
                 <div class="inp inp_nm">
                     <img class="iconSmall" src="../source/images/icon/svg/mail.svg" alt="email_icon">
-                    <input id="email" type="text" name="email" placeholder="Email or username" required <?php 
-                        if (isset($_SESSION['username'])) {
-                            echo "value='" . $_SESSION['username'] . "'";
-                        }
-                    ?>>
+                    <input id="email" type="text" name="email" placeholder="Email or username" required <?php if (isset($_SESSION['username'])) {
+                                                                                                            echo "value='" . $_SESSION['username'] . "'";
+                                                                                                        } ?>>
                 </div>
             </div>
             <!-- Input password -->
@@ -31,9 +29,9 @@ include 'includes/header.php';
                 <img id="eyepassword_icon" class="iconSmall icon_fn" src="../source/images/icon/svg/eye-invisibility.svg" onclick="passwordVisibility()" alt="password_invisibility">
             </div>
             <?php
-                if (isset($_SESSION['error'])) {
-                    echo "<p class='error' style='text-align: center;'>" . $_SESSION['error'] . "</p>";
-                }
+            if (isset($_SESSION['error'])) {
+                echo "<p class='error' style='text-align: center;'>" . $_SESSION['error'] . "</p>";
+            }
             ?>
             <div class="input_actions">
                 <span><a class="link" href="">Forgot Password?</a></span>

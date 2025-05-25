@@ -465,6 +465,7 @@ select {
 .searchcontainer {
   gap: 8px;
   width: 90px;
+  min-width: 80px;
   height: 100%;
   display: flex;
   max-height: 24px;

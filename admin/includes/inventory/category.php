@@ -92,7 +92,7 @@
                             <th></th>
                         </tr>
                         <?php //Display all products
-                            $fetchsubctg = "SELECT * FROM product_subcategory LEFT JOIN product_category ON product_subcategory.ctg_id = product_category.ctg_id ORDER BY product_subcategory.created_at DESC";
+                            $fetchsubctg = "CALL GetSubcategoriesWithCategory()";
                             $querysubctg = mysqli_query($conn, $fetchsubctg);
     
                             if($querysubctg -> num_rows > 0){
