@@ -33,7 +33,11 @@
                             <th></th>
                         </tr>
                         <?php //Display all products
+<<<<<<< HEAD
+                        $fetchProducts = "SELECT * FROM customer";
+=======
                         $fetchProducts = "CALL GetAllCustomers()";
+>>>>>>> 9d3848ab5ee271ef87d46074b903f57f1d1dea4a
                         $exec_prd = mysqli_query($conn, $fetchProducts);
 
                         if ($exec_prd->num_rows > 0) {
