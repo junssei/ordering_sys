@@ -14,7 +14,7 @@ include 'includes/header.php';
                     <p id="breadcrumbs"> <?php echo "Dashboard" ?> </p>
                 </div>
                 <div id="content_body">
-                    
+
                 </div>
             </div>
         </div>

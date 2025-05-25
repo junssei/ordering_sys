@@ -16,13 +16,14 @@ if ($_SERVER['HTTP_HOST'] === 'localhost' || $_SERVER['HTTP_HOST'] === '127.0.0.
     $dbusername = "root";
     $db = "bigcasdb";
     $dbpassword = "";
-} else {
-    // Remote server credentials
-    $host = "auth-db1762.hstgr.io";
-    $db = "u746273317_bigcasdb";
-    $dbusername = "u746273317_bigcas";
-    $dbpassword = "CUTILLASb1gc4s!";
 }
+// else {
+//     // Remote server credentials
+//     $host = "auth-db1762.hstgr.io";
+//     $db = "u746273317_bigcasdb";
+//     $dbusername = "u746273317_bigcas";
+//     $dbpassword = "CUTILLASb1gc4s!";
+// }
 
 $conn = new mysqli($host, $dbusername, $dbpassword, $db);
 

@@ -1,4 +1,4 @@
-#container{
+#container {
     width: 100%;
     height: 100vh;
     /* overflow: hidden; */
@@ -6,7 +6,7 @@
 }
 
 /* It covers all the sidebar and body */
-#subcontainer{
+#subcontainer {
     zoom: 95%;
     height: 100%;
     display: flex;
@@ -18,7 +18,7 @@
 }
 
 /* Sidebar Style */
-#subcontainer > #sidebar{
+#subcontainer>#sidebar {
     gap: 0px;
     width: 200px;
     height: 100%;
@@ -29,13 +29,13 @@
 }
 
 /* Sidebar Logo */
-#sidebar > #logo{
-    padding: 16px 0 13px 0;
+#sidebar>#logo {
+    padding: 16px 0 10.5px 0;
     position: relative;
 }
 
 /* SideNavbar */
-#sidebar > #navigation{
+#sidebar>#navigation {
     /* gap: 8px; */
     height: 100%;
     display: flex;
@@ -46,7 +46,7 @@
 }
 
 /* nav menus */
-.menu{
+.menu {
     gap: 16px;
     display: flex;
     cursor: pointer;
@@ -57,38 +57,38 @@
     border-radius: 32px 0 0px 32px;
 }
 
-.menu > div{
+.menu>div {
     gap: 16px;
     display: flex;
     flex-direction: row;
 }
 
-.menu:hover{
+.menu:hover {
     /* font-weight: 600; */
     color: var(--white);
     background-color: var(--blue);
 }
 
-.menu:hover img{
+.menu:hover img {
     filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(2350%) hue-rotate(349deg) brightness(122%) contrast(103%);
 }
 
 /* nav dropdown menus */
-.dropdown_menus{
+.dropdown_menus {
     display: none;
     font-size: 14px;
     margin-left: 32px;
 }
 
 /* when the dropdown is active */
-.active{
+.active {
     display: flex;
     font-weight: 600;
     color: var(--blue2);
     background-color: var(--gray);
 }
 
-.active img{
+.active img {
     filter: var(--filterBlue2);
 }
 
@@ -96,13 +96,13 @@
     display: block;
 } */
 
-#navactions > #logout:hover{
+#navactions>#logout:hover {
     color: var(--white);
     background-color: var(--red);
 }
 
 /* Body where all the content displayed */
-#subcontainer > #body{
+#subcontainer>#body {
     width: 100%;
     height: 100%;
     display: flex;
@@ -112,7 +112,7 @@
 }
 
 /* Main Header */
-#body > #header{
+#body>#header {
     display: flex;
     padding: 16px 32px 16px 16px;
     position: relative;
@@ -122,43 +122,44 @@
     background-color: var(--white);
 }
 
-#header > #header_left{
+#header>#header_left {
     gap: 8px;
     display: flex;
     align-items: center;
     flex-direction: row;
 }
 
-#header_left > #togglehamburger{
+#header_left>#togglehamburger {
     cursor: pointer;
 }
 
-#header > #header_right{
+#header>#header_right {
     gap: 8px;
     display: flex;
     align-items: center;
     flex-direction: row;
 }
 
-#header_right > #addbutton, #notification{
+#header_right>#addbutton,
+#notification {
     cursor: pointer;
 }
 
-#header_right > #profile_section{
+#header_right>#profile_section {
     display: flex;
     position: relative;
     flex-direction: row;
 }
 
-#profile_section > #user_image > img{
-    width: 33px; 
-    height: 33px; 
+#profile_section>#user_image>img {
+    width: 33px;
+    height: 33px;
     cursor: pointer;
     border-radius: 100%;
     border: 2px solid var(--blue);
 }
 
-#profile_section > #user_profile{
+#profile_section>#user_profile {
     z-index: 1;
     gap: 8px;
     display: none;
@@ -172,25 +173,25 @@
     border-radius: 20px 0px 20px 20px;
 }
 
-#user_profile img{
-    width: 64px; 
+#user_profile img {
+    width: 64px;
     height: 64px;
     border-radius: 100%;
 }
 
-#userpfp #username{
+#userpfp #username {
     font-weight: 600;
 }
 
-#userpfp #userrole{
+#userpfp #userrole {
     font-size: 14px;
     font-weight: 300;
 }
 
 /* The content */
-#body > #content{
+#body>#content {
     gap: 32px;
-    height: 100%;
+    height: 90vh;
     display: flex;
     padding: 32px;
     position: relative;
@@ -198,24 +199,24 @@
 }
 
 /* Header for Content such as breadcrumbs and the buttons */
-#content > #content_header{
+#content>#content_header {
     display: flex;
     justify-content: space-between;
     /* padding: 16px 32px; */
     /* background-color: yellow; */
 }
 
-.contentheader_actions > button{
+.contentheader_actions>button {
     border: none;
     background-color: var(--blue);
 }
 
-.contentheader_actions > button:hover{
+.contentheader_actions>button:hover {
     background-color: var(--blue2);
 }
 
 /* Form Container */
-.form_container{
+.form_container {
     gap: 16px;
     width: 100%;
     padding: 16px 0;
@@ -224,29 +225,29 @@
     flex-direction: column;
 }
 
-.form_container .form_header{
+.form_container .form_header {
     display: flex;
     flex-direction: column;
 }
 
-.form_container .form_header p{
+.form_container .form_header p {
     font-size: 14px;
     text-align: justify;
 }
 
-.form_container > .form_body{
+.form_container>.form_body {
     gap: 16px;
     display: flex;
     flex-direction: column;
 }
 
-.form_body > .form_inputfield{
+.form_body>.form_inputfield {
     gap: 16px;
     display: flex;
     flex-direction: column;
 }
 
-.form_inputfield .input{
+.form_inputfield .input {
     width: 100%;
     height: 40px;
     display: flex;
@@ -257,17 +258,17 @@
     background-color: var(--white);
 }
 
-.form_inputfield .input_select select{
+.form_inputfield .input_select select {
     width: 100%;
     background-color: var(--white);
 }
 
-.input_select select:hover{
+.input_select select:hover {
     cursor: pointer;
     background-color: var(--gray2);
 }
 
-#multiple_variant_field{
+#multiple_variant_field {
     gap: 16px;
     /* zoom: 90%; */
     display: flex;
@@ -275,38 +276,38 @@
 }
 
 /* Modal/Dialog Style */
-.dialog{
+.dialog {
     top: 50%;
     left: 50%;
     position: absolute;
     transform: translate(-50%, -50%);
 }
 
-.dialog_container{
+.dialog_container {
     gap: 16px;
     display: flex;
     position: relative;
     flex-direction: column;
 }
 
-.dialog_container > #dialog_header{
+.dialog_container>#dialog_header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
 /* Body inside of dialog */
-.dialog_container > #dialog_body{
+.dialog_container>#dialog_body {
     gap: 36px;
     display: flex;
     flex-direction: column;
 }
 
-#dialog_body > .dialog_message{
+#dialog_body>.dialog_message {
     width: 100%;
 }
 
-#dialog_body > .dialog_action{
+#dialog_body>.dialog_action {
     gap: 16px;
     width: 100%;
     display: flex;
@@ -314,7 +315,7 @@
 }
 
 /* Form inside of dialog */
-.dialog_container > .dialog_form{
+.dialog_container>.dialog_form {
     gap: 16px;
     width: 100%;
     height: 100%;
@@ -322,20 +323,20 @@
     flex-direction: row;
 }
 
-.dialog_form .dialog_imginp{
+.dialog_form .dialog_imginp {
     gap: 16px;
     display: flex;
     flex-direction: column;
 }
 
-.dialog_form .dialog_allinp{
+.dialog_form .dialog_allinp {
     gap: 16px;
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.dialog_form #multiple_input_container{
+.dialog_form #multiple_input_container {
     gap: 16px;
     display: flex;
     /* flex-wrap: wrap; */
@@ -344,7 +345,9 @@
     flex-direction: column;
 }
 
-.dialog_form .input,.dialog_allinp .input, .dialog_imginp .input{
+.dialog_form .input,
+.dialog_allinp .input,
+.dialog_imginp .input {
     width: 100%;
     height: 40px;
     display: flex;
@@ -356,21 +359,21 @@
     background-color: var(--white);
 }
 
-.input .inp{
+.input .inp {
     width: 100%;
     display: flex;
     padding: 0 16px;
     position: relative;
     align-items: center;
-}  
+}
 
-.input .inp input{
+.input .inp input {
     width: 100%;
     word-wrap: break-word;
     word-break: break-all;
 }
 
-.input_textarea{
+.input_textarea {
     width: 100%;
     display: flex;
     min-width: 100px;
@@ -382,7 +385,7 @@
     background-color: var(--white);
 }
 
-.input_inptextarea{
+.input_inptextarea {
     width: 100%;
     height: 100%;
     display: flex;
@@ -390,7 +393,7 @@
     overflow: auto;
 }
 
-.input_inptextarea textarea{
+.input_inptextarea textarea {
     width: 100%;
     /* height: 100%; */
     resize: none;
@@ -399,7 +402,7 @@
     padding: 8px 16px;
 }
 
-.inputfile{
+.inputfile {
     gap: 8px;
     /* height: 100%; */
     display: flex;
@@ -408,12 +411,12 @@
     justify-content: center;
 }
 
-.inputfile img{
+.inputfile img {
     /* border-radius: 4px; */
     /* border: 1px solid var(--blue); */
 }
 
-.inputfile .inpfile{
+.inputfile .inpfile {
     gap: 16px;
     display: flex;
     position: relative;
@@ -431,12 +434,12 @@
     /* width: 100%; */
 }
 
-.inputfile input[type="file"]::file-selector-button:hover{
+.inputfile input[type="file"]::file-selector-button:hover {
     background-color: var(--blue2);
 }
 
 /* For Select Option */
-.input_select{
+.input_select {
     width: 100%;
     height: 40px;
     position: relative;
@@ -445,25 +448,25 @@
     background-color: var(--blue2);
 }
 
-.input_select > select{
+.input_select>select {
     padding: 8px;
     width: 100%;
     height: 100%;
     border: none;
 }
 
-.input_select select option{
+.input_select select option {
     width: 100%;
     height: 40px;
 }
 
-.select_product_attribute{
+.select_product_attribute {
     width: 100%;
 }
 
 /* Body of the Content, where mostly display tables */
-#content > #content_body{
-    height: 76vh;
+#content>#content_body {
+    height: 100%;
     padding: 32px;
     overflow-y: auto;
     position: relative;
@@ -471,13 +474,13 @@
 }
 
 /* Options for Content Body */
-.content_body_row{
+.content_body_row {
     gap: 32px;
     display: flex;
     flex-direction: row;
 }
 
-.content_body_col{
+.content_body_col {
     gap: 32px;
     display: flex;
     overflow-y: auto;
@@ -485,7 +488,7 @@
 }
 
 /* Style for Tables */
-.maincontainer{
+.maincontainer {
     /* zoom: 90%; */
     gap: 16px;
     width: 100%;
@@ -495,7 +498,7 @@
     flex-direction: column;
 }
 
-.tablecontainer{
+.tablecontainer {
     gap: 16px;
     zoom: 90%;
     width: 100%;
@@ -507,7 +510,7 @@
     /* background-color: aqua; */
 }
 
-.maincontainer > .tablecontainer_header{
+.maincontainer>.tablecontainer_header {
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -515,14 +518,14 @@
 }
 
 /* Filter Section at table */
-.maincontainer > .tablefilter_header{
+.maincontainer>.tablefilter_header {
     gap: 16px;
     zoom: 85%;
     display: flex;
     justify-content: start;
 }
 
-.tablefilter_header .select_filter{
+.tablefilter_header .select_filter {
     width: 130px;
     cursor: pointer;
     overflow: hidden;
@@ -532,7 +535,7 @@
     border: 2px solid var(--blue2);
 }
 
-.select_filter > select{
+.select_filter>select {
     width: 100%;
     height: 100%;
     border: none;
@@ -540,33 +543,34 @@
     cursor: pointer;
 }
 
-.select_filter > select option{
+.select_filter>select option {
     width: 100%;
     cursor: pointer;
 }
 
-.select_filter > select option:hover{
+.select_filter>select option:hover {
     cursor: pointer;
 }
 
 /* Actions at table such search and add button */
-.tablecontainer_header > .tablecontainerheader_actions{
+.tablecontainer_header>.tablecontainerheader_actions {
     gap: 16px;
     display: flex;
     align-items: center;
     flex-direction: row;
+    justify-content: flex-end;
 }
 
-.tablecontainer_header > .tablecontainerheader_actions > button{
+.tablecontainer_header>.tablecontainerheader_actions>button {
     border: none;
     background-color: var(--blue);
 }
 
-.tablecontainer_header > .tablecontainerheader_actions > button:hover{
+.tablecontainer_header>.tablecontainerheader_actions>button:hover {
     background-color: var(--blue2);
 }
 
-.tablecontainer .table{
+.tablecontainer .table {
     width: 100%;
     font-size: 14px;
     overflow-x: hidden;
@@ -575,7 +579,7 @@
     border-collapse: collapse;
 }
 
-.table .table_header{
+.table .table_header {
     top: 0;
     z-index: 1;
     position: sticky;
@@ -583,21 +587,26 @@
     background-color: var(--blue);
 }
 
-.table .table_header th{
+.table .table_header th {
     text-align: left;
     padding: 16px 16px;
 }
 
-.table .table_rows:nth-child(even){background-color: var(--gray);}
+.table .table_rows:nth-child(even) {
+    background-color: var(--gray);
+}
 
-.table .table_rows:hover {background-color: var(--gray4); cursor: pointer;}
+.table .table_rows:hover {
+    background-color: var(--gray4);
+    cursor: pointer;
+}
 
-.table .table_rows{
+.table .table_rows {
     overflow: hidden;
     position: relative;
 }
 
-.table .table_rows td{
+.table .table_rows td {
     overflow: hidden;
     max-width: 150px;
     position: relative;
@@ -606,6 +615,6 @@
     text-overflow: ellipsis;
 }
 
-.table_rows .action_col{
+.table_rows .action_col {
     text-align: right;
 }
