@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 16, 2025 at 04:31 PM
+-- Generation Time: May 25, 2025 at 05:26 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,76 @@ SET time_zone = "+00:00";
 --
 -- Database: `bigcasdb`
 --
+
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetAllAdminUsers` ()   BEGIN
+SELECT * FROM admin;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetAllCategories` ()   BEGIN
+SELECT * FROM product_category;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetAllCustomers` ()   BEGIN
+SELECT * FROM customer;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetAllProducts` ()   BEGIN
+SELECT * FROM product;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetAllProductVariation` ()   BEGIN
+SELECT * FROM product_variation;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetFilteredSubcategories` (IN `input_ctg_id` VARCHAR(10), IN `input_sort` VARCHAR(10))   BEGIN
+    IF input_ctg_id = 'all' THEN
+        IF input_sort = 'oldest' THEN
+            SELECT *
+            FROM product_subcategory 
+            LEFT JOIN product_category ON product_subcategory.ctg_id = product_category.ctg_id
+            ORDER BY product_subcategory.created_at ASC;
+        ELSE
+            SELECT *
+            FROM product_subcategory 
+            LEFT JOIN product_category ON product_subcategory.ctg_id = product_category.ctg_id
+            ORDER BY product_subcategory.created_at DESC;
+        END IF;
+    ELSE
+        IF input_sort = 'oldest' THEN
+            SELECT *
+            FROM product_subcategory 
+            LEFT JOIN product_category ON product_subcategory.ctg_id = product_category.ctg_id
+            WHERE product_subcategory.ctg_id = CAST(input_ctg_id AS UNSIGNED)
+            ORDER BY product_subcategory.created_at ASC;
+        ELSE
+            SELECT *
+            FROM product_subcategory 
+            LEFT JOIN product_category ON product_subcategory.ctg_id = product_category.ctg_id
+            WHERE product_subcategory.ctg_id = CAST(input_ctg_id AS UNSIGNED)
+            ORDER BY product_subcategory.created_at DESC;
+        END IF;
+    END IF;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetSubcategoriesByCategoryID` (IN `input_ctg_id` INT)   BEGIN
+    SELECT * 
+    FROM product_subcategory 
+    WHERE ctg_id = input_ctg_id;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetSubcategoriesWithCategory` ()   BEGIN
+    SELECT * 
+    FROM product_subcategory 
+    LEFT JOIN product_category 
+    ON product_subcategory.ctg_id = product_category.ctg_id 
+    ORDER BY product_subcategory.created_at DESC;
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -62,7 +132,8 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`admin_id`, `username`, `password`, `firstname`, `lastname`, `email`, `role`, `created_at`, `updated_at`) VALUES
 (1, 'junevincent', '$2y$10$IEjkwtYR1Pm9sCcTeSaf2u1H5TU0irJPPZgCzpnVUSQ8xGH3/mnb6', 'June Vincent', 'Fernandez', 'junevincentmagsayofernandez@gmail.com', 'admin', '2024-12-27 07:39:21', '2024-12-27 07:39:21'),
-(2, 'bigcas_admin', '$2y$10$eQ9QHoGc7byv2K504u6TwuAWoGL68g2PE5BCIcs5l0SCR1lYBJSFi', 'Jessa Mae', 'Bigcas', 'jessamaebigcas@gmail.com', 'admin', '2025-01-07 03:41:52', '2025-01-07 03:41:52');
+(2, 'bigcas_admin', '$2y$10$eQ9QHoGc7byv2K504u6TwuAWoGL68g2PE5BCIcs5l0SCR1lYBJSFi', 'Jessa Mae', 'Bigcas', 'jessamaebigcas@gmail.com', 'admin', '2025-01-07 03:41:52', '2025-01-07 03:41:52'),
+(4, 'junevincent', '$2y$10$9/qIEDR.9EIPTonvnRHjhec2XCZ04uajKU1IoCy92etbi98w5wINO', 'june vincent', 'fernandez', 'junevincentmagsayo.fernandez@my.smciligan.edu.ph', 'unassigned', '2025-05-15 08:19:31', '2025-05-15 08:19:31');
 
 -- --------------------------------------------------------
 
@@ -162,14 +233,6 @@ CREATE TABLE `cart_item` (
   `price` double(12,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `cart_item`
---
-
-INSERT INTO `cart_item` (`cart_item_id`, `cart_id`, `product_id`, `variation_id`, `quantity`, `price`) VALUES
-(56, 1, 1, 3, 2, 20.00),
-(57, 1, 3, 9, 2, 10.00);
-
 -- --------------------------------------------------------
 
 --
@@ -203,18 +266,6 @@ INSERT INTO `customer` (`customer_id`, `username`, `password`, `firstname`, `las
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customer_address`
---
-
-CREATE TABLE `customer_address` (
-  `customer_id` int(11) NOT NULL,
-  `address_id` int(11) NOT NULL,
-  `is_default` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `orderp`
 --
 
@@ -222,7 +273,7 @@ CREATE TABLE `orderp` (
   `order_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `order_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `status` int(11) NOT NULL,
+  `status` int(11) NOT NULL COMMENT '0 - Pending Order\r\n1 - Confirmed Order\r\n2 - Deliver Order\r\n3 - Unpaid Order\r\n5 - Completed Order\r\n10 - Cancelled Order',
   `total_amount` double(12,2) NOT NULL,
   `delivery_method` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -232,12 +283,15 @@ CREATE TABLE `orderp` (
 --
 
 INSERT INTO `orderp` (`order_id`, `customer_id`, `order_date`, `status`, `total_amount`, `delivery_method`) VALUES
-(1, 1, '2025-01-06 19:11:43', 0, 85.00, 'Pickup'),
+(1, 1, '2025-01-06 19:11:43', 1, 85.00, 'Pickup'),
 (2, 1, '2025-01-06 21:39:56', 0, 70.00, 'Pickup'),
 (3, 1, '2025-01-08 08:29:18', 0, 205.00, 'Pickup'),
 (4, 1, '2025-01-15 04:19:27', 0, 105.00, 'Pickup'),
 (5, 1, '2025-01-15 04:23:10', 0, 105.00, 'Pickup'),
-(6, 1, '2025-01-15 04:42:54', 0, 140.00, 'Pickup');
+(6, 1, '2025-01-15 04:42:54', 0, 140.00, 'Pickup'),
+(7, 1, '2025-01-16 16:01:48', 0, 100.00, 'Pickup'),
+(8, 1, '2025-01-16 16:02:46', 0, 100.00, 'Pickup'),
+(9, 1, '2025-01-26 17:26:59', 0, 40.00, 'Delivery');
 
 -- --------------------------------------------------------
 
@@ -252,25 +306,6 @@ CREATE TABLE `order_product` (
   `variation_id` int(11) NOT NULL,
   `quantity` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `order_product`
---
-
-INSERT INTO `order_product` (`order_product_id`, `order_id`, `product_id`, `variation_id`, `quantity`) VALUES
-(7, 1, 1, 1, 1),
-(8, 1, 1, 3, 1),
-(9, 1, 2, 6, 1),
-(10, 2, 1, 2, 3),
-(11, 2, 2, 4, 1),
-(12, 3, 1, 3, 3),
-(13, 3, 2, 5, 3),
-(14, 3, 3, 11, 1),
-(15, 4, 2, 7, 3),
-(16, 5, 2, 7, 3),
-(17, 5, 1, 1, 2),
-(18, 6, 1, 2, 2),
-(19, 6, 1, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -304,7 +339,9 @@ INSERT INTO `payment` (`payment_id`, `order_id`, `payment_date`, `payment_method
 (15, 5, '2025-01-15 04:23:10', 'Cash', '0', '', 105.00),
 (16, 5, '2025-01-15 04:23:10', 'Cash', '0', '', 105.00),
 (17, 6, '2025-01-15 04:42:54', 'Cash', '0', NULL, 140.00),
-(18, 6, '2025-01-15 04:42:54', 'Cash', '0', NULL, 140.00);
+(18, 6, '2025-01-15 04:42:54', 'Cash', '0', NULL, 140.00),
+(19, 8, '2025-01-16 16:02:46', 'Cash', '0', NULL, 100.00),
+(20, 9, '2025-01-26 17:26:59', 'Cash', '0', NULL, 40.00);
 
 -- --------------------------------------------------------
 
@@ -330,9 +367,7 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`product_id`, `product_name`, `product_brand`, `description`, `baseprice`, `image`, `admin_id`, `subctg_id`, `created_at`, `updated_at`) VALUES
-(1, 'Coca Cola (Bottled)', 'Coca Cola', 'Bottled Coca Cola 12oz-1L ', 10.00, 's-l1200.jpg', 1, 13, '2025-01-03 08:04:29', '2025-01-05 05:43:14'),
-(2, 'White Egg (S-XL)', '', '', 10.00, 'xlegg_345x@2x.webp', 1, 16, '2025-01-03 14:19:44', '2025-01-03 14:19:44'),
-(3, 'FIBISCO HI-RO Chocolate Sandwich Cookies', 'FIBISCO', '', 7.00, 'ph-11134207-7rasl-m2kuuncyuwhrcf.webp', 1, 23, '2025-01-03 20:57:29', '2025-01-05 03:52:47');
+(4, 'HI-RO FIBISCO', 'FIBISCO', 'HI-RO FIBISCO\n- 33G 1 X 3 PAIRS \n- 33G 10 X 3 PAIRS', 10.00, '5E1916F69FA20370.jpg', 4, 23, '2025-05-17 11:37:09', '2025-05-17 11:39:18');
 
 -- --------------------------------------------------------
 
@@ -422,18 +457,64 @@ CREATE TABLE `product_variation` (
 --
 
 INSERT INTO `product_variation` (`variation_id`, `product_id`, `name`, `price`, `sku`, `stock`, `image`, `created_at`, `updated_at`) VALUES
-(1, 1, '8oz', 15.00, '', 39, '5cb35e9b-f4e2-459e-9729-2f43b8cc31e6.jpg', '2025-01-04 05:32:22', '2025-01-05 14:59:28'),
-(2, 1, '12oz', 20.00, 'CCSF-12oz', 69, 'coca-cola-bottle-NxeKw2A-600.jpg', '2025-01-04 05:32:22', '2025-01-05 14:59:28'),
-(3, 1, '1L', 50.00, 'CCSF-1L', 30, 's-l1200.jpg', '2025-01-04 05:32:22', '2025-01-05 14:59:28'),
-(4, 2, 'Small', 10.00, '', 50, 'xlegg_345x@2x.webp', '2025-01-04 06:59:24', '2025-01-04 12:00:14'),
-(5, 2, 'Medium', 15.00, '', 50, 'xlegg_345x@2x.webp', '2025-01-04 06:59:24', '2025-01-04 12:00:14'),
-(6, 2, 'Large', 20.00, '', 50, 'xlegg_345x@2x.webp', '2025-01-04 06:59:24', '2025-01-04 12:00:14'),
-(7, 2, 'Extra Large', 25.00, '', 50, 'xlegg_345x@2x.webp', '2025-01-04 06:59:24', '2025-01-04 12:00:14'),
-(8, 2, 'White Egg (30 x 1 Tray)', 300.00, '', 10, 'xlegg_345x@2x.webp', '2025-01-04 08:45:05', '2025-01-04 12:00:14'),
-(9, 3, '80g (1 packet x 1 pack)', 50.00, '', 41, 'ph-11134207-7quky-lk57jy3dgwwf6a.webp', '2025-01-04 08:45:05', '2025-01-05 14:59:44'),
-(10, 3, '200g (1 packet)', 75.00, '', 17, 'sg-11134201-22100-x034s2prapiv4a.webp', '2025-01-04 08:45:05', '2025-01-05 14:59:44'),
-(11, 3, '33g (1 packet)', 10.00, '', 36, 'ph-11134207-7rasl-m2kuuncyuwhrcf.webp', '2025-01-04 08:45:05', '2025-01-05 14:59:44'),
-(12, 3, '33g (10 packets x 1 pack)', 100.00, '', 10, 'ph-11134201-7qukx-lhsuw0kwnz7t6e.webp', '2025-01-04 08:45:05', '2025-01-05 14:59:44');
+(13, 4, '33g x 1 packet', 10.00, 'HRF-01', 80, '659ae1_61d7dc32845d4cec800cb90e690286b1~mv2.avif', '2025-05-24 11:30:19', '2025-05-24 16:11:35'),
+(14, 4, '33g x 10 packets', 120.00, 'HRF-33G10F', 60, 'FIBISCO-20-102.png', '2025-05-24 16:10:19', '2025-05-24 16:11:35');
+
+--
+-- Triggers `product_variation`
+--
+DELIMITER $$
+CREATE TRIGGER `trg_log_stock_insert` AFTER INSERT ON `product_variation` FOR EACH ROW BEGIN
+  INSERT INTO stock_log (variation_id, old_stock, new_stock, changed_at)
+  VALUES (NEW.variation_id, 0, NEW.stock, NOW());
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `trg_log_stock_update` BEFORE UPDATE ON `product_variation` FOR EACH ROW BEGIN
+  IF OLD.stock != NEW.stock THEN
+    INSERT INTO stock_log (variation_id, old_stock, new_stock, changed_at)
+    VALUES (OLD.variation_id, OLD.stock, NEW.stock, NOW());
+  END IF;
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `stock_alert`
+--
+
+CREATE TABLE `stock_alert` (
+  `variation_id` int(11) NOT NULL,
+  `current_stock` int(11) NOT NULL,
+  `message` text NOT NULL,
+  `alert_time` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `stock_log`
+--
+
+CREATE TABLE `stock_log` (
+  `log_id` int(11) NOT NULL,
+  `variation_id` int(11) NOT NULL,
+  `old_stock` int(11) NOT NULL,
+  `new_stock` int(11) NOT NULL,
+  `changed_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `stock_log`
+--
+
+INSERT INTO `stock_log` (`log_id`, `variation_id`, `old_stock`, `new_stock`, `changed_at`) VALUES
+(1, 13, 50, 40, '2025-05-24 23:03:00'),
+(2, 14, 0, 60, '2025-05-25 00:10:19'),
+(3, 13, 40, 80, '2025-05-25 00:11:35');
 
 --
 -- Indexes for dumped tables
@@ -476,22 +557,15 @@ ALTER TABLE `cart`
 --
 ALTER TABLE `cart_item`
   ADD PRIMARY KEY (`cart_item_id`),
-  ADD KEY `cart_id` (`cart_id`),
-  ADD KEY `product_id` (`product_id`),
-  ADD KEY `variation_id` (`variation_id`);
+  ADD KEY `cart_item_ibfk_1` (`cart_id`),
+  ADD KEY `cart_item_ibfk_2` (`product_id`),
+  ADD KEY `cart_item_ibfk_3` (`variation_id`);
 
 --
 -- Indexes for table `customer`
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`customer_id`);
-
---
--- Indexes for table `customer_address`
---
-ALTER TABLE `customer_address`
-  ADD KEY `address_id` (`address_id`),
-  ADD KEY `customer_id` (`customer_id`);
 
 --
 -- Indexes for table `orderp`
@@ -505,9 +579,9 @@ ALTER TABLE `orderp`
 --
 ALTER TABLE `order_product`
   ADD PRIMARY KEY (`order_product_id`),
-  ADD KEY `order_id` (`order_id`),
-  ADD KEY `variation_id` (`variation_id`),
-  ADD KEY `order_product_ibfk_3` (`product_id`);
+  ADD KEY `order_product_ibfk_1` (`order_id`),
+  ADD KEY `order_product_ibfk_2` (`product_id`),
+  ADD KEY `order_product_ibfk_3` (`variation_id`);
 
 --
 -- Indexes for table `payment`
@@ -521,8 +595,8 @@ ALTER TABLE `payment`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`product_id`),
-  ADD KEY `admin_id` (`admin_id`),
-  ADD KEY `subctg_id` (`subctg_id`);
+  ADD KEY `product_ibfk_1` (`admin_id`),
+  ADD KEY `product_ibfk_2` (`subctg_id`);
 
 --
 -- Indexes for table `product_category`
@@ -542,7 +616,14 @@ ALTER TABLE `product_subcategory`
 --
 ALTER TABLE `product_variation`
   ADD PRIMARY KEY (`variation_id`),
-  ADD KEY `product_id` (`product_id`);
+  ADD KEY `product_variation_ibfk_2` (`product_id`);
+
+--
+-- Indexes for table `stock_log`
+--
+ALTER TABLE `stock_log`
+  ADD PRIMARY KEY (`log_id`),
+  ADD KEY `variation_id` (`variation_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -558,7 +639,7 @@ ALTER TABLE `address`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `attributes`
@@ -582,7 +663,7 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `cart_item`
 --
 ALTER TABLE `cart_item`
-  MODIFY `cart_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `cart_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `customer`
@@ -594,25 +675,25 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `orderp`
 --
 ALTER TABLE `orderp`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `order_product`
 --
 ALTER TABLE `order_product`
-  MODIFY `order_product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `order_product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `product_category`
@@ -630,7 +711,13 @@ ALTER TABLE `product_subcategory`
 -- AUTO_INCREMENT for table `product_variation`
 --
 ALTER TABLE `product_variation`
-  MODIFY `variation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `variation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `stock_log`
+--
+ALTER TABLE `stock_log`
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
@@ -652,16 +739,9 @@ ALTER TABLE `cart`
 -- Constraints for table `cart_item`
 --
 ALTER TABLE `cart_item`
-  ADD CONSTRAINT `cart_item_ibfk_1` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`cart_id`),
-  ADD CONSTRAINT `cart_item_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`),
-  ADD CONSTRAINT `cart_item_ibfk_3` FOREIGN KEY (`variation_id`) REFERENCES `product_variation` (`variation_id`);
-
---
--- Constraints for table `customer_address`
---
-ALTER TABLE `customer_address`
-  ADD CONSTRAINT `customer_address_ibfk_1` FOREIGN KEY (`address_id`) REFERENCES `address` (`address_id`),
-  ADD CONSTRAINT `customer_address_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`);
+  ADD CONSTRAINT `cart_item_ibfk_1` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`cart_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `cart_item_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `cart_item_ibfk_3` FOREIGN KEY (`variation_id`) REFERENCES `product_variation` (`variation_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `orderp`
@@ -673,22 +753,15 @@ ALTER TABLE `orderp`
 -- Constraints for table `order_product`
 --
 ALTER TABLE `order_product`
-  ADD CONSTRAINT `order_product_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orderp` (`order_id`),
-  ADD CONSTRAINT `order_product_ibfk_2` FOREIGN KEY (`variation_id`) REFERENCES `product_variation` (`variation_id`),
-  ADD CONSTRAINT `order_product_ibfk_3` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`);
+  ADD CONSTRAINT `order_product_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orderp` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `order_product_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `order_product_ibfk_3` FOREIGN KEY (`variation_id`) REFERENCES `product_variation` (`variation_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `payment`
 --
 ALTER TABLE `payment`
   ADD CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orderp` (`order_id`);
-
---
--- Constraints for table `product`
---
-ALTER TABLE `product`
-  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`admin_id`) REFERENCES `admin` (`admin_id`),
-  ADD CONSTRAINT `product_ibfk_2` FOREIGN KEY (`subctg_id`) REFERENCES `product_subcategory` (`subctg_id`);
 
 --
 -- Constraints for table `product_subcategory`
@@ -700,7 +773,13 @@ ALTER TABLE `product_subcategory`
 -- Constraints for table `product_variation`
 --
 ALTER TABLE `product_variation`
-  ADD CONSTRAINT `product_variation_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`);
+  ADD CONSTRAINT `product_variation_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `stock_log`
+--
+ALTER TABLE `stock_log`
+  ADD CONSTRAINT `stock_log_ibfk_1` FOREIGN KEY (`variation_id`) REFERENCES `product_variation` (`variation_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
