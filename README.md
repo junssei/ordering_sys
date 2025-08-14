@@ -1,1 +1,1 @@
-It is my personal and school project. It is an online grocery store and ordering system developed using PHP.
+It is both a personal and academic endeavour. It is a PHP-based online goods store and ordering system.
