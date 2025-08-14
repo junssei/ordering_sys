@@ -31,4 +31,9 @@ if ($_GET['page'] == "attributes_option" && $_GET['id']) {
     $row = mysqli_fetch_array($result);
     include 'dialogs/add_dialog/addattributes-option_dialog.php';
 }
+
+if ($_GET['page'] == "stock") {
+    $page = $_GET['page'];
+    include 'dialogs/add_dialog/addstock_dialog.php';
+}
 ?>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 25, 2025 at 05:26 AM
+-- Generation Time: Aug 14, 2025 at 01:46 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -45,6 +45,10 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `GetAllProductVariation` ()   BEGIN
 SELECT * FROM product_variation;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetAllStockLog` ()   BEGIN
+SELECT * FROM stock_log;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GetFilteredSubcategories` (IN `input_ctg_id` VARCHAR(10), IN `input_sort` VARCHAR(10))   BEGIN
     IF input_ctg_id = 'all' THEN
         IF input_sort = 'oldest' THEN
@@ -73,6 +77,29 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `GetFilteredSubcategories` (IN `inpu
             ORDER BY product_subcategory.created_at DESC;
         END IF;
     END IF;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetProductwithVariations` ()   BEGIN
+    SELECT
+        p.product_id,
+        p.product_name,
+        p.product_brand,
+        p.description,
+        p.baseprice,
+        p.image AS product_image,
+        p.subctg_id,
+        v.variation_id,
+        v.name AS variation_name,
+        v.price AS variation_price,
+        v.stock,
+        v.sku,
+        v.image AS variation_image,
+        v.created_at,
+        v.updated_at
+    FROM 
+        product p
+    JOIN 
+        product_variation v ON p.product_id = v.product_id;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GetSubcategoriesByCategoryID` (IN `input_ctg_id` INT)   BEGIN
@@ -131,9 +158,8 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`admin_id`, `username`, `password`, `firstname`, `lastname`, `email`, `role`, `created_at`, `updated_at`) VALUES
-(1, 'junevincent', '$2y$10$IEjkwtYR1Pm9sCcTeSaf2u1H5TU0irJPPZgCzpnVUSQ8xGH3/mnb6', 'June Vincent', 'Fernandez', 'junevincentmagsayofernandez@gmail.com', 'admin', '2024-12-27 07:39:21', '2024-12-27 07:39:21'),
 (2, 'bigcas_admin', '$2y$10$eQ9QHoGc7byv2K504u6TwuAWoGL68g2PE5BCIcs5l0SCR1lYBJSFi', 'Jessa Mae', 'Bigcas', 'jessamaebigcas@gmail.com', 'admin', '2025-01-07 03:41:52', '2025-01-07 03:41:52'),
-(4, 'junevincent', '$2y$10$9/qIEDR.9EIPTonvnRHjhec2XCZ04uajKU1IoCy92etbi98w5wINO', 'june vincent', 'fernandez', 'junevincentmagsayo.fernandez@my.smciligan.edu.ph', 'unassigned', '2025-05-15 08:19:31', '2025-05-15 08:19:31');
+(5, 'junevincent', '$2y$10$zTchd8/l/WlOOFWiwxHiyOmrFRJnQOZVOcxsQ6WVXL8vSlZk1okGq', 'June Vincent', 'Fernandez', 'junevincentmagsayofernandez@gmail.com', 'unassigned', '2025-08-14 11:43:40', '2025-08-14 11:43:40');
 
 -- --------------------------------------------------------
 
@@ -291,7 +317,8 @@ INSERT INTO `orderp` (`order_id`, `customer_id`, `order_date`, `status`, `total_
 (6, 1, '2025-01-15 04:42:54', 0, 140.00, 'Pickup'),
 (7, 1, '2025-01-16 16:01:48', 0, 100.00, 'Pickup'),
 (8, 1, '2025-01-16 16:02:46', 0, 100.00, 'Pickup'),
-(9, 1, '2025-01-26 17:26:59', 0, 40.00, 'Delivery');
+(9, 1, '2025-01-26 17:26:59', 0, 40.00, 'Delivery'),
+(10, 1, '2025-05-25 14:58:38', 0, 100.00, 'Pickup');
 
 -- --------------------------------------------------------
 
@@ -306,6 +333,13 @@ CREATE TABLE `order_product` (
   `variation_id` int(11) NOT NULL,
   `quantity` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order_product`
+--
+
+INSERT INTO `order_product` (`order_product_id`, `order_id`, `product_id`, `variation_id`, `quantity`) VALUES
+(22, 10, 4, 15, 2);
 
 -- --------------------------------------------------------
 
@@ -341,7 +375,8 @@ INSERT INTO `payment` (`payment_id`, `order_id`, `payment_date`, `payment_method
 (17, 6, '2025-01-15 04:42:54', 'Cash', '0', NULL, 140.00),
 (18, 6, '2025-01-15 04:42:54', 'Cash', '0', NULL, 140.00),
 (19, 8, '2025-01-16 16:02:46', 'Cash', '0', NULL, 100.00),
-(20, 9, '2025-01-26 17:26:59', 'Cash', '0', NULL, 40.00);
+(20, 9, '2025-01-26 17:26:59', 'Cash', '0', NULL, 40.00),
+(21, 10, '2025-05-25 14:58:38', 'Cash', '0', NULL, 100.00);
 
 -- --------------------------------------------------------
 
@@ -367,7 +402,7 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`product_id`, `product_name`, `product_brand`, `description`, `baseprice`, `image`, `admin_id`, `subctg_id`, `created_at`, `updated_at`) VALUES
-(4, 'HI-RO FIBISCO', 'FIBISCO', 'HI-RO FIBISCO\n- 33G 1 X 3 PAIRS \n- 33G 10 X 3 PAIRS', 10.00, '5E1916F69FA20370.jpg', 4, 23, '2025-05-17 11:37:09', '2025-05-17 11:39:18');
+(4, 'HI-RO FIBISCO', 'FIBISCO', 'HI-RO FIBISCO\r\n- 33G 1 X 3 PAIRS \r\n- 33G 10 X 3 PAIRS', 10.00, '5E1916F69FA20370.jpg', 4, 23, '2025-05-17 11:37:09', '2025-05-17 11:39:18');
 
 -- --------------------------------------------------------
 
@@ -457,21 +492,22 @@ CREATE TABLE `product_variation` (
 --
 
 INSERT INTO `product_variation` (`variation_id`, `product_id`, `name`, `price`, `sku`, `stock`, `image`, `created_at`, `updated_at`) VALUES
-(13, 4, '33g x 1 packet', 10.00, 'HRF-01', 80, '659ae1_61d7dc32845d4cec800cb90e690286b1~mv2.avif', '2025-05-24 11:30:19', '2025-05-24 16:11:35'),
-(14, 4, '33g x 10 packets', 120.00, 'HRF-33G10F', 60, 'FIBISCO-20-102.png', '2025-05-24 16:10:19', '2025-05-24 16:11:35');
+(13, 4, '33g x 1 packet', 10.00, 'HRF-01', 80, '659ae1_61d7dc32845d4cec800cb90e690286b1~mv2.avif', '2025-05-24 11:30:19', '2025-05-25 14:56:14'),
+(14, 4, '33g x 10 packets', 120.00, 'HRF-33G10F', 50, 'FIBISCO-20-102.png', '2025-05-24 16:10:19', '2025-05-25 14:56:14'),
+(15, 4, '200G x 1 packet', 50.00, 'HRF-200G1', 30, 'ph-11134201-7qul7-lhsuvw67482v38.jpg', '2025-05-25 14:54:33', '2025-05-25 14:56:14');
 
 --
 -- Triggers `product_variation`
 --
 DELIMITER $$
-CREATE TRIGGER `trg_log_stock_insert` AFTER INSERT ON `product_variation` FOR EACH ROW BEGIN
+CREATE TRIGGER `after_stock_insert` AFTER INSERT ON `product_variation` FOR EACH ROW BEGIN
   INSERT INTO stock_log (variation_id, old_stock, new_stock, changed_at)
   VALUES (NEW.variation_id, 0, NEW.stock, NOW());
 END
 $$
 DELIMITER ;
 DELIMITER $$
-CREATE TRIGGER `trg_log_stock_update` BEFORE UPDATE ON `product_variation` FOR EACH ROW BEGIN
+CREATE TRIGGER `before_stock_update` BEFORE UPDATE ON `product_variation` FOR EACH ROW BEGIN
   IF OLD.stock != NEW.stock THEN
     INSERT INTO stock_log (variation_id, old_stock, new_stock, changed_at)
     VALUES (OLD.variation_id, OLD.stock, NEW.stock, NOW());
@@ -479,6 +515,29 @@ CREATE TRIGGER `trg_log_stock_update` BEFORE UPDATE ON `product_variation` FOR E
 END
 $$
 DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sales_summary`
+--
+
+CREATE TABLE `sales_summary` (
+  `id` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `total_sales` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `sales_summary`
+--
+
+INSERT INTO `sales_summary` (`id`, `date`, `total_sales`, `created_at`) VALUES
+(1, '2025-05-25', 100.00, '2025-05-25 15:12:30'),
+(2, '2025-05-25', 100.00, '2025-05-25 15:13:30'),
+(3, '2025-05-25', 100.00, '2025-05-25 15:14:30'),
+(4, '2025-05-25', 100.00, '2025-05-25 15:15:30');
 
 -- --------------------------------------------------------
 
@@ -514,7 +573,10 @@ CREATE TABLE `stock_log` (
 INSERT INTO `stock_log` (`log_id`, `variation_id`, `old_stock`, `new_stock`, `changed_at`) VALUES
 (1, 13, 50, 40, '2025-05-24 23:03:00'),
 (2, 14, 0, 60, '2025-05-25 00:10:19'),
-(3, 13, 40, 80, '2025-05-25 00:11:35');
+(3, 13, 40, 80, '2025-05-25 00:11:35'),
+(4, 14, 60, 50, '2025-05-25 13:18:45'),
+(5, 15, 0, 50, '2025-05-25 22:54:33'),
+(6, 15, 50, 30, '2025-05-25 22:56:14');
 
 --
 -- Indexes for dumped tables
@@ -619,6 +681,12 @@ ALTER TABLE `product_variation`
   ADD KEY `product_variation_ibfk_2` (`product_id`);
 
 --
+-- Indexes for table `sales_summary`
+--
+ALTER TABLE `sales_summary`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `stock_log`
 --
 ALTER TABLE `stock_log`
@@ -639,7 +707,7 @@ ALTER TABLE `address`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `attributes`
@@ -663,7 +731,7 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `cart_item`
 --
 ALTER TABLE `cart_item`
-  MODIFY `cart_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `cart_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `customer`
@@ -675,19 +743,19 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `orderp`
 --
 ALTER TABLE `orderp`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `order_product`
 --
 ALTER TABLE `order_product`
-  MODIFY `order_product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `order_product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -711,13 +779,19 @@ ALTER TABLE `product_subcategory`
 -- AUTO_INCREMENT for table `product_variation`
 --
 ALTER TABLE `product_variation`
-  MODIFY `variation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `variation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `sales_summary`
+--
+ALTER TABLE `sales_summary`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `stock_log`
 --
 ALTER TABLE `stock_log`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
@@ -780,6 +854,15 @@ ALTER TABLE `product_variation`
 --
 ALTER TABLE `stock_log`
   ADD CONSTRAINT `stock_log_ibfk_1` FOREIGN KEY (`variation_id`) REFERENCES `product_variation` (`variation_id`);
+
+DELIMITER $$
+--
+-- Events
+--
+CREATE DEFINER=`root`@`localhost` EVENT `daily_sales_log` ON SCHEDULE EVERY 1 MINUTE STARTS '2025-05-25 23:12:30' ON COMPLETION PRESERVE ENABLE DO INSERT INTO sales_summary (date, total_sales)
+  SELECT CURDATE(), SUM(total_amount) FROM orderp WHERE DATE(order_date) = CURDATE()$$
+
+DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

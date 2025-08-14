@@ -1,13 +1,13 @@
-<?php 
+<?php
 require '../../source/db/connect.php';
-if($_GET['value'] && $_GET['page'] == "subcategory"){
+if ($_GET['value'] && $_GET['page'] == "subcategory") {
     $sort = $_GET['sort'];
     $value = $_GET['value'];
 
     $call = "CALL GetFilteredSubcategories('$value', '$sort')";
     $querysubctg = mysqli_query($conn, $call);
 
-    if($querysubctg -> num_rows > 0){
+    if ($querysubctg->num_rows > 0) {
         echo '
         <table class="table">
         <tr class="table_header">
@@ -17,7 +17,7 @@ if($_GET['value'] && $_GET['page'] == "subcategory"){
             <th></th>
         </tr>';
         while ($rowSubctg = mysqli_fetch_array($querysubctg)) {
-            echo '<tr class="table_rows" onclick="' ."editModal('subcategory', {$rowSubctg['subctg_id']})" . '">';
+            echo '<tr class="table_rows" onclick="' . "editModal('subcategory', {$rowSubctg['subctg_id']})" . '">';
             echo "<td><img src='../source/images/upload/categories/" . $rowSubctg['subctg_img'] . "' class='imageSmall'></td>";
             echo "<td>" . $rowSubctg['subctg_name'] . "</td>";
             echo "<td>" . $rowSubctg['ctg_name'] . "</td>";
@@ -40,11 +40,11 @@ if($_GET['value'] && $_GET['page'] == "subcategory"){
     }
 }
 
-if($_GET['page'] == "category"){
+if ($_GET['page'] == "category") {
     $page = $_GET['page'];
     $sort = $_GET['sort'];
 
-    if($sort == 'oldest'){
+    if ($sort == 'oldest') {
         $fetch = "SELECT * FROM product_{$page} ORDER BY created_at ASC";
         $query = mysqli_query($conn, $fetch);
     } else {
@@ -52,7 +52,7 @@ if($_GET['page'] == "category"){
         $query = mysqli_query($conn, $fetch);
     }
 
-    if($query -> num_rows > 0){
+    if ($query->num_rows > 0) {
         echo '
         <table class="table">
         <tr class="table_header">
@@ -61,7 +61,7 @@ if($_GET['page'] == "category"){
             <th></th>
         </tr>';
         while ($row = mysqli_fetch_array($query)) {
-            echo '<tr class="table_rows" onclick="' ."editModal('category', {$row['ctg_id']})" . '">';
+            echo '<tr class="table_rows" onclick="' . "editModal('category', {$row['ctg_id']})" . '">';
             echo "<td><img src='../source/images/upload/categories/" . $row['ctg_img'] . "' class='imageSmall'></td>";
             echo "<td>" . $row['ctg_name'] . "</td>";
             echo '<td class="action_col"> 
@@ -81,4 +81,3 @@ if($_GET['page'] == "category"){
         echo "</table>";
     }
 }
-?> 
