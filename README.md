@@ -2,4 +2,4 @@ It is both a personal and academic endeavour. It is a PHP-based online goods sto
 
 Follow me:  
 YouTube: https://www.youtube.com/@junseei  
-Tiktok: tiktok.com/@junssei  
+Tiktok: https://www.tiktok.com/@junssei  
